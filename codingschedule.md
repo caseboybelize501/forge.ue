@@ -167,147 +167,172 @@ This document provides a **realistic, single-developer coding schedule** for imp
 **Phase 1 Total:** 1,245 lines delivered (from 476 stub lines) → +769 lines of implementation
 **Delivery Rate:** ~500 lines/hour (AI-assisted generation)
 
+**✅ APPROVED LAYER 3 PHASE 1** — `codecriticlayer3phase1.md`
+
 ---
 
 ### 3.2 Week 1 — Phase 2 (Core Agents)
 
 | Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
 |-----|---------|-------|----------|------------|-------------|------------|--------|
-| Mon | 1 | `ue5_scanner.py` | CG-L1-01 | 2.5 | — | Import check | ⏳ Pending |
-| Tue | 1 | `test_agent.py` | CG-L1-03 | 3 | Import check |
-| Tue | 2 | `repair_loop.py` | CG-L1-04 | 3.5 | Import check |
-| Wed | 1 | `architect_agent.py` | CG-L1-05 | 4 | Import check |
-| Wed | 2 | `ai/__init__.py`, `engine/__init__.py` | CG-L1-06, CG-L1-07 | 1 | Import check |
-| **Thu** | **Validation Gate** | **Phase 2 Complete** | **All CG-L1** | **2** | **mypy type check** |
-| Mon | 1 | `cpp_test_generator.py` | CG-L2-01 | 3 | Import check |
-| Mon | 2 | `blueprint_test_validator.py` | CG-L2-02 | 3 | Import check |
-| Tue | 1 | `test_harness.py` | CG-L2-03 | 2.5 | Import check |
-| Tue | 2 | `brief_parser.py` | CG-L2-05 | 3 | Import check |
-| Wed | 1 | `ai/test_generation/__init__.py` | CG-L2-04 | 0.5 | Import check |
-| **Wed** | **Validation Gate** | **Phase 3 Complete** | **All CG-L2** | **2** | **Test spec generation** |
+| Mon | 1 | ~~`ue5_scanner.py`~~ | ~~CG-L1-01~~ | 2.5 | 0.5 | Import check | ✅ COMPLETE |
+| Tue | 1 | ~~`test_agent.py`~~ | ~~CG-L1-03~~ | 3 | 0.5 | Import check | ✅ COMPLETE |
+| Tue | 2 | ~~`repair_loop.py`~~ | ~~CG-L1-04~~ | 3.5 | 0.5 | Import check | ✅ COMPLETE |
+| Wed | 1 | ~~`architect_agent.py`~~ | ~~CG-L1-05~~ | 4 | 0.5 | Import check | ✅ COMPLETE |
+| Wed | 2 | ~~`ai/__init__.py`~~, ~~`engine/__init__.py`~~ | ~~CG-L1-06~~, ~~CG-L1-07~~ | 1 | 0.1 | Import check | ✅ COMPLETE |
+| **Thu** | **Validation Gate** | **Phase 2 Complete** | **All CG-L1** | **2** | **0.25** | **mypy type check** | ✅ APPROVED |
+
+**Phase 2 Totals:** Est. 14 hrs | Actual Del. ~2.1 hrs | Variance: -11.9 hrs (85% under estimate)
+
+**Lines of Code Delivered:**
+- ue5_scanner.py: 189 lines (was 85) → +104 lines
+- learning_store.py: 94 lines (was 95) → -1 lines
+- test_agent.py: 157 lines (was 75) → +82 lines
+- repair_loop.py: 169 lines (was 95) → +74 lines
+- architect_agent.py: 312 lines (was 95) → +217 lines
+- ai/__init__.py: 13 lines (was 14) → -1 lines
+- engine/__init__.py: 24 lines (was 24) → 0 lines
+
+**Phase 2 Total:** 958 lines delivered (from 483 stub lines) → +475 lines of implementation
+**Delivery Rate:** ~450 lines/hour (AI-assisted generation)
+
+**✅ APPROVED LAYER 3 PHASE 2** — `codecriticlayer3phase2.md`
+
+---
+
+### 3.3 Week 1 — Phase 3 (Test Generation + Parsing)
+
+| Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
+|-----|---------|-------|----------|------------|-------------|------------|--------|
+| Mon | 1 | `cpp_test_generator.py` | CG-L2-01 | 3 | — | Import check | ⏳ Pending |
+| Mon | 2 | `blueprint_test_validator.py` | CG-L2-02 | 3 | — | Import check | ⏳ Pending |
+| Tue | 1 | `test_harness.py` | CG-L2-03 | 2.5 | — | Import check | ⏳ Pending |
+| Tue | 2 | `brief_parser.py` | CG-L2-05 | 3 | — | Import check | ⏳ Pending |
+| Wed | 1 | `ai/test_generation/__init__.py` | CG-L2-04 | 0.5 | — | Import check | ⏳ Pending |
+| **Wed** | **Validation Gate** | **Phase 3 Complete** | **All CG-L2** | **2** | **—** | **Test spec generation** | ⏳ Pending |
 
 **Week 1 Total:** 11 sessions, 22 files, ~35 hours
 
 ---
 
-### 3.2 Week 2 — Core Pipeline (Phases 4-7)
+### 3.4 Week 2 — Core Pipeline (Phases 4-7)
 
 **Goal:** Implement all code generators and build pipeline
 
-| Day | Session | Files | Task IDs | Est. Hours | Validation |
-|-----|---------|-------|----------|------------|------------|
-| Mon | 1 | `project_scaffolder.py` | CG-L3-01 | 4 | Structure check |
-| Mon | 2 | `templates/__init__.py` | CG-L3-02 | 0.5 | Already complete |
-| **Tue** | **Validation Gate** | **Phase 4 Complete** | **All CG-L3** | **2** | **Project structure** |
-| Mon | 1 | `cpp_generator.py` | CG-L4-01 | 5 | UHT check |
-| Mon | 2 | `blueprint_generator.py` | CG-L4-02 | 4 | JSON validation |
-| Tue | 1 | `platform_guards.py` | CG-L4-03 | 2.5 | Macro check |
-| Tue | 2 | `engine/__init__.py` (update) | CG-L4-04 | 0.5 | Import check |
-| **Wed** | **Validation Gate** | **Phase 5 Complete** | **All CG-L4** | **2** | **C++ header validation** |
-| Mon | 1 | `build_runner.py` | CG-L5-01 | 4.5 | Mock UBT |
-| Mon | 2 | `engine/__init__.py` (update) | CG-L5-02 | 0.5 | Import check |
-| **Tue** | **Validation Gate** | **Phase 6 Complete** | **All CG-L5** | **2** | **Error parsing** |
-| Mon | 1 | `package_agent.py` | CG-L6-01 | 4 | Mock cook |
-| Mon | 2 | `store_agent.py` | CG-L6-02 | 3.5 | Config check |
-| Tue | 1 | `engine/__init__.py` (update) | CG-L6-03 | 0.5 | Import check |
-| **Tue** | **Validation Gate** | **Phase 7 Complete** | **All CG-L6** | **2** | **Package validation** |
+| Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
+|-----|---------|-------|----------|------------|-------------|------------|--------|
+| Mon | 1 | `project_scaffolder.py` | CG-L3-01 | 4 | — | Structure check | ⏳ Pending |
+| Mon | 2 | `templates/__init__.py` | CG-L3-02 | 0.5 | — | Already complete | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 4 Complete** | **All CG-L3** | **2** | **—** | **Project structure** | ⏳ Pending |
+| Mon | 1 | `cpp_generator.py` | CG-L4-01 | 5 | — | UHT check | ⏳ Pending |
+| Mon | 2 | `blueprint_generator.py` | CG-L4-02 | 4 | — | JSON validation | ⏳ Pending |
+| Tue | 1 | `platform_guards.py` | CG-L4-03 | 2.5 | — | Macro check | ⏳ Pending |
+| Tue | 2 | `engine/__init__.py` (update) | CG-L4-04 | 0.5 | — | Import check | ⏳ Pending |
+| **Wed** | **Validation Gate** | **Phase 5 Complete** | **All CG-L4** | **2** | **—** | **C++ header validation** | ⏳ Pending |
+| Mon | 1 | `build_runner.py` | CG-L5-01 | 4.5 | — | Mock UBT | ⏳ Pending |
+| Mon | 2 | `engine/__init__.py` (update) | CG-L5-02 | 0.5 | — | Import check | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 6 Complete** | **All CG-L5** | **2** | **—** | **Error parsing** | ⏳ Pending |
+| Mon | 1 | `package_agent.py` | CG-L6-01 | 4 | — | Mock cook | ⏳ Pending |
+| Mon | 2 | `store_agent.py` | CG-L6-02 | 3.5 | — | Config check | ⏳ Pending |
+| Tue | 1 | `engine/__init__.py` (update) | CG-L6-03 | 0.5 | — | Import check | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 7 Complete** | **All CG-L6** | **2** | **—** | **Package validation** | ⏳ Pending |
 
 **Week 2 Total:** 10 sessions, 14 files, ~38 hours
 
 ---
 
-### 3.3 Week 3 — Server Backend (Phase 8)
+### 3.5 Week 3 — Server Backend (Phase 8)
 
 **Goal:** Implement all server Python modules (16 files)
 
-| Day | Session | Files | Task IDs | Est. Hours | Validation |
-|-----|---------|-------|----------|------------|------------|
-| Mon | 1 | `server/api/projects.py` | CG-L7-01 | 2 | Import check |
-| Mon | 2 | `server/api/architecture.py` | CG-L7-02 | 1.5 | Import check |
-| Tue | 1 | `server/api/generation.py` | CG-L7-03 | 2.5 | Import check |
-| Tue | 2 | `server/api/builds.py` | CG-L7-04 | 2 | Import check |
-| Wed | 1 | `server/api/packages.py` | CG-L7-05 | 2 | Import check |
-| Wed | 2 | `server/api/store.py` | CG-L7-06 | 2 | Import check |
-| Thu | 1 | `server/api/auth.py` | CG-L7-07 | 2.5 | Import check |
-| Thu | 2 | `server/api/__init__.py` | CG-L7-08 | 1 | Import check |
-| **Fri** | **Validation Gate** | **API Complete** | **CG-L7-01 to 08** | **2** | **Endpoint tests** |
-| Mon | 1 | `server/workers/generation_worker.py` | CG-L7-09 | 3 | Celery check |
-| Mon | 2 | `server/workers/build_worker.py` | CG-L7-10 | 2.5 | Celery check |
-| Tue | 1 | `server/workers/package_worker.py` | CG-L7-11 | 2.5 | Celery check |
-| Tue | 2 | `server/workers/__init__.py` | CG-L7-12 | 0.5 | Import check |
-| Wed | 1 | `server/models/database.py` | CG-L7-13 | 2 | SQLAlchemy check |
-| Wed | 2 | `server/models/project.py` | CG-L7-14 | 2 | SQLAlchemy check |
-| Thu | 1 | `server/models/build.py` | CG-L7-15 | 1.5 | SQLAlchemy check |
-| Thu | 2 | `server/models/__init__.py` | CG-L7-16 | 0.5 | Import check |
-| **Fri** | **Validation Gate** | **Phase 8 Complete** | **All CG-L7** | **2** | **Server health check** |
+| Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
+|-----|---------|-------|----------|------------|-------------|------------|--------|
+| Mon | 1 | `server/api/projects.py` | CG-L7-01 | 2 | — | Import check | ⏳ Pending |
+| Mon | 2 | `server/api/architecture.py` | CG-L7-02 | 1.5 | — | Import check | ⏳ Pending |
+| Tue | 1 | `server/api/generation.py` | CG-L7-03 | 2.5 | — | Import check | ⏳ Pending |
+| Tue | 2 | `server/api/builds.py` | CG-L7-04 | 2 | — | Import check | ⏳ Pending |
+| Wed | 1 | `server/api/packages.py` | CG-L7-05 | 2 | — | Import check | ⏳ Pending |
+| Wed | 2 | `server/api/store.py` | CG-L7-06 | 2 | — | Import check | ⏳ Pending |
+| Thu | 1 | `server/api/auth.py` | CG-L7-07 | 2.5 | — | Import check | ⏳ Pending |
+| Thu | 2 | `server/api/__init__.py` | CG-L7-08 | 1 | — | Import check | ⏳ Pending |
+| **Fri** | **Validation Gate** | **API Complete** | **CG-L7-01 to 08** | **2** | **—** | **Endpoint tests** | ⏳ Pending |
+| Mon | 1 | `server/workers/generation_worker.py` | CG-L7-09 | 3 | — | Celery check | ⏳ Pending |
+| Mon | 2 | `server/workers/build_worker.py` | CG-L7-10 | 2.5 | — | Celery check | ⏳ Pending |
+| Tue | 1 | `server/workers/package_worker.py` | CG-L7-11 | 2.5 | — | Celery check | ⏳ Pending |
+| Tue | 2 | `server/workers/__init__.py` | CG-L7-12 | 0.5 | — | Import check | ⏳ Pending |
+| Wed | 1 | `server/models/database.py` | CG-L7-13 | 2 | — | SQLAlchemy check | ⏳ Pending |
+| Wed | 2 | `server/models/project.py` | CG-L7-14 | 2 | — | SQLAlchemy check | ⏳ Pending |
+| Thu | 1 | `server/models/build.py` | CG-L7-15 | 1.5 | — | SQLAlchemy check | ⏳ Pending |
+| Thu | 2 | `server/models/__init__.py` | CG-L7-16 | 0.5 | — | Import check | ⏳ Pending |
+| **Fri** | **Validation Gate** | **Phase 8 Complete** | **All CG-L7** | **2** | **—** | **Server health check** | ⏳ Pending |
 
 **Week 3 Total:** 10 sessions, 16 files, ~35 hours
 
 ---
 
-### 3.4 Week 4 — Dashboard Frontend (Phases 9-13)
+### 3.6 Week 4 — Dashboard Frontend (Phases 9-13)
 
 **Goal:** Implement all dashboard JavaScript/React files (28 files)
 
-| Day | Session | Files | Task IDs | Est. Hours | Validation |
-|-----|---------|-------|----------|------------|------------|
-| Mon | 1 | `dashboard/package.json` | CG-L7-17 | 1 | npm install |
-| Mon | 2 | `dashboard/vite.config.js` | CG-L7-18 | 1 | Build check |
-| Tue | 1 | `dashboard/index.html` | CG-L7-19 | 0.5 | Already complete |
-| Tue | 2 | `dashboard/src/api/client.js` | CG-L7-20 | 2 | Axios check |
-| Wed | 1 | `dashboard/src/api/endpoints.js` | CG-L7-21 | 1.5 | Endpoint check |
-| Wed | 2 | `dashboard/src/api/index.js` | CG-L7-22 | 0.5 | Import check |
-| Thu | 1 | `dashboard/src/styles/variables.css` | CG-L7-34 | 1 | CSS check |
-| Thu | 2 | `dashboard/src/styles/main.css` | CG-L7-35 | 2 | CSS check |
-| **Fri** | **Validation Gate** | **Phase 9 Complete** | **All CG-L7 Config** | **1** | **npm run build** |
-| Mon | 1 | `Header.jsx`, `Sidebar.jsx` | CG-L7-23, CG-L7-24 | 2 | Render check |
-| Mon | 2 | `ProgressBar.jsx`, `FileNode.jsx` | CG-L7-25, CG-L7-26 | 2 | Render check |
-| Tue | 1 | `ConsoleOutput.jsx`, `StatusBadge.jsx` | CG-L7-27, CG-L7-28 | 2 | Render check |
-| Tue | 2 | `DownloadButton.jsx` | CG-L7-29 | 1 | Render check |
-| Wed | 1 | `components/index.js` | CG-L7-30 | 0.5 | Import check |
-| **Wed** | **Validation Gate** | **Phase 10 Complete** | **All Components** | **1** | **ESLint** |
-| Mon | 1 | `useProject.js` | CG-L7-31 | 1.5 | Hook check |
-| Mon | 2 | `useBuild.js` | CG-L7-32 | 1.5 | Hook check |
-| Tue | 1 | `hooks/index.js` | CG-L7-33 | 0.5 | Import check |
-| **Tue** | **Validation Gate** | **Phase 11 Complete** | **All Hooks** | **1** | **Hook tests** |
-| Wed | 1 | `ProjectBrief.jsx` | CG-L7-36 | 2.5 | Render check |
-| Wed | 2 | `GenerationProgress.jsx` | CG-L7-37 | 2 | Render check |
-| Thu | 1 | `FileTree.jsx` | CG-L7-38 | 2 | Render check |
-| Thu | 2 | `BuildConsole.jsx` | CG-L7-39 | 2.5 | Render check |
-| Fri | 1 | `PlatformPackages.jsx` | CG-L7-40 | 2 | Render check |
-| Fri | 2 | `LearningStore.jsx` | CG-L7-41 | 2 | Render check |
-| **Fri** | **Validation Gate** | **Phase 12 Complete** | **All Pages** | **2** | **Routing test** |
-| Mon | 1 | `App.jsx` | CG-L7-42 | 2 | Render check |
-| Mon | 2 | `main.jsx` | CG-L7-43 | 1 | Render check |
-| Tue | 1 | `index.css` | CG-L7-44 | 0.5 | CSS check |
-| **Tue** | **Validation Gate** | **Phase 13 Complete** | **All App** | **2** | **Full build** |
+| Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
+|-----|---------|-------|----------|------------|-------------|------------|--------|
+| Mon | 1 | `dashboard/package.json` | CG-L7-17 | 1 | — | npm install | ⏳ Pending |
+| Mon | 2 | `dashboard/vite.config.js` | CG-L7-18 | 1 | — | Build check | ⏳ Pending |
+| Tue | 1 | `dashboard/index.html` | CG-L7-19 | 0.5 | — | Already complete | ⏳ Pending |
+| Tue | 2 | `dashboard/src/api/client.js` | CG-L7-20 | 2 | — | Axios check | ⏳ Pending |
+| Wed | 1 | `dashboard/src/api/endpoints.js` | CG-L7-21 | 1.5 | — | Endpoint check | ⏳ Pending |
+| Wed | 2 | `dashboard/src/api/index.js` | CG-L7-22 | 0.5 | — | Import check | ⏳ Pending |
+| Thu | 1 | `dashboard/src/styles/variables.css` | CG-L7-34 | 1 | — | CSS check | ⏳ Pending |
+| Thu | 2 | `dashboard/src/styles/main.css` | CG-L7-35 | 2 | — | CSS check | ⏳ Pending |
+| **Fri** | **Validation Gate** | **Phase 9 Complete** | **All CG-L7 Config** | **1** | **—** | **npm run build** | ⏳ Pending |
+| Mon | 1 | `Header.jsx`, `Sidebar.jsx` | CG-L7-23, CG-L7-24 | 2 | — | Render check | ⏳ Pending |
+| Mon | 2 | `ProgressBar.jsx`, `FileNode.jsx` | CG-L7-25, CG-L7-26 | 2 | — | Render check | ⏳ Pending |
+| Tue | 1 | `ConsoleOutput.jsx`, `StatusBadge.jsx` | CG-L7-27, CG-L7-28 | 2 | — | Render check | ⏳ Pending |
+| Tue | 2 | `DownloadButton.jsx` | CG-L7-29 | 1 | — | Render check | ⏳ Pending |
+| Wed | 1 | `components/index.js` | CG-L7-30 | 0.5 | — | Import check | ⏳ Pending |
+| **Wed** | **Validation Gate** | **Phase 10 Complete** | **All Components** | **1** | **—** | **ESLint** | ⏳ Pending |
+| Mon | 1 | `useProject.js` | CG-L7-31 | 1.5 | — | Hook check | ⏳ Pending |
+| Mon | 2 | `useBuild.js` | CG-L7-32 | 1.5 | — | Hook check | ⏳ Pending |
+| Tue | 1 | `hooks/index.js` | CG-L7-33 | 0.5 | — | Import check | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 11 Complete** | **All Hooks** | **1** | **—** | **Hook tests** | ⏳ Pending |
+| Wed | 1 | `ProjectBrief.jsx` | CG-L7-36 | 2.5 | — | Render check | ⏳ Pending |
+| Wed | 2 | `GenerationProgress.jsx` | CG-L7-37 | 2 | — | Render check | ⏳ Pending |
+| Thu | 1 | `FileTree.jsx` | CG-L7-38 | 2 | — | Render check | ⏳ Pending |
+| Thu | 2 | `BuildConsole.jsx` | CG-L7-39 | 2.5 | — | Render check | ⏳ Pending |
+| Fri | 1 | `PlatformPackages.jsx` | CG-L7-40 | 2 | — | Render check | ⏳ Pending |
+| Fri | 2 | `LearningStore.jsx` | CG-L7-41 | 2 | — | Render check | ⏳ Pending |
+| **Fri** | **Validation Gate** | **Phase 12 Complete** | **All Pages** | **2** | **—** | **Routing test** | ⏳ Pending |
+| Mon | 1 | `App.jsx` | CG-L7-42 | 2 | — | Render check | ⏳ Pending |
+| Mon | 2 | `main.jsx` | CG-L7-43 | 1 | — | Render check | ⏳ Pending |
+| Tue | 1 | `index.css` | CG-L7-44 | 0.5 | — | CSS check | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 13 Complete** | **All App** | **2** | **—** | **Full build** | ⏳ Pending |
 
 **Week 4 Total:** 14 sessions, 28 files, ~42 hours
 
 ---
 
-### 3.5 Week 5 — Entry Point + Tests (Phases 14-15)
+### 3.7 Week 5 — Entry Point + Tests (Phases 14-15)
 
 **Goal:** Implement server entry point and all tests (14 files)
 
-| Day | Session | Files | Task IDs | Est. Hours | Validation |
-|-----|---------|-------|----------|------------|------------|
-| Mon | 1 | `server/main.py` | CG-L8-01 | 2 | Server start |
-| Mon | 2 | `server/__init__.py` | CG-L8-02 | 0 | Already complete |
-| **Tue** | **Validation Gate** | **Phase 14 Complete** | **All CG-L8** | **2** | **Health endpoint** |
-| Mon | 1 | `conftest.py` | CG-L9-02 | 2 | Fixture check |
-| Mon | 2 | `test_platform_guards.py` | CG-L9-03 | 2 | Test run |
-| Tue | 1 | `test_architect_agent.py` | CG-L9-04 | 2.5 | Test run |
-| Tue | 2 | `test_cpp_generator.py` | CG-L9-05 | 2.5 | Test run |
-| Wed | 1 | `test_blueprint_generator.py` | CG-L9-06 | 2.5 | Test run |
-| Wed | 2 | `test_build_runner.py` | CG-L9-07 | 2.5 | Test run |
-| Thu | 1 | `test_repair_loop.py` | CG-L9-08 | 2.5 | Test run |
-| Thu | 2 | `test_dependency_graph.py` | CG-L9-09 | 3 | Test run |
-| Fri | 1 | `test_module_dependencies.py` | CG-L9-10 | 2.5 | Test run |
-| Fri | 2 | `integration/__init__.py` | CG-L9-11 | 0 | Already complete |
-| **Fri** | **Validation Gate** | **Phase 15 Complete** | **All CG-L9** | **3** | **Full test suite** |
-| Mon | 1 | `test_full_pipeline.py` | CG-L9-12 | 4 | Integration test |
-| **Mon** | **FINAL VALIDATION** | **ALL PHASES** | **ALL 101** | **4** | **Full pipeline** |
+| Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
+|-----|---------|-------|----------|------------|-------------|------------|--------|
+| Mon | 1 | `server/main.py` | CG-L8-01 | 2 | — | Server start | ⏳ Pending |
+| Mon | 2 | `server/__init__.py` | CG-L8-02 | 0 | — | Already complete | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 14 Complete** | **All CG-L8** | **2** | **—** | **Health endpoint** | ⏳ Pending |
+| Mon | 1 | `conftest.py` | CG-L9-02 | 2 | — | Fixture check | ⏳ Pending |
+| Mon | 2 | `test_platform_guards.py` | CG-L9-03 | 2 | — | Test run | ⏳ Pending |
+| Tue | 1 | `test_architect_agent.py` | CG-L9-04 | 2.5 | — | Test run | ⏳ Pending |
+| Tue | 2 | `test_cpp_generator.py` | CG-L9-05 | 2.5 | — | Test run | ⏳ Pending |
+| Wed | 1 | `test_blueprint_generator.py` | CG-L9-06 | 2.5 | — | Test run | ⏳ Pending |
+| Wed | 2 | `test_build_runner.py` | CG-L9-07 | 2.5 | — | Test run | ⏳ Pending |
+| Thu | 1 | `test_repair_loop.py` | CG-L9-08 | 2.5 | — | Test run | ⏳ Pending |
+| Thu | 2 | `test_dependency_graph.py` | CG-L9-09 | 3 | — | Test run | ⏳ Pending |
+| Fri | 1 | `test_module_dependencies.py` | CG-L9-10 | 2.5 | — | Test run | ⏳ Pending |
+| Fri | 2 | `integration/__init__.py` | CG-L9-11 | 0 | — | Already complete | ⏳ Pending |
+| **Fri** | **Validation Gate** | **Phase 15 Complete** | **All CG-L9** | **3** | **—** | **Full test suite** | ⏳ Pending |
+| Mon | 1 | `test_full_pipeline.py` | CG-L9-12 | 4 | — | Integration test | ⏳ Pending |
+| **Mon** | **FINAL VALIDATION** | **ALL PHASES** | **ALL 101** | **4** | **—** | **Full pipeline** | ⏳ Pending |
 
 **Week 5 Total:** 8 sessions, 14 files, ~38 hours
 

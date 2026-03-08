@@ -8,7 +8,7 @@ Dependencies:
 - contracts.models.project_spec (L0-002)
 - ai.architect_agent (L1-001)
 """
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from pathlib import Path
 
 from contracts.models.game_brief import GameBrief, Genre, Platform, MechanicSpec

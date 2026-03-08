@@ -15,7 +15,7 @@ import json
 
 from contracts.models.game_brief import GameBrief
 from contracts.models.store_spec import StoreSubmission, StoreAssets, RatingConfig
-from contracts.models.platform_spec import PackageResult
+from contracts.models.build_result import PackageResult
 
 
 class StoreAgent:
