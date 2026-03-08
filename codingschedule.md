@@ -291,9 +291,27 @@ This document provides a **realistic, single-developer coding schedule** for imp
 
 | Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
 |-----|---------|-------|----------|------------|-------------|------------|--------|
-| Mon | 1 | `project_scaffolder.py` | CG-L3-01 | 4 | — | Structure check | ⏳ Pending |
-| Mon | 2 | `templates/__init__.py` | CG-L3-02 | 0.5 | — | Already complete | ⏳ Pending |
-| **Tue** | **Validation Gate** | **Phase 4 Complete** | **All CG-L3** | **2** | **—** | **Project structure** | ⏳ Pending |
+| Mon | 1 | ~~`project_scaffolder.py`~~ | ~~CG-L3-01~~ | 4 | 0.5 | Structure check | ✅ COMPLETE |
+| Mon | 2 | ~~`templates/__init__.py`~~ | ~~CG-L3-02~~ | 0.5 | 0 | Already complete | ✅ COMPLETE |
+| **Tue** | **Validation Gate** | **Phase 4 Complete** | **All CG-L3** | **2** | **0.25** | **Project structure** | ✅ APPROVED |
+
+**Phase 4 Totals:** Est. 4.5 hrs | Actual Del. ~0.75 hrs | Variance: -3.75 hrs (83% under estimate)
+
+**Lines of Code Delivered:**
+- project_scaffolder.py — 412 lines (was 110) → +302 lines
+- templates/__init__.py — 10 lines (unchanged) → Already complete
+
+**Phase 4 Total:** 422 lines delivered (from 120 stub lines) → +302 lines of implementation
+**Delivery Rate:** ~400 lines/hour (AI-assisted generation)
+
+**✅ APPROVED LAYER 3 PHASE 4**
+
+---
+
+### 3.5 Week 2 — Phase 5 (Code Generation)
+
+| Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
+|-----|---------|-------|----------|------------|-------------|------------|--------|
 | Mon | 1 | `cpp_generator.py` | CG-L4-01 | 5 | — | UHT check | ⏳ Pending |
 | Mon | 2 | `blueprint_generator.py` | CG-L4-02 | 4 | — | JSON validation | ⏳ Pending |
 | Tue | 1 | `platform_guards.py` | CG-L4-03 | 2.5 | — | Macro check | ⏳ Pending |
