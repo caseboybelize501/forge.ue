@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.venv/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# UE5 Generated (per project)
+output/*/Binaries/
+output/*/Intermediate/
+output/*/Saved/
+output/*/DerivedDataCache/
+
+# FORGE Runtime
+.dedup/
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.pem
+*.key
+
+# Test
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Node (dashboard)
+dashboard/node_modules/
+dashboard/dist/
+dashboard/.env.local

@@ -1,0 +1,375 @@
+openapi: 3.0.3
+info:
+  title: FORGE API
+  description: Autonomous Unreal Engine 5 Game Development Platform
+  version: 1.0.0
+  license:
+    name: PRIVATE - All Rights Reserved
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+
+paths:
+  /api/projects:
+    post:
+      summary: Create project from GameBrief
+      operationId: createProject
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameBriefRequest'
+      responses:
+        '201':
+          description: Project created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+
+  /api/projects/{project_id}:
+    get:
+      summary: Get project details
+      operationId: getProject
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Project details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectResponse'
+
+  /api/projects/{project_id}/architecture:
+    get:
+      summary: Get architect plan for human review (GATE-1)
+      operationId: getArchitecture
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ProjectSpec architecture
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSpec'
+
+  /api/projects/{project_id}/generate:
+    post:
+      summary: Trigger full generation pipeline
+      operationId: triggerGeneration
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Generation started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+
+  /api/projects/{project_id}/generate/progress:
+    get:
+      summary: Get topo level + critic status
+      operationId: getProgress
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Progress status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProgressResponse'
+
+  /api/projects/{project_id}/generate/files:
+    get:
+      summary: Get generated file tree
+      operationId: getFileTree
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File tree
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FileTreeResponse'
+
+  /api/projects/{project_id}/build:
+    get:
+      summary: Get compilation status
+      operationId: getBuildStatus
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Build status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildStatusResponse'
+
+  /api/projects/{project_id}/package:
+    post:
+      summary: Trigger platform packaging
+      operationId: triggerPackaging
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                platforms:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '202':
+          description: Packaging started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskResponse'
+
+  /api/projects/{project_id}/package/{platform}:
+    get:
+      summary: Download packaged binary
+      operationId: downloadPackage
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: platform
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Package download
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+
+  /api/projects/{project_id}/store:
+    get:
+      summary: Get store submission assets
+      operationId: getStoreSubmission
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Store submission
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StoreSubmission'
+
+  /api/projects/{project_id}/critic-log:
+    get:
+      summary: Get full critic audit trail
+      operationId: getCriticLog
+      parameters:
+        - name: project_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Critic log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CriticLogResponse'
+
+  /health:
+    get:
+      summary: Health check
+      operationId: healthCheck
+      responses:
+        '200':
+          description: Service healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+
+components:
+  schemas:
+    GameBriefRequest:
+      type: object
+      required:
+        - brief
+      properties:
+        brief:
+          type: string
+
+    ProjectResponse:
+      type: object
+      properties:
+        project_id:
+          type: string
+        project_name:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+
+    ProjectSpec:
+      type: object
+      properties:
+        project_id:
+          type: string
+        project_name:
+          type: string
+        modules:
+          type: array
+          items:
+            type: object
+        subsystems:
+          type: array
+          items:
+            type: string
+        cpp_files:
+          type: array
+          items:
+            type: string
+        blueprint_files:
+          type: array
+          items:
+            type: string
+        ubt_module_deps:
+          type: object
+        platform_targets:
+          type: array
+          items:
+            type: string
+        estimated_compile_min:
+          type: integer
+
+    TaskResponse:
+      type: object
+      properties:
+        task_id:
+          type: string
+        status:
+          type: string
+        message:
+          type: string
+
+    ProgressResponse:
+      type: object
+      properties:
+        current_level:
+          type: integer
+        total_levels:
+          type: integer
+        critic_status:
+          type: string
+        files_generated:
+          type: integer
+
+    FileTreeResponse:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+              size:
+                type: integer
+
+    BuildStatusResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        errors:
+          type: array
+          items:
+            type: object
+        warnings:
+          type: array
+          items:
+            type: string
+        duration_seconds:
+          type: number
+
+    StoreSubmission:
+      type: object
+      properties:
+        store:
+          type: string
+        assets:
+          type: object
+        rating:
+          type: object
+
+    CriticLogResponse:
+      type: object
+      properties:
+        phases:
+          type: array
+          items:
+            type: object
+            properties:
+              phase:
+                type: integer
+              passed:
+                type: boolean
+              errors:
+                type: array
+                items:
+                  type: string
