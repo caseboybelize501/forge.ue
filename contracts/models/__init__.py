@@ -16,9 +16,10 @@ from contracts.models.code_artifact import (
 )
 from contracts.models.build_result import (
     CompileResult, TestResult, PackageResult,
-    ErrorReport, RepairContext, TestSpec,
+    ErrorReport, RepairContext, TestSpec, AssertionSpec,
     ProjectResponse, TaskResponse, ProgressResponse,
-    FileTreeResponse, BuildStatusResponse, CriticLogResponse
+    FileTreeResponse, BuildStatusResponse, CriticLogResponse,
+    ValidationResult
 )
 from contracts.models.agent_message import (
     AgentTask, AgentResult, CriticResult
@@ -39,9 +40,10 @@ __all__ = [
     'CppFile', 'HeaderFile', 'BlueprintGraph', 'BlueprintNode',
     # Build Result
     'CompileResult', 'TestResult', 'PackageResult',
-    'ErrorReport', 'RepairContext', 'TestSpec',
+    'ErrorReport', 'RepairContext', 'TestSpec', 'AssertionSpec',
     'ProjectResponse', 'TaskResponse', 'ProgressResponse',
     'FileTreeResponse', 'BuildStatusResponse', 'CriticLogResponse',
+    'ValidationResult',
     # Agent Message
     'AgentTask', 'AgentResult', 'CriticResult',
     # Platform Spec

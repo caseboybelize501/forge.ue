@@ -138,7 +138,7 @@ class CompileResult(BaseModel):
 class TestSpec(BaseModel):
     """
     Test specification for a system.
-    
+
     Attributes:
         test_name: Name of the test
         test_type: Type of test (automation, blueprint, platform_guard)
@@ -151,7 +151,7 @@ class TestSpec(BaseModel):
     target_system: str
     assertions: List[Dict[str, Any]] = Field(default_factory=list)
     expected_result: str
-    
+
     @field_validator('test_name')
     @classmethod
     def test_name_not_empty(cls, v: str) -> str:
@@ -159,7 +159,7 @@ class TestSpec(BaseModel):
         if not v or not v.strip():
             raise ValueError('test_name cannot be empty')
         return v.strip()
-    
+
     @field_validator('target_system')
     @classmethod
     def target_system_not_empty(cls, v: str) -> str:
@@ -167,13 +167,47 @@ class TestSpec(BaseModel):
         if not v or not v.strip():
             raise ValueError('target_system cannot be empty')
         return v.strip()
-    
+
     @field_validator('expected_result')
     @classmethod
     def expected_result_not_empty(cls, v: str) -> str:
         """Validate expected_result is not empty."""
         if not v or not v.strip():
             raise ValueError('expected_result cannot be empty')
+        return v.strip()
+
+
+class AssertionSpec(BaseModel):
+    """
+    Individual test assertion specification.
+
+    Attributes:
+        name: Assertion name
+        condition: Condition to test (as string expression)
+        expected_value: Expected value for the condition
+        actual_value: Actual value (populated during test execution)
+        message: Optional assertion message
+    """
+    name: str
+    condition: str
+    expected_value: Optional[Any] = None
+    actual_value: Optional[Any] = None
+    message: Optional[str] = None
+
+    @field_validator('name')
+    @classmethod
+    def name_not_empty(cls, v: str) -> str:
+        """Validate name is not empty."""
+        if not v or not v.strip():
+            raise ValueError('name cannot be empty')
+        return v.strip()
+
+    @field_validator('condition')
+    @classmethod
+    def condition_not_empty(cls, v: str) -> str:
+        """Validate condition is not empty."""
+        if not v or not v.strip():
+            raise ValueError('condition cannot be empty')
         return v.strip()
 
 
@@ -348,3 +382,29 @@ class BuildStatusResponse(BaseModel):
 class CriticLogResponse(BaseModel):
     """Response schema for critic log."""
     phases: List[Dict[str, Any]]
+
+
+class ValidationResult(BaseModel):
+    """
+    Result of Blueprint or test validation.
+
+    Attributes:
+        success: Whether validation succeeded
+        errors: List of validation errors
+        warnings: List of validation warnings
+        validated_nodes: Number of nodes validated
+        timestamp: Validation timestamp
+    """
+    success: bool
+    errors: List[str] = Field(default_factory=list)
+    warnings: List[str] = Field(default_factory=list)
+    validated_nodes: int = 0
+    timestamp: datetime
+
+    @field_validator('validated_nodes')
+    @classmethod
+    def nodes_non_negative(cls, v: int) -> int:
+        """Validate validated_nodes is non-negative."""
+        if v < 0:
+            raise ValueError('validated_nodes must be non-negative')
+        return v
