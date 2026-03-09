@@ -1,11 +1,20 @@
 {
   "document": "wfcritic_prebuild.json",
   "project": "wolf.beast",
-  "version": "1.1",
+  "version": "1.2",
   "created": "2026-03-08",
+  "revised": "2026-03-09",
   "re_evaluated": "2026-03-08",
   "title": "WOLVERINE: UNBOUNDED — Layer 1 Critic Pre-Build",
   "summary": "Layer 1 architecture critic review. All Layer 1 MDs (wfreqs.md, wfarch.md, wfdep.graph.md, wfmod.dep.md, wf_file_manifest.md) reviewed against wolf.beastprompt.md original vision. File manifest tallied: L1_MANIFEST_COUNT = 214 files. Architecture fulfills original vision with minor discrepancies noted. Key HR compliance verified at design level.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L1",
+    "phase": "P6"
+  },
+
   "file_manifest_tally": {
     "count_by_build_level": [
       {"level": "L0", "name": "Core Types", "files": 8, "verification": "Verified (0.1-0.8)"},

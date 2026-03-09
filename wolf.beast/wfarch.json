@@ -1,10 +1,19 @@
 {
   "document": "wfarch.json",
   "project": "wolf.beast",
-  "version": "1.0",
+  "version": "1.1",
   "created": "2026-03-08",
+  "revised": "2026-03-09",
   "title": "WOLVERINE: UNBOUNDED — Architecture Specification",
   "summary": "Complete UE5 architecture for Wolverine: Unbounded. Defines GameMode hierarchy, character components (Claw, Wound, Rage, Movement, Trauma), AI systems (Weapon X soldiers, fear escalation), world architecture (Port Ashford districts, persistent destruction), audio (MetaSounds reactive graph), and HUD (minimal, wound-driven). All components map to FR/NFR/HR requirements from wolf.beastprompt.md.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L1",
+    "phase": "P2"
+  },
+
   "game_mode_hierarchy": {
     "UWolverineGameMode": {
       "parent": "AGameMode",

@@ -1,10 +1,19 @@
 {
   "document": "wftask_schedule.json",
   "project": "wolf.beast",
-  "version": "1.0",
+  "version": "1.1",
   "created": "2026-03-09",
+  "revised": "2026-03-09",
   "title": "WOLVERINE: UNBOUNDED — Task Schedule (Phase 7)",
   "summary": "Atomic task breakdown with dependencies for all 214 files. Organized by build level (L0-L5) and milestone gates. Each task includes ID, description, input files, output artifacts, dependencies, and estimated complexity.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L1",
+    "phase": "P7"
+  },
+
   "total_tasks": 213,
   "task_notation": {
     "task_id": "Unique identifier (e.g., T001, T105)",

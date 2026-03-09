@@ -1,11 +1,19 @@
 {
   "document": "wf_file_manifest.json",
   "project": "wolf.beast",
-  "version": "1.1",
+  "version": "1.2",
   "created": "2026-03-08",
-  "revised": "2026-03-08",
+  "revised": "2026-03-09",
   "title": "WOLVERINE: UNBOUNDED — File Manifest",
   "summary": "Complete file manifest for Wolverine: Unbounded. Every C++ header/implementation pair, Blueprint class, config file, and automation test. Total: 214 files (84 C++ source, 16 Blueprint, 5 config files, 8 automation tests, 101 content assets). Organized by build level from wfmod.dep.md. Each file includes path, build level, and FR/NFR/HR references.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L1",
+    "phase": "P5"
+  },
+
   "build_level_0_core_types": {
     "description": "Core Types (8 files)",
     "files": [

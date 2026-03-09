@@ -1,10 +1,19 @@
 {
   "document": "wolf.beastprompt.json",
   "project": "wolf.beast",
-  "version": "1.0",
+  "version": "1.1",
   "created": "2026-03-09",
+  "revised": "2026-03-09",
   "title": "WOLVERINE: UNBOUNDED — Game Brief (JSON)",
   "description": "Identical JSON conversion of wolf.beastprompt.md. Read exactly once by architect_agent. Never read again after Layer 1.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L0",
+    "phase": "Source"
+  },
+
   "license": {
     "text": "Private Repository — All Rights Reserved",
     "ownership": "Game output owned entirely by developer",

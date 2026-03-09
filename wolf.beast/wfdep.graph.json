@@ -1,10 +1,19 @@
 {
   "document": "wfdep.graph.json",
   "project": "wolf.beast",
-  "version": "1.0",
+  "version": "1.1",
   "created": "2026-03-08",
+  "revised": "2026-03-09",
   "title": "WOLVERINE: UNBOUNDED — Dependency Graph",
   "summary": "Complete UE5 module dependency graph for Wolverine: Unbounded. Nodes represent all C++ modules, Blueprint systems, and plugin dependencies. Edges represent compile-time and runtime dependencies. Cycle detection performed. Topological sort establishes UBT build levels. Critical path: Core → Material → Claw → Character → AI → World → UI.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L1",
+    "phase": "P3"
+  },
+
   "dependency_graph": {
     "notation": {
       "node_format": "[ModuleName] (Type: C++ | Blueprint | Plugin | Enum | Struct)",

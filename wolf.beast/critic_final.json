@@ -1,10 +1,43 @@
 {
   "document": "critic_final.json",
   "project": "wolf.beast",
-  "version": "1.2",
+  "version": "1.3",
   "created": "2026-03-09",
   "reconciled": "2026-03-09",
   "phase": "Layer 1 Phase 9 - Final Critic - RECONCILED",
+  "consolidated_summary": {
+    "source": "layer1sys_arch.json",
+    "total_files": 214,
+    "layer1_files": 113,
+    "layer3_content_assets": 101,
+    "cpp_headers": 42,
+    "cpp_sources": 42,
+    "automation_tests": 8,
+    "blueprint_classes": 10,
+    "blueprint_systems": 6,
+    "config_files": 5,
+    "dependency_graph": {
+      "nodes": 47,
+      "edges": 89,
+      "cycles": 0,
+      "verdict": "DAG"
+    },
+    "total_tasks": 213,
+    "milestone_gates": 10,
+    "critical_path_files": 18,
+    "hr_compliance": {
+      "HR-01": "SATISFIED",
+      "HR-02": "SATISFIED",
+      "HR-03": "SATISFIED",
+      "HR-04": "SATISFIED",
+      "HR-05": "SATISFIED",
+      "HR-06": "SATISFIED",
+      "HR-07": "SATISFIED",
+      "HR-08": "SATISFIED"
+    },
+    "layer1_status": "COMPLETE",
+    "layer2_ready": true
+  },
   "derived_from": [
     "wolf.beastprompt.md",
     "wfreqs.json",
@@ -16,7 +49,8 @@
     "wftask_schedule.json",
     "wfstructure_confirmed.json (v1.2)",
     "wfcountguide.json",
-    "final_count.json (v1.1)"
+    "final_count.json (v1.1)",
+    "layer1sys_arch.json (v1.0)"
   ],
   "count_reconciliation": {
     "protocol": "wfcountguide.json - LayerEngine Count Reconciliation Protocol v1.0",

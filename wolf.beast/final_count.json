@@ -1,10 +1,18 @@
 {
   "document": "final_count.json",
   "project": "wolf.beast",
-  "version": "1.2",
+  "version": "1.3",
   "created": "2026-03-09",
-  "reconciled": "2026-03-09",
+  "revised": "2026-03-09",
   "phase": "Layer 1 Phase 9 - Count Reconciliation - RECONCILED",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L1",
+    "phase": "Count Reconciliation"
+  },
+
   "tally_sources": {
     "manifest_json": "wf_file_manifest.json",
     "structure_json": "wfstructure_confirmed.json",

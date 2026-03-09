@@ -9,6 +9,14 @@ to me
     "title": "LayerEngine Count Reconciliation Protocol",
     "description": "Completeness as arithmetic, not assumption. One count flows through every layer. Delta can only be zero or positive. Never negative. A layer cannot close until its count matches or exceeds the previous layer's locked count.",
     "version": "1.0.0",
+    
+    "GOVERNANCE": {
+        "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+        "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+        "layer": "L1",
+        "phase": "Count Protocol"
+    },
+
     "principles": {
         "core_rule": "count(files_produced) must equal count(files_planned) at every layer close",
         "delta_rule": "Each layer's file count must be >= the previous layer's locked count. Delta can grow. It cannot shrink.",

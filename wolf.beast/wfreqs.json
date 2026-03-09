@@ -1,10 +1,19 @@
 {
   "document": "wfreqs.json",
   "project": "wolf.beast",
-  "version": "1.0",
+  "version": "1.1",
   "created": "2026-03-08",
+  "revised": "2026-03-09",
   "title": "WOLVERINE: UNBOUNDED — Workflow Frequencies",
   "summary": "Development rhythm and iteration frequencies for FORGE pipeline execution on the Wolverine project.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "READ-ONLY — Layer 1 frozen. Modifications require return to source phase.",
+    "layer": "L1",
+    "phase": "P1"
+  },
+
   "layer1_frequencies": {
     "title": "Architecture Planning",
     "phases": [

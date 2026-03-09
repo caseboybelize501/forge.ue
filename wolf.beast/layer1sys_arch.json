@@ -1,10 +1,34 @@
 {
   "document": "layer1sys_arch.json",
   "project": "wolf.beast",
-  "version": "1.0",
+  "version": "1.1",
   "created": "2026-03-09",
+  "revised": "2026-03-09",
   "title": "WOLVERINE: UNBOUNDED — Layer 1 System Architecture (Consolidated)",
   "description": "Consolidated system architecture combining all validated Layer 1 JSON documents. Single source of truth for Layer 1 complete state.",
+  
+  "GOVERNANCE": {
+    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
+    "status": "PARENT — All other .json files are governed by this document",
+    "layer": "L1",
+    "phase": "P9",
+    "governed_json_files": [
+      "wolf.beastprompt.json (L0 Source)",
+      "wfreqs.json (L1 P1)",
+      "wfarch.json (L1 P2)",
+      "wfdep.graph.json (L1 P3)",
+      "wfmod.dep.json (L1 P4)",
+      "wf_file_manifest.json (L1 P5)",
+      "wfcritic_prebuild.json (L1 P6)",
+      "wftask_schedule.json (L1 P7)",
+      "wfstructure_confirmed.json (L1 P8)",
+      "wfcountguide.json (L1 Count Protocol)",
+      "critic_final.json (L1 P9)",
+      "final_count.json (L1 Count Reconciliation)"
+    ],
+    "rule": "No governed .json file may be modified after Layer 1 APPROVED without returning to the source phase defined in wolf.beastprompt.md"
+  },
+
   "source_documents": [
     "wolf.beastprompt.json (Game Brief)",
     "wfarch.json (Architecture Specification)",
