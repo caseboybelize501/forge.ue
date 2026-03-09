@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WOLVERINE: UNBOUNDED — Layer 1 System Architecture (Consolidated)</title>
+    <style>
+        :root {
+            --primary: #c41e3a;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --accent: #ff6b35;
+            --success: #28a745;
+            --warning: #ffc107;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--light);
+        }
+        header {
+            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        h1 { font-size: 2.2em; margin-bottom: 10px; }
+        h2 { 
+            color: var(--primary); 
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            margin: 30px 0 20px 0;
+            font-size: 1.8em;
+        }
+        h3 { color: var(--dark); margin: 25px 0 15px 0; font-size: 1.4em; }
+        h4 { color: var(--accent); margin: 20px 0 10px 0; font-size: 1.2em; }
+        .meta-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .meta-item {
+            background: var(--dark);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .meta-label { font-size: 0.85em; opacity: 0.8; }
+        .meta-value { font-size: 1.2em; font-weight: bold; margin-top: 5px; }
+        .token-badge {
+            background: var(--accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .governance-box {
+            background: #fff3cd;
+            border-left: 5px solid var(--warning);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .status-pass { color: var(--success); font-weight: bold; }
+        .status-fail { color: var(--primary); font-weight: bold; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background: var(--dark);
+            color: white;
+            font-weight: 600;
+        }
+        tr:hover { background: #f8f9fa; }
+        .code-block {
+            background: var(--dark);
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            margin: 20px 0;
+        }
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .pillar-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border-top: 4px solid var(--primary);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .hr-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .hr-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid var(--success);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .hr-satisfied { color: var(--success); font-weight: bold; }
+        .section-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        ul { margin-left: 20px; margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
+        .toc {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .toc ul { list-style: none; }
+        .toc a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .toc a:hover { text-decoration: underline; }
+        footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 3px solid var(--primary);
+            text-align: center;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🐺 WOLVERINE: UNBOUNDED</h1>
+        <p style="font-size: 1.3em; opacity: 0.9;">Layer 1 System Architecture (Consolidated)</p>
+        <div style="margin-top: 15px;">
+            <span class="token-badge">14400 tokens</span>
+            <span class="token-badge" style="margin-left: 10px;">57,607 characters</span>
+            <span class="token-badge" style="margin-left: 10px;">Version 1.3</span>
+        </div>
+    </header>
+
+    <div class="meta-info">
+        <div class="meta-grid">
+            <div class="meta-item">
+                <div class="meta-label">Document</div>
+                <div class="meta-value">layer1sys_arch.json</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Project</div>
+                <div class="meta-value">wolf.beast</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Created</div>
+                <div class="meta-value">2026-03-09</div>
+            </div>
+            <div class="meta-item">
+                <div class="meta-label">Status</div>
+                <div class="meta-value status-pass">COMPLETE</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="governance-box">
+        <h3>📋 GOVERNANCE</h3>
+        <p><strong>Parent Document:</strong> layer1sys_arch.json (Layer 1 Phase 9)</p>
+        <p><strong>Status:</strong> PARENT — All other .json files are governed by this document</p>
+        <p><strong>Layer:</strong> L1 | <strong>Phase:</strong> P9</p>
+        <p style="margin-top: 10px; font-style: italic;">Rule: No governed .json file may be modified after Layer 1 APPROVED without returning to the source phase defined in wolf.beastprompt.md</p>
+    </div>
+
+    <nav class="toc">
+        <h3>📑 Table of Contents</h3>
+        <ul>
+            <li><a href="#source-documents">Source Documents</a></li>
+            <li><a href="#project-metadata">1. Project Metadata</a></li>
+            <li><a href="#requirements">2. Requirements</a></li>
+            <li><a href="#tech-stack">3. Tech Stack</a></li>
+            <li><a href="#system-architecture">4. System Architecture</a></li>
+            <li><a href="#dependency-graph">5. Dependency Graph</a></li>
+            <li><a href="#file-manifest">6. File Manifest</a></li>
+            <li><a href="#folder-structure">7. Folder Structure</a></li>
+            <li><a href="#task-schedule">8. Task Schedule</a></li>
+            <li><a href="#count-reconciliation">9. Count Reconciliation</a></li>
+            <li><a href="#workflow-frequencies">10. Workflow Frequencies</a></li>
+            <li><a href="#critic-verification">11. Critic Verification</a></li>
+            <li><a href="#milestones">12. Milestones</a></li>
+            <li><a href="#layer1-status">13. Layer 1 Status</a></li>
+            <li><a href="#token-manifest">14. Token Manifest</a></li>
+            <li><a href="#context-token">Context Token</a></li>
+            <li><a href="#decision-hash">Decision Hash</a></li>
+        </ul>
+    </nav>
+
+    <div class="section-card" id="source-documents">
+        <h3>📚 Source Documents</h3>
+        <ul>
+            <li>wolf.beastprompt.json (Game Brief)</li>
+            <li>wfarch.json (Architecture Specification)</li>
+            <li>wfdep.graph.json (Dependency Graph)</li>
+            <li>wfmod.dep.json (Module Dependencies)</li>
+            <li>wf_file_manifest.json (File Manifest)</li>
+            <li>wftask_schedule.json (Task Schedule)</li>
+            <li>wfcritic_prebuild.json (Critic Pre-Build)</li>
+            <li>wfstructure_confirmed.json (Folder Structure)</li>
+            <li>wfcountguide.json (Count Reconciliation Protocol)</li>
+            <li>critic_final.json (Final Critic)</li>
+            <li>final_count.json (Count Reconciliation)</li>
+            <li>wfreqs.json (Workflow Frequencies)</li>
+        </ul>
+    </div>
+
+    <div class="section-card" id="project-metadata">
+        <h2>1. Project Metadata</h2>
+        
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <h4>🎮 Engine & Platforms</h4>
+                <p><strong>Engine:</strong> Unreal Engine 5.3+</p>
+                <p><strong>Platforms:</strong> PC (primary), PS5, Xbox Series X</p>
+                <p><strong>Genre:</strong> Third-person open world action</p>
+            </div>
+            <div class="pillar-card">
+                <h4>🎯 Design Pillars</h4>
+                <p><strong>Pillar 1:</strong> YOU FEEL THE CLAWS — Material system is the combat</p>
+                <p><strong>Pillar 2:</strong> DAMAGE IS A RESOURCE — Getting hurt makes you more dangerous</p>
+                <p><strong>Pillar 3:</strong> THE CITY IS ALIVE AND DESTRUCTIBLE — Nothing resets</p>
+            </div>
+            <div class="pillar-card">
+                <h4>🎬 References</h4>
+                <p><strong>Traversal:</strong> Spider-Man PS4 (traversal fluidity + open world density)</p>
+                <p><strong>Combat:</strong> X-Men Origins: Wolverine PS3 (combat viscerality)</p>
+                <p><strong>World Design:</strong> Batman: Arkham City (world design + predator gameplay)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card" id="requirements">
+        <h2>2. Requirements</h2>
+        
+        <h3>Hard Requirements (8/8 SATISFIED)</h3>
+        <div class="hr-grid">
+            <div class="hr-item">
+                <strong>HR-01:</strong> CLAWS DEPLOY IN FIRST 10 SECONDS OF GAMEPLAY
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+            <div class="hr-item">
+                <strong>HR-02:</strong> DAMAGE MODEL IS REAL-TIME ON CHARACTER MESH
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+            <div class="hr-item">
+                <strong>HR-03:</strong> NO LOADING SCREENS WITHIN THE CITY
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+            <div class="hr-item">
+                <strong>HR-04:</strong> RAGE CANNOT BE MANUALLY ACTIVATED
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+            <div class="hr-item">
+                <strong>HR-05:</strong> ENVIRONMENTAL DESTRUCTION IS PERSISTENT
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+            <div class="hr-item">
+                <strong>HR-06:</strong> CLAW MATERIAL SYSTEM HAS MINIMUM 6 MATERIAL TYPES
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+            <div class="hr-item">
+                <strong>HR-07:</strong> PREDATOR MODE IS ALWAYS OPTIONAL
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+            <div class="hr-item">
+                <strong>HR-08:</strong> NO SKILL TREES. NO UPGRADE MENUS
+                <div class="hr-satisfied">✓ SATISFIED</div>
+            </div>
+        </div>
+
+        <h3>Additional Requirements</h3>
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Count</th>
+            </tr>
+            <tr>
+                <td>Functional Requirements (FR)</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <td>Non-Functional Requirements (NFR)</td>
+                <td>8</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="tech-stack">
+        <h2>3. Tech Stack</h2>
+        
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Technology</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>Engine</td>
+                <td>Unreal Engine 5.3+</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>Rendering</td>
+                <td>Lumen + Nanite</td>
+                <td>Logan uses non-Nanite skeletal mesh for wound deformation</td>
+            </tr>
+            <tr>
+                <td>Physics</td>
+                <td>Chaos Physics</td>
+                <td>Ragdoll + environmental destruction</td>
+            </tr>
+            <tr>
+                <td>Animation</td>
+                <td>Motion Matching + Control Rig</td>
+                <td>Traversal fluidity + procedural claw deployment</td>
+            </tr>
+            <tr>
+                <td>AI</td>
+                <td>Behavior Trees + EQS</td>
+                <td>Environment Query System</td>
+            </tr>
+            <tr>
+                <td>Audio</td>
+                <td>MetaSounds</td>
+                <td>Reactive score system</td>
+            </tr>
+            <tr>
+                <td>Haptics</td>
+                <td>Platform-native</td>
+                <td>DualSense adaptive triggers</td>
+            </tr>
+            <tr>
+                <td>Destruction</td>
+                <td>Chaos Destruction</td>
+                <td>Persistent, not resetting</td>
+            </tr>
+            <tr>
+                <td>Crowd</td>
+                <td>Mass AI</td>
+                <td>City population density</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="system-architecture">
+        <h2>4. System Architecture</h2>
+        
+        <h3>Game Mode Hierarchy</h3>
+        <table>
+            <tr>
+                <th>Class</th>
+                <th>Parent</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>UWolverineGameMode</td>
+                <td>AGameMode</td>
+                <td>Manages 72-hour narrative timeline, district state, mission flow</td>
+            </tr>
+            <tr>
+                <td>UWolverineGameState</td>
+                <td>AGameState</td>
+                <td>Replicates game state to all clients</td>
+            </tr>
+            <tr>
+                <td>UWolverinePlayerState</td>
+                <td>APlayerState</td>
+                <td>Player-specific persistent data (NO XP/skills — HR-08)</td>
+            </tr>
+        </table>
+
+        <h3>Character Components</h3>
+        <table>
+            <tr>
+                <th>Component</th>
+                <th>Purpose</th>
+                <th>Tick Rate</th>
+                <th>HR Mapping</th>
+            </tr>
+            <tr>
+                <td>UWolverineClawComponent</td>
+                <td>Claw deployment, material detection, impact response</td>
+                <td>60fps (TG_PrePhysics)</td>
+                <td>HR-01, HR-06</td>
+            </tr>
+            <tr>
+                <td>UWolverineWoundSystemComponent</td>
+                <td>Real-time mesh deformation, healing visualization</td>
+                <td>10Hz (performance)</td>
+                <td>HR-02</td>
+            </tr>
+            <tr>
+                <td>UWolverineRageComponent</td>
+                <td>Rage accumulation, Berserker Mode state machine</td>
+                <td>TG_UpdateWork</td>
+                <td>HR-04 (event-driven only)</td>
+            </tr>
+            <tr>
+                <td>UWolverineMovementComponent</td>
+                <td>Custom traversal (sprint, wall climb, claw swing, lunge)</td>
+                <td>TG_PrePhysics</td>
+                <td>HR-01, HR-07</td>
+            </tr>
+            <tr>
+                <td>UWolverineTraumaSystemComponent</td>
+                <td>Memory fragment unlocks, mechanical bonuses</td>
+                <td>Event-driven only</td>
+                <td>HR-08</td>
+            </tr>
+            <tr>
+                <td>UWolverineAudioComponent</td>
+                <td>MetaSounds reactive graph</td>
+                <td>-</td>
+                <td>HR-06</td>
+            </tr>
+            <tr>
+                <td>UHapticFeedbackSystem</td>
+                <td>Asymmetric haptic feedback per claw/material</td>
+                <td>-</td>
+                <td>HR-06</td>
+            </tr>
+        </table>
+
+        <h3>AI Architecture</h3>
+        <h4>Enemy Types:</h4>
+        <ul>
+            <li>AWeaponXSoldier (standard infantry)</li>
+            <li>AWeaponXHeavyUnit (powered armor)</li>
+            <li>AMutantHunter (healing dampening)</li>
+            <li>AFeralMutant (fast, dodge-heavy)</li>
+            <li>ASentinel (late-game boss)</li>
+        </ul>
+        <h4>Systems:</h4>
+        <ul>
+            <li>AEscalationManager (city-wide AI state)</li>
+            <li>Behavior Trees + EQS</li>
+            <li>Fear State Machine</li>
+        </ul>
+
+        <h3>World Architecture</h3>
+        <h4>Districts:</h4>
+        <ul>
+            <li>Basin (starting area — industrial waterfront)</li>
+            <li>Midtown (downtown — civilian dense)</li>
+            <li>Ridge (residential — Weapon X HQ)</li>
+        </ul>
+        <h4>Key Systems:</h4>
+        <ul>
+            <li>APortAshfordWorldSettings — District streaming, weather, destruction persistence</li>
+            <li>UDestructionPersistenceData — GUID-based destruction records (survives save/load)</li>
+            <li>AWeatherSystem — Dynamic weather transitions</li>
+        </ul>
+
+        <h3>HUD Architecture</h3>
+        <table>
+            <tr>
+                <th>Widget</th>
+                <th>Purpose</th>
+                <th>HR Compliance</th>
+            </tr>
+            <tr>
+                <td>UWolverineHUD</td>
+                <td>Minimal HUD (wound density, rage vignette, compass only)</td>
+                <td>HR-08 — NO XP/level/skill UI</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="dependency-graph">
+        <h2>5. Dependency Graph</h2>
+        
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Build Levels</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Total C++ Modules</td>
+                <td>31</td>
+            </tr>
+            <tr>
+                <td>Total C++ Files</td>
+                <td>62</td>
+            </tr>
+            <tr>
+                <td>Nodes Checked</td>
+                <td>47</td>
+            </tr>
+            <tr>
+                <td>Edges Checked</td>
+                <td>89</td>
+            </tr>
+            <tr>
+                <td>Cycles Detected</td>
+                <td class="status-pass">0 (DAG Verified)</td>
+            </tr>
+        </table>
+
+        <h3>Critical Path: Claws in Game</h3>
+        <div class="code-block">
+WolverineCoreTypes → IWolverineMaterialResponse → MaterialResponseSystem → 
+ClawComponent → MovementComponent → WolverineCharacter
+
+Result: Playable in empty level
+Minimum Files: 18
+        </div>
+
+        <h3>Build Level Assignment</h3>
+        <table>
+            <tr>
+                <th>Level</th>
+                <th>Modules</th>
+                <th>Files</th>
+            </tr>
+            <tr>
+                <td>Level 0</td>
+                <td>Core types, enums, interfaces</td>
+                <td>4 modules, 8 files</td>
+            </tr>
+            <tr>
+                <td>Level 1</td>
+                <td>MaterialResponse, WoundSystem, Animation, SaveGame</td>
+                <td>4 modules, 8 files</td>
+            </tr>
+            <tr>
+                <td>Level 2</td>
+                <td>Claw, Rage, Trauma, Audio, Haptic</td>
+                <td>5 modules, 10 files</td>
+            </tr>
+            <tr>
+                <td>Level 3</td>
+                <td>Movement, Character, PlayerController, HUD</td>
+                <td>6 modules, 12 files</td>
+            </tr>
+            <tr>
+                <td>Level 4</td>
+                <td>AI + World</td>
+                <td>9 modules, 36 files</td>
+            </tr>
+            <tr>
+                <td>Level 5</td>
+                <td>GameMode, GameState, PlayerState</td>
+                <td>3 modules, 10 files</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="file-manifest">
+        <h2>6. File Manifest</h2>
+        
+        <table>
+            <tr>
+                <th>Category</th>
+                <th>Count</th>
+            </tr>
+            <tr>
+                <td>Total Files</td>
+                <td>214</td>
+            </tr>
+            <tr>
+                <td>Layer 1 Files</td>
+                <td>113</td>
+            </tr>
+            <tr>
+                <td>Layer 3 Content Assets</td>
+                <td>101</td>
+            </tr>
+            <tr>
+                <td>C++ Headers</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>C++ Sources</td>
+                <td>42</td>
+            </tr>
+            <tr>
+                <td>Automation Tests</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>Blueprint Classes</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>Blueprint Systems</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Config Files</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <td>Content Assets</td>
+                <td>101</td>
+            </tr>
+        </table>
+
+        <h3>By Build Level</h3>
+        <table>
+            <tr>
+                <th>Level</th>
+                <th>Files</th>
+            </tr>
+            <tr>
+                <td>L0 Core Types</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>L1 Systems</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td>L2 Components</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <td>L3 Character</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>L4 AI + World</td>
+                <td>36</td>
+            </tr>
+            <tr>
+                <td>L5 Game Flow</td>
+                <td>10</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="folder-structure">
+        <h2>7. Folder Structure</h2>
+        
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Root</td>
+                <td>wolf.beast</td>
+            </tr>
+            <tr>
+                <td>Total Folders</td>
+                <td>35</td>
+            </tr>
+        </table>
+
+        <h3>Source Structure</h3>
+        <ul>
+            <li>Source/Wolverine/Public: 42 headers</li>
+            <li>Source/Wolverine/Private: 42 sources</li>
+            <li>Source/Wolverine/Tests/Automation: 8 tests</li>
+            <li>Content/Blueprints: 16 blueprint placeholders</li>
+            <li>Content/Animations: 52 clips documented</li>
+            <li>Content/Audio: 18 files documented</li>
+            <li>Content/Materials: 6 materials documented</li>
+            <li>Content/Data: 31 data assets (Memories, Intel, Haptics)</li>
+            <li>Config: 5 .ini files</li>
+        </ul>
+    </div>
+
+    <div class="section-card" id="task-schedule">
+        <h2>8. Task Schedule</h2>
+        
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Total Tasks</td>
+                <td>213</td>
+            </tr>
+            <tr>
+                <td>Milestone Gates</td>
+                <td>10</td>
+            </tr>
+        </table>
+
+        <h3>Milestone Gates</h3>
+        <ol>
+            <li>MG-L0-COMPLETE — Core Types Compiled (T001-T008)</li>
+            <li>MG-L1-COMPLETE — Systems Functional (T009-T016)</li>
+            <li>MG-L2-COMPLETE — Components Ready (T017-T026)</li>
+            <li>MG-CLAWS-IN-GAME — CRITICAL MILESTONE (T001-T018)</li>
+            <li>MG-L3-COMPLETE — Character Complete (T027-T038)</li>
+            <li>MG-L4-COMPLETE — AI + World Integrated (T039-T074)</li>
+            <li>MG-L5-COMPLETE — Game Flow Complete (T075-T084)</li>
+            <li>MG-BP-COMPLETE — Blueprints Integrated (T085-T099)</li>
+            <li>MG-TESTS-PASS — Automation Tests Pass (T100-T107)</li>
+            <li>MG-CONTENT-READY — Content Assets Complete (T108-T219)</li>
+        </ol>
+    </div>
+
+    <div class="section-card" id="count-reconciliation">
+        <h2>9. Count Reconciliation</h2>
+        
+        <div class="governance-box" style="border-left-color: var(--success); background: #d4edda;">
+            <h3 class="status-pass">✅ CRP-V01 (L1_LOCK): PASS</h3>
+            <p><strong>L1_MANIFEST_COUNT:</strong> 113</p>
+            <p><strong>L1_STRUCTURE_COUNT:</strong> 113</p>
+            <p><strong>Delta:</strong> 0</p>
+            <p><strong>Status:</strong> MATCH ✓</p>
+        </div>
+
+        <h3>Protocol</h3>
+        <p>LayerEngine Count Reconciliation Protocol v1.0 (wfcountguide.json)</p>
+        
+        <h3>Verifier Checks</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Gate</th>
+                <th>Check</th>
+                <th>Blocking</th>
+            </tr>
+            <tr>
+                <td>CRP-V01</td>
+                <td>L1_LOCK</td>
+                <td>L1_MANIFEST_COUNT === L1_STRUCTURE_COUNT</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>CRP-V02</td>
+                <td>L2_MANIFEST_GATE</td>
+                <td>L2_MANIFEST_COUNT >= L1_CONTRACT_COUNT</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>CRP-V03</td>
+                <td>L2_MANIFEST_GATE</td>
+                <td>DELTA >= 0</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>CRP-V04</td>
+                <td>L2_SCHEDULE_GATE</td>
+                <td>SCHEDULE_FILE_COUNT === L2_MANIFEST_COUNT</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>CRP-V05</td>
+                <td>L3_SESSION_GATE</td>
+                <td>FILES_COMPLETED <= FILES_SCHEDULED</td>
+                <td>Yes</td>
+            </tr>
+            <tr>
+                <td>CRP-V06</td>
+                <td>ALL</td>
+                <td>All required_fields present in gate header</td>
+                <td>Yes</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="workflow-frequencies">
+        <h2>10. Workflow Frequencies</h2>
+        
+        <table>
+            <tr>
+                <th>Layer</th>
+                <th>Phases</th>
+                <th>Total Minutes</th>
+                <th>Total Hours</th>
+            </tr>
+            <tr>
+                <td>Layer 1</td>
+                <td>9</td>
+                <td>540</td>
+                <td>9.0</td>
+            </tr>
+            <tr>
+                <td>Layer 2</td>
+                <td>9</td>
+                <td>630</td>
+                <td>10.5</td>
+            </tr>
+            <tr>
+                <td>Layer 3</td>
+                <td>10</td>
+                <td>705</td>
+                <td>11.75</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>28</strong></td>
+                <td><strong>1875</strong></td>
+                <td><strong>31.25</strong></td>
+            </tr>
+        </table>
+
+        <h3>Critic Gates</h3>
+        <p><strong>Total Gates:</strong> 20</p>
+        <p><strong>Repair Loop Max Cycles:</strong> 3 per layer</p>
+    </div>
+
+    <div class="section-card" id="critic-verification">
+        <h2>11. Critic Verification</h2>
+        
+        <div class="governance-box" style="border-left-color: var(--success); background: #d4edda;">
+            <h3 class="status-pass">✅ LAYER 1 STATUS: COMPLETE - ALL GATES PASSED</h3>
+        </div>
+
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td>Pre-Build Verdict</td>
+                <td class="status-pass">APPROVED</td>
+            </tr>
+            <tr>
+                <td>Final Verdict</td>
+                <td class="status-pass">APPROVED</td>
+            </tr>
+            <tr>
+                <td>Vision Fulfillment</td>
+                <td class="status-pass">HIGH FIDELITY</td>
+            </tr>
+            <tr>
+                <td>Architecture Quality</td>
+                <td class="status-pass">HIGH</td>
+            </tr>
+            <tr>
+                <td>File Manifest Quality</td>
+                <td class="status-pass">HIGH</td>
+            </tr>
+            <tr>
+                <td>Technical Resolutions</td>
+                <td class="status-pass">VALID</td>
+            </tr>
+            <tr>
+                <td>Automation Test Coverage</td>
+                <td class="status-pass">8 tests map 1:1 to 8 HR</td>
+            </tr>
+        </table>
+
+        <h3>Three Pillars Implementation</h3>
+        <ul>
+            <li><strong>Pillar 1 (Claws):</strong> ClawComponent + MaterialResponse + HapticSystem + AudioComponent — Complete</li>
+            <li><strong>Pillar 2 (Damage):</strong> WoundSystem + RageComponent (damage → rage → power) — Complete</li>
+            <li><strong>Pillar 3 (City):</strong> PortAshfordWorldSettings + DestructionPersistence + EscalationManager — Complete</li>
+        </ul>
+    </div>
+
+    <div class="section-card" id="milestones">
+        <h2>12. Milestones</h2>
+        
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Milestone</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>M1</td>
+                <td>CLAW VERTICAL SLICE</td>
+                <td>Claws deploy, impact 6 materials, camera + haptic + audio all respond</td>
+            </tr>
+            <tr>
+                <td>M2</td>
+                <td>MOVEMENT VERTICAL SLICE</td>
+                <td>Full traversal kit in test level</td>
+            </tr>
+            <tr>
+                <td>M3</td>
+                <td>DAMAGE LOOP</td>
+                <td>Wounds + healing + rage all functional</td>
+            </tr>
+            <tr>
+                <td>M4</td>
+                <td>ENEMY LOOP</td>
+                <td>Soldiers think, fear, escalate</td>
+            </tr>
+            <tr>
+                <td>M5</td>
+                <td>WORLD INTEGRATION</td>
+                <td>Port Ashford alive + destructible</td>
+            </tr>
+            <tr>
+                <td>M6</td>
+                <td>FULL GAME LOOP</td>
+                <td>Act 1 playable start to finish</td>
+            </tr>
+            <tr>
+                <td>M7</td>
+                <td>CONTENT COMPLETE</td>
+                <td>All three acts playable</td>
+            </tr>
+            <tr>
+                <td>M8</td>
+                <td>PLATFORM GOLD</td>
+                <td>PC + PS5 + Xbox builds passing cert</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="layer1-status">
+        <h2>13. Layer 1 Status</h2>
+        
+        <div class="governance-box" style="border-left-color: var(--success); background: #d4edda;">
+            <h3 class="status-pass">✅ STATUS: COMPLETE - ALL GATES PASSED</h3>
+            <p><strong>Layer 2 Ready:</strong> Yes</p>
+            <p><strong>Blocking Issues:</strong> 0</p>
+            <p><strong>Repairs Completed:</strong> 2</p>
+        </div>
+
+        <h3>Key Decisions</h3>
+        <ul>
+            <li>CRP-V01 count reconciliation PASSED (113 = 113)</li>
+            <li>All 8 HR requirements SATISFIED at structure level</li>
+            <li>Nanite/mesh deform conflict resolved (non-Nanite character mesh)</li>
+            <li>HR-04 enforced at compile-time (no BlueprintCallable on AddRage)</li>
+            <li>WoundSystem ticks at 10Hz (performance optimization)</li>
+            <li>8 automation tests map 1:1 to 8 HR requirements</li>
+            <li>Dependency graph is DAG (0 cycles, deterministic build)</li>
+            <li>Technical resolutions VALID and FEASIBLE</li>
+        </ul>
+    </div>
+
+    <div class="section-card" id="token-manifest">
+        <h2>14. Token Manifest</h2>
+        
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Total Files</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td>Total Characters</td>
+                <td>334,512</td>
+            </tr>
+            <tr>
+                <td>Total Tokens</td>
+                <td>83,628</td>
+            </tr>
+        </table>
+
+        <h3>Parent Document</h3>
+        <table>
+            <tr>
+                <th>File</th>
+                <th>Location</th>
+                <th>Tokens</th>
+                <th>LLM Safety</th>
+            </tr>
+            <tr>
+                <td>14400tokens_layer1sys_arch.json</td>
+                <td>root</td>
+                <td>14,400</td>
+                <td>16K+ required</td>
+            </tr>
+        </table>
+
+        <h3>Archived Documents (layer1archive/layer1json/)</h3>
+        <table>
+            <tr>
+                <th>File</th>
+                <th>Layer</th>
+                <th>Tokens</th>
+                <th>LLM Safety</th>
+            </tr>
+            <tr>
+                <td>wftask_schedule.json</td>
+                <td>L1 P7</td>
+                <td>13,664</td>
+                <td>16K+ required</td>
+            </tr>
+            <tr>
+                <td>wolf.beastprompt.json</td>
+                <td>L0 Source</td>
+                <td>9,218</td>
+                <td>16K+ required</td>
+            </tr>
+            <tr>
+                <td>wfarch.json</td>
+                <td>L1 P2</td>
+                <td>8,740</td>
+                <td>16K+ required</td>
+            </tr>
+            <tr>
+                <td>wfdep.graph.json</td>
+                <td>L1 P3</td>
+                <td>8,681</td>
+                <td>16K+ required</td>
+            </tr>
+            <tr>
+                <td>wf_file_manifest.json</td>
+                <td>L1 P5</td>
+                <td>7,960</td>
+                <td>16K+ required</td>
+            </tr>
+            <tr>
+                <td>wfcritic_prebuild.json</td>
+                <td>L1 P6</td>
+                <td>6,736</td>
+                <td>8K+ required</td>
+            </tr>
+            <tr>
+                <td>wfstructure_confirmed.json</td>
+                <td>L1 P8</td>
+                <td>6,434</td>
+                <td>8K+ required</td>
+            </tr>
+            <tr>
+                <td>wfcountguide.json</td>
+                <td>Count Protocol</td>
+                <td>3,805</td>
+                <td>4K+ safe</td>
+            </tr>
+            <tr>
+                <td>wfmod.dep.json</td>
+                <td>L1 P4</td>
+                <td>3,320</td>
+                <td>4K+ safe</td>
+            </tr>
+            <tr>
+                <td>wfreqs.json</td>
+                <td>L1 P1</td>
+                <td>2,327</td>
+                <td>4K+ safe</td>
+            </tr>
+            <tr>
+                <td>critic_final.json</td>
+                <td>L1 P9</td>
+                <td>1,768</td>
+                <td>4K+ safe</td>
+            </tr>
+            <tr>
+                <td>final_count.json</td>
+                <td>Count Reconciliation</td>
+                <td>974</td>
+                <td>4K+ safe</td>
+            </tr>
+        </table>
+
+        <h3>LLM Ingestion Guide by Context Window</h3>
+        <table>
+            <tr>
+                <th>Context Window</th>
+                <th>Safe Files</th>
+                <th>Total Tokens</th>
+            </tr>
+            <tr>
+                <td>4K tokens</td>
+                <td>5 files</td>
+                <td>10,194</td>
+            </tr>
+            <tr>
+                <td>8K tokens</td>
+                <td>7 files</td>
+                <td>23,362</td>
+            </tr>
+            <tr>
+                <td>16K tokens</td>
+                <td>All 12 archived</td>
+                <td>73,583</td>
+            </tr>
+            <tr>
+                <td>32K tokens</td>
+                <td>All 12 archived</td>
+                <td>73,583</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section-card" id="context-token">
+        <h2>Context Token</h2>
+        
+        <table>
+            <tr>
+                <th>Metric</th>
+                <th>Value</th>
+            </tr>
+            <tr>
+                <td>Estimated Tokens</td>
+                <td>14,400</td>
+            </tr>
+            <tr>
+                <td>Character Count</td>
+                <td>57,599</td>
+            </tr>
+            <tr>
+                <td>Word Count</td>
+                <td>11,250</td>
+            </tr>
+            <tr>
+                <td>Token Calculation Method</td>
+                <td>characters / 4 (standard English text approximation)</td>
+            </tr>
+        </table>
+
+        <h3>LLM Ingestion Safety</h3>
+        <table>
+            <tr>
+                <th>Context Window</th>
+                <th>Safe?</th>
+            </tr>
+            <tr>
+                <td>4K tokens</td>
+                <td class="status-fail">NO</td>
+            </tr>
+            <tr>
+                <td>8K tokens</td>
+                <td class="status-fail">NO</td>
+            </tr>
+            <tr>
+                <td>16K tokens</td>
+                <td class="status-pass">YES</td>
+            </tr>
+            <tr>
+                <td>32K tokens</td>
+                <td class="status-pass">YES</td>
+            </tr>
+        </table>
+        <p><strong>Minimum Context Required:</strong> 16K tokens</p>
+    </div>
+
+    <div class="section-card" id="decision-hash">
+        <h2>Decision Hash</h2>
+        
+        <div class="code-block">
+{
+    "document": "layer1sys_arch.json",
+    "project": "wolf.beast",
+    "version": "1.3",
+    "created": "2026-03-09",
+    "revised": "2026-03-09",
+    "source_documents_count": 12,
+    "layer1_status": "COMPLETE",
+    "l1_manifest_count": 113,
+    "l1_structure_count": 113,
+    "delta": 0,
+    "crp_v01_status": "PASS",
+    "hr_compliance": {
+        "HR-01": "SATISFIED",
+        "HR-02": "SATISFIED",
+        "HR-03": "SATISFIED",
+        "HR-04": "SATISFIED",
+        "HR-05": "SATISFIED",
+        "HR-06": "SATISFIED",
+        "HR-07": "SATISFIED",
+        "HR-08": "SATISFIED"
+    },
+    "dependency_graph": {
+        "nodes": 47,
+        "edges": 89,
+        "cycles": 0,
+        "verdict": "DAG"
+    },
+    "total_files": 214,
+    "total_tasks": 213,
+    "milestone_gates": 10,
+    "automation_tests": 8,
+    "critical_path_files": 18,
+    "verdict": "APPROVED",
+    "layer2_ready": true
+}
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>🐺 WOLVERINE: UNBOUNDED — A FORGE Game</strong></p>
+        <p>Private Repository — All Rights Reserved</p>
+        <p style="margin-top: 10px; font-style: italic;">Logan doesn't wait to be Wolverine. Neither does the game.</p>
+        <p style="margin-top: 20px;">Generated: 2026-03-09 | Version 1.3 | 14400 tokens</p>
+    </footer>
+</body>
+</html>
