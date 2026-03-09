@@ -1,402 +1,497 @@
-{
-  "document": "layer1sys_arch.json",
-  "project": "wolf.beast",
-  "version": "1.1",
-  "created": "2026-03-09",
-  "revised": "2026-03-09",
-  "title": "WOLVERINE: UNBOUNDED — Layer 1 System Architecture (Consolidated)",
-  "description": "Consolidated system architecture combining all validated Layer 1 JSON documents. Single source of truth for Layer 1 complete state.",
-  
-  "GOVERNANCE": {
-    "parent_document": "layer1sys_arch.json (Layer 1 Phase 9)",
-    "status": "PARENT — All other .json files are governed by this document",
-    "layer": "L1",
-    "phase": "P9",
-    "governed_json_files": [
-      "wolf.beastprompt.json (L0 Source)",
-      "wfreqs.json (L1 P1)",
-      "wfarch.json (L1 P2)",
-      "wfdep.graph.json (L1 P3)",
-      "wfmod.dep.json (L1 P4)",
-      "wf_file_manifest.json (L1 P5)",
-      "wfcritic_prebuild.json (L1 P6)",
-      "wftask_schedule.json (L1 P7)",
-      "wfstructure_confirmed.json (L1 P8)",
-      "wfcountguide.json (L1 Count Protocol)",
-      "critic_final.json (L1 P9)",
-      "final_count.json (L1 Count Reconciliation)"
-    ],
-    "rule": "No governed .json file may be modified after Layer 1 APPROVED without returning to the source phase defined in wolf.beastprompt.md"
-  },
+﻿{
+    "document":  "layer1sys_arch.json",
+    "project":  "wolf.beast",
+    "version":  "1.2",
+    "created":  "2026-03-09",
+    "revised":  "2026-03-09",
+    "title":  "WOLVERINE: UNBOUNDED â€” Layer 1 System Architecture (Consolidated)",
+    "description":  "Consolidated system architecture combining all validated Layer 1 JSON documents. Single source of truth for Layer 1 complete state.",
+    "GOVERNANCE":  {
+                       "parent_document":  "layer1sys_arch.json (Layer 1 Phase 9)",
+                       "status":  "PARENT â€” All other .json files are governed by this document",
+                       "layer":  "L1",
+                       "phase":  "P9",
+                       "governed_json_files":  [
+                                                   "wolf.beastprompt.json (L0 Source)",
+                                                   "wfreqs.json (L1 P1)",
+                                                   "wfarch.json (L1 P2)",
+                                                   "wfdep.graph.json (L1 P3)",
+                                                   "wfmod.dep.json (L1 P4)",
+                                                   "wf_file_manifest.json (L1 P5)",
+                                                   "wfcritic_prebuild.json (L1 P6)",
+                                                   "wftask_schedule.json (L1 P7)",
+                                                   "wfstructure_confirmed.json (L1 P8)",
+                                                   "wfcountguide.json (L1 Count Protocol)",
+                                                   "critic_final.json (L1 P9)",
+                                                   "final_count.json (L1 Count Reconciliation)"
+                                               ],
+                       "rule":  "No governed .json file may be modified after Layer 1 APPROVED without returning to the source phase defined in wolf.beastprompt.md"
+                   },
+    "source_documents":  [
+                             "wolf.beastprompt.json (Game Brief)",
+                             "wfarch.json (Architecture Specification)",
+                             "wfdep.graph.json (Dependency Graph)",
+                             "wfmod.dep.json (Module Dependencies)",
+                             "wf_file_manifest.json (File Manifest)",
+                             "wftask_schedule.json (Task Schedule)",
+                             "wfcritic_prebuild.json (Critic Pre-Build)",
+                             "wfstructure_confirmed.json (Folder Structure)",
+                             "wfcountguide.json (Count Reconciliation Protocol)",
+                             "critic_final.json (Final Critic)",
+                             "final_count.json (Count Reconciliation)",
+                             "wfreqs.json (Workflow Frequencies)"
+                         ],
+    "1_project_metadata":  {
+                               "engine":  "Unreal Engine 5.3+",
+                               "target_platforms":  [
+                                                        "PC (primary)",
+                                                        "PS5",
+                                                        "Xbox Series X"
+                                                    ],
+                               "genre":  "Third-person open world action",
+                               "tone":  "Brutal. Personal. Noir western in a modern city.",
+                               "references":  {
+                                                  "traversal":  "Spider-Man PS4 (traversal fluidity + open world density)",
+                                                  "combat":  "X-Men Origins: Wolverine PS3 (combat viscerality)",
+                                                  "world_design":  "Batman: Arkham City (world design + predator gameplay)"
+                                              },
+                               "design_pillars":  {
+                                                      "pillar_1":  "YOU FEEL THE CLAWS â€” Material system is the combat",
+                                                      "pillar_2":  "DAMAGE IS A RESOURCE â€” Getting hurt makes you more dangerous",
+                                                      "pillar_3":  "THE CITY IS ALIVE AND DESTRUCTIBLE â€” Nothing resets"
+                                                  }
+                           },
+    "2_requirements":  {
+                           "hard_requirements":  {
+                                                     "HR-01":  "CLAWS DEPLOY IN FIRST 10 SECONDS OF GAMEPLAY",
+                                                     "HR-02":  "DAMAGE MODEL IS REAL-TIME ON CHARACTER MESH",
+                                                     "HR-03":  "NO LOADING SCREENS WITHIN THE CITY",
+                                                     "HR-04":  "RAGE CANNOT BE MANUALLY ACTIVATED",
+                                                     "HR-05":  "ENVIRONMENTAL DESTRUCTION IS PERSISTENT",
+                                                     "HR-06":  "CLAW MATERIAL SYSTEM HAS MINIMUM 6 MATERIAL TYPES",
+                                                     "HR-07":  "PREDATOR MODE IS ALWAYS OPTIONAL",
+                                                     "HR-08":  "NO SKILL TREES. NO UPGRADE MENUS"
+                                                 },
+                           "functional_requirements_count":  20,
+                           "non_functional_requirements_count":  8,
+                           "hr_compliance_status":  {
+                                                        "HR-01":  "SATISFIED",
+                                                        "HR-02":  "SATISFIED",
+                                                        "HR-03":  "SATISFIED",
+                                                        "HR-04":  "SATISFIED",
+                                                        "HR-05":  "SATISFIED",
+                                                        "HR-06":  "SATISFIED",
+                                                        "HR-07":  "SATISFIED",
+                                                        "HR-08":  "SATISFIED"
+                                                    }
+                       },
+    "3_tech_stack":  {
+                         "engine":  "Unreal Engine 5.3+",
+                         "rendering":  {
+                                           "lumen":  "required â€” city density demands it",
+                                           "nanite":  "required â€” high density urban geometry without LOD pop",
+                                           "note":  "Logan character uses non-Nanite skeletal mesh for wound deformation"
+                                       },
+                         "physics":  "Chaos Physics (ragdoll + environmental destruction)",
+                         "animation":  {
+                                           "motion_matching":  "traversal fluidity requirement (UE5.3+ plugin)",
+                                           "control_rig":  "procedural claw deployment/retraction"
+                                       },
+                         "ai":  "Behavior Trees + EQS (Environment Query System)",
+                         "audio":  "MetaSounds (reactive score system)",
+                         "haptics":  "Platform-native (DualSense adaptive triggers)",
+                         "destruction":  "Chaos Destruction (persistent, not resetting)",
+                         "crowd":  "Mass AI (city population density)"
+                     },
+    "4_system_architecture":  {
+                                  "game_mode_hierarchy":  {
+                                                              "UWolverineGameMode":  {
+                                                                                         "parent":  "AGameMode",
+                                                                                         "purpose":  "Manages 72-hour narrative timeline, district state, mission flow"
+                                                                                     },
+                                                              "UWolverineGameState":  {
+                                                                                          "parent":  "AGameState",
+                                                                                          "purpose":  "Replicates game state to all clients"
+                                                                                      },
+                                                              "UWolverinePlayerState":  {
+                                                                                            "parent":  "APlayerState",
+                                                                                            "purpose":  "Player-specific persistent data (NO XP/skills â€” HR-08)"
+                                                                                        }
+                                                          },
+                                  "character_components":  {
+                                                               "UWolverineClawComponent":  {
+                                                                                               "parent":  "UActorComponent",
+                                                                                               "purpose":  "Claw deployment, material detection, impact response",
+                                                                                               "tick":  "60fps during combat (TG_PrePhysics)",
+                                                                                               "hr_mapping":  [
+                                                                                                                  "HR-01",
+                                                                                                                  "HR-06"
+                                                                                                              ]
+                                                                                           },
+                                                               "UWolverineWoundSystemComponent":  {
+                                                                                                      "parent":  "UActorComponent",
+                                                                                                      "purpose":  "Real-time mesh deformation, healing visualization",
+                                                                                                      "tick":  "10Hz (TG_PostUpdateWork) â€” performance optimization",
+                                                                                                      "hr_mapping":  [
+                                                                                                                         "HR-02"
+                                                                                                                     ]
+                                                                                                  },
+                                                               "UWolverineRageComponent":  {
+                                                                                               "parent":  "UActorComponent",
+                                                                                               "purpose":  "Rage accumulation, Berserker Mode state machine",
+                                                                                               "tick":  "TG_UpdateWork",
+                                                                                               "hr04_compliance":  "NO public ActivateRage() â€” event-driven only",
+                                                                                               "hr_mapping":  [
+                                                                                                                  "HR-04"
+                                                                                                              ]
+                                                                                           },
+                                                               "UWolverineMovementComponent":  {
+                                                                                                   "parent":  "UCharacterMovementComponent",
+                                                                                                   "purpose":  "Custom traversal (sprint, wall climb, claw swing, lunge)",
+                                                                                                   "tick":  "TG_PrePhysics",
+                                                                                                   "hr_mapping":  [
+                                                                                                                      "HR-01",
+                                                                                                                      "HR-07"
+                                                                                                                  ]
+                                                                                               },
+                                                               "UWolverineTraumaSystemComponent":  {
+                                                                                                       "parent":  "UActorComponent",
+                                                                                                       "purpose":  "Memory fragment unlocks, mechanical bonuses (no XP/skills)",
+                                                                                                       "tick":  "No (event-driven only)",
+                                                                                                       "hr_mapping":  [
+                                                                                                                          "HR-08"
+                                                                                                                      ]
+                                                                                                   },
+                                                               "UWolverineAudioComponent":  {
+                                                                                                "parent":  "UAudioComponent",
+                                                                                                "purpose":  "MetaSounds reactive graph",
+                                                                                                "hr_mapping":  [
+                                                                                                                   "HR-06"
+                                                                                                               ]
+                                                                                            },
+                                                               "UHapticFeedbackSystem":  {
+                                                                                             "parent":  "UActorComponent",
+                                                                                             "purpose":  "Asymmetric haptic feedback per claw, per material",
+                                                                                             "hr_mapping":  [
+                                                                                                                "HR-06"
+                                                                                                            ]
+                                                                                         }
+                                                           },
+                                  "ai_architecture":  {
+                                                          "enemy_types":  [
+                                                                              "AWeaponXSoldier (standard infantry)",
+                                                                              "AWeaponXHeavyUnit (powered armor)",
+                                                                              "AMutantHunter (healing dampening)",
+                                                                              "AFeralMutant (fast, dodge-heavy)",
+                                                                              "ASentinel (late-game boss)"
+                                                                          ],
+                                                          "systems":  [
+                                                                          "AEscalationManager (city-wide AI state)",
+                                                                          "Behavior Trees + EQS",
+                                                                          "Fear State Machine"
+                                                                      ]
+                                                      },
+                                  "world_architecture":  {
+                                                             "districts":  [
+                                                                               "Basin",
+                                                                               "Midtown",
+                                                                               "Ridge"
+                                                                           ],
+                                                             "APortAshfordWorldSettings":  {
+                                                                                               "parent":  "AWorldSettings",
+                                                                                               "purpose":  "District streaming, weather, destruction persistence"
+                                                                                           },
+                                                             "UDestructionPersistenceData":  {
+                                                                                                 "parent":  "UDataAsset",
+                                                                                                 "purpose":  "GUID-based destruction records (survives save/load)"
+                                                                                             },
+                                                             "AWeatherSystem":  {
+                                                                                    "parent":  "AActor",
+                                                                                    "purpose":  "Dynamic weather transitions"
+                                                                                }
+                                                         },
+                                  "hud_architecture":  {
+                                                           "UWolverineHUD":  {
+                                                                                 "parent":  "UUserWidget",
+                                                                                 "purpose":  "Minimal HUD (wound density, rage vignette, compass only)",
+                                                                                 "hr_mapping":  [
+                                                                                                    "HR-08 â€” NO XP/level/skill UI"
+                                                                                                ]
+                                                                             }
+                                                       }
+                              },
+    "5_dependency_graph":  {
+                               "build_levels":  6,
+                               "total_cpp_modules":  31,
+                               "total_cpp_files":  62,
+                               "cycle_detection":  {
+                                                       "nodes_checked":  47,
+                                                       "edges_checked":  89,
+                                                       "cycles_detected":  0,
+                                                       "verdict":  "Graph is a DAG (Directed Acyclic Graph)"
+                                                   },
+                               "critical_path":  {
+                                                     "description":  "Claws in Game",
+                                                     "path":  [
+                                                                  "WolverineCoreTypes",
+                                                                  "IWolverineMaterialResponse",
+                                                                  "MaterialResponseSystem",
+                                                                  "ClawComponent",
+                                                                  "MovementComponent",
+                                                                  "WolverineCharacter"
+                                                              ],
+                                                     "result":  "Playable in empty level",
+                                                     "minimum_files":  18
+                                                 },
+                               "build_level_assignment":  {
+                                                              "level_0":  "Core types, enums, interfaces (4 modules, 8 files)",
+                                                              "level_1":  "MaterialResponse, WoundSystem, Animation, SaveGame (4 modules, 8 files)",
+                                                              "level_2":  "Claw, Rage, Trauma, Audio, Haptic (5 modules, 10 files)",
+                                                              "level_3":  "Movement, Character, PlayerController, HUD (6 modules, 12 files)",
+                                                              "level_4":  "AI + World (9 modules, 36 files)",
+                                                              "level_5":  "GameMode, GameState, PlayerState (3 modules, 10 files)"
+                                                          }
+                           },
+    "6_file_manifest":  {
+                            "total_files":  214,
+                            "layer1_files":  113,
+                            "layer3_content_assets":  101,
+                            "breakdown":  {
+                                              "cpp_headers":  42,
+                                              "cpp_sources":  42,
+                                              "automation_tests":  8,
+                                              "blueprint_classes":  10,
+                                              "blueprint_systems":  6,
+                                              "config_files":  5,
+                                              "content_assets":  101
+                                          },
+                            "by_build_level":  {
+                                                   "L0_Core_Types":  8,
+                                                   "L1_Systems":  8,
+                                                   "L2_Components":  10,
+                                                   "L3_Character":  12,
+                                                   "L4_AI_World":  36,
+                                                   "L5_Game_Flow":  10
+                                               }
+                        },
+    "7_folder_structure":  {
+                               "root":  "wolf.beast",
+                               "total_folders":  35,
+                               "source_structure":  {
+                                                        "Source/Wolverine/Public":  "42 headers",
+                                                        "Source/Wolverine/Private":  "42 sources",
+                                                        "Source/Wolverine/Tests/Automation":  "8 tests",
+                                                        "Content/Blueprints":  "16 blueprint placeholders",
+                                                        "Content/Animations":  "52 clips documented",
+                                                        "Content/Audio":  "18 files documented",
+                                                        "Content/Materials":  "6 materials documented",
+                                                        "Content/Data":  "31 data assets (Memories, Intel, Haptics)",
+                                                        "Config":  "5 .ini files"
+                                                    }
+                           },
+    "8_task_schedule":  {
+                            "total_tasks":  213,
+                            "milestone_gates":  [
+                                                    {
+                                                        "gate":  "MG-L0-COMPLETE",
+                                                        "tasks":  "T001-T008",
+                                                        "description":  "Core Types Compiled"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-L1-COMPLETE",
+                                                        "tasks":  "T009-T016",
+                                                        "description":  "Systems Functional"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-L2-COMPLETE",
+                                                        "tasks":  "T017-T026",
+                                                        "description":  "Components Ready"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-CLAWS-IN-GAME",
+                                                        "tasks":  "T001-T018",
+                                                        "description":  "CRITICAL MILESTONE â€” 18 files, playable claw demo"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-L3-COMPLETE",
+                                                        "tasks":  "T027-T038",
+                                                        "description":  "Character Complete"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-L4-COMPLETE",
+                                                        "tasks":  "T039-T074",
+                                                        "description":  "AI + World Integrated"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-L5-COMPLETE",
+                                                        "tasks":  "T075-T084",
+                                                        "description":  "Game Flow Complete"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-BP-COMPLETE",
+                                                        "tasks":  "T085-T099",
+                                                        "description":  "Blueprints Integrated"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-TESTS-PASS",
+                                                        "tasks":  "T100-T107",
+                                                        "description":  "Automation Tests Pass (8 HR tests)"
+                                                    },
+                                                    {
+                                                        "gate":  "MG-CONTENT-READY",
+                                                        "tasks":  "T108-T219",
+                                                        "description":  "Content Assets Complete"
+                                                    }
+                                                ]
+                        },
+    "9_count_reconciliation":  {
+                                   "protocol":  "LayerEngine Count Reconciliation Protocol v1.0 (wfcountguide.json)",
+                                   "gate":  "L1_LOCK (CRP-V01)",
+                                   "pass_condition":  "L1_MANIFEST_COUNT === L1_STRUCTURE_COUNT",
+                                   "manifest_count":  113,
+                                   "structure_count":  113,
+                                   "delta":  0,
+                                   "status":  "MATCH âœ“",
+                                   "crp_v01_result":  "PASS",
+                                   "verifier_checks":  [
+                                                           {
+                                                               "id":  "CRP-V01",
+                                                               "gate":  "L1_LOCK",
+                                                               "check":  "L1_MANIFEST_COUNT === L1_STRUCTURE_COUNT",
+                                                               "blocking":  true
+                                                           },
+                                                           {
+                                                               "id":  "CRP-V02",
+                                                               "gate":  "L2_MANIFEST_GATE",
+                                                               "check":  "L2_MANIFEST_COUNT \u003e= L1_CONTRACT_COUNT",
+                                                               "blocking":  true
+                                                           },
+                                                           {
+                                                               "id":  "CRP-V03",
+                                                               "gate":  "L2_MANIFEST_GATE",
+                                                               "check":  "DELTA \u003e= 0",
+                                                               "blocking":  true
+                                                           },
+                                                           {
+                                                               "id":  "CRP-V04",
+                                                               "gate":  "L2_SCHEDULE_GATE",
+                                                               "check":  "SCHEDULE_FILE_COUNT === L2_MANIFEST_COUNT",
+                                                               "blocking":  true
+                                                           },
+                                                           {
+                                                               "id":  "CRP-V05",
+                                                               "gate":  "L3_SESSION_GATE",
+                                                               "check":  "FILES_COMPLETED \u003c= FILES_SCHEDULED",
+                                                               "blocking":  true
+                                                           },
+                                                           {
+                                                               "id":  "CRP-V06",
+                                                               "gate":  "ALL",
+                                                               "check":  "All required_fields present in gate header",
+                                                               "blocking":  true
+                                                           }
+                                                       ]
+                               },
+    "10_workflow_frequencies":  {
+                                    "layer1_phases":  9,
+                                    "layer1_total_minutes":  540,
+                                    "layer2_phases":  9,
+                                    "layer2_total_minutes":  630,
+                                    "layer3_phases":  10,
+                                    "layer3_total_minutes":  705,
+                                    "total_development_hours":  47,
+                                    "critic_gates":  20,
+                                    "repair_loop_max_cycles":  3,
+                                    "daily_cadence":  "7 days recommended schedule"
+                                },
+    "11_critic_verification":  {
+                                   "prebuild_verdict":  "APPROVED",
+                                   "final_verdict":  "APPROVED",
+                                   "vision_fulfillment":  "HIGH_FIDELITY",
+                                   "architecture_quality":  "HIGH",
+                                   "file_manifest_quality":  "HIGH",
+                                   "technical_resolutions":  "VALID",
+                                   "automation_test_coverage":  "8 tests map 1:1 to 8 HR requirements",
+                                   "three_pillars_implementation":  {
+                                                                        "pillar_1_claws":  "ClawComponent + MaterialResponse + HapticSystem + AudioComponent â€” Complete",
+                                                                        "pillar_2_damage":  "WoundSystem + RageComponent (damage â†’ rage â†’ power) â€” Complete",
+                                                                        "pillar_3_city":  "PortAshfordWorldSettings + DestructionPersistence + EscalationManager â€” Complete"
+                                                                    }
+                               },
+    "12_milestones":  {
+                          "M1_CLAW_VERTICAL_SLICE":  "Claws deploy, impact 6 materials, camera + haptic + audio all respond",
+                          "M2_MOVEMENT_VERTICAL_SLICE":  "Full traversal kit in test level",
+                          "M3_DAMAGE_LOOP":  "Wounds + healing + rage all functional",
+                          "M4_ENEMY_LOOP":  "Soldiers think, fear, escalate",
+                          "M5_WORLD_INTEGRATION":  "Port Ashford alive + destructible",
+                          "M6_FULL_GAME_LOOP":  "Act 1 playable start to finish",
+                          "M7_CONTENT_COMPLETE":  "All three acts playable",
+                          "M8_PLATFORM_GOLD":  "PC + PS5 + Xbox builds passing cert"
+                      },
+    "13_layer1_status":  {
+                             "status":  "COMPLETE - ALL GATES PASSED",
+                             "layer2_ready":  true,
+                             "blocking_issues":  [
 
-  "source_documents": [
-    "wolf.beastprompt.json (Game Brief)",
-    "wfarch.json (Architecture Specification)",
-    "wfdep.graph.json (Dependency Graph)",
-    "wfmod.dep.json (Module Dependencies)",
-    "wf_file_manifest.json (File Manifest)",
-    "wftask_schedule.json (Task Schedule)",
-    "wfcritic_prebuild.json (Critic Pre-Build)",
-    "wfstructure_confirmed.json (Folder Structure)",
-    "wfcountguide.json (Count Reconciliation Protocol)",
-    "critic_final.json (Final Critic)",
-    "final_count.json (Count Reconciliation)",
-    "wfreqs.json (Workflow Frequencies)"
-  ],
-
-  "1_project_metadata": {
-    "engine": "Unreal Engine 5.3+",
-    "target_platforms": ["PC (primary)", "PS5", "Xbox Series X"],
-    "genre": "Third-person open world action",
-    "tone": "Brutal. Personal. Noir western in a modern city.",
-    "references": {
-      "traversal": "Spider-Man PS4 (traversal fluidity + open world density)",
-      "combat": "X-Men Origins: Wolverine PS3 (combat viscerality)",
-      "world_design": "Batman: Arkham City (world design + predator gameplay)"
-    },
-    "design_pillars": {
-      "pillar_1": "YOU FEEL THE CLAWS — Material system is the combat",
-      "pillar_2": "DAMAGE IS A RESOURCE — Getting hurt makes you more dangerous",
-      "pillar_3": "THE CITY IS ALIVE AND DESTRUCTIBLE — Nothing resets"
-    }
-  },
-
-  "2_requirements": {
-    "hard_requirements": {
-      "HR-01": "CLAWS DEPLOY IN FIRST 10 SECONDS OF GAMEPLAY",
-      "HR-02": "DAMAGE MODEL IS REAL-TIME ON CHARACTER MESH",
-      "HR-03": "NO LOADING SCREENS WITHIN THE CITY",
-      "HR-04": "RAGE CANNOT BE MANUALLY ACTIVATED",
-      "HR-05": "ENVIRONMENTAL DESTRUCTION IS PERSISTENT",
-      "HR-06": "CLAW MATERIAL SYSTEM HAS MINIMUM 6 MATERIAL TYPES",
-      "HR-07": "PREDATOR MODE IS ALWAYS OPTIONAL",
-      "HR-08": "NO SKILL TREES. NO UPGRADE MENUS"
-    },
-    "functional_requirements_count": 20,
-    "non_functional_requirements_count": 8,
-    "hr_compliance_status": {
-      "HR-01": "SATISFIED",
-      "HR-02": "SATISFIED",
-      "HR-03": "SATISFIED",
-      "HR-04": "SATISFIED",
-      "HR-05": "SATISFIED",
-      "HR-06": "SATISFIED",
-      "HR-07": "SATISFIED",
-      "HR-08": "SATISFIED"
-    }
-  },
-
-  "3_tech_stack": {
-    "engine": "Unreal Engine 5.3+",
-    "rendering": {
-      "lumen": "required — city density demands it",
-      "nanite": "required — high density urban geometry without LOD pop",
-      "note": "Logan character uses non-Nanite skeletal mesh for wound deformation"
-    },
-    "physics": "Chaos Physics (ragdoll + environmental destruction)",
-    "animation": {
-      "motion_matching": "traversal fluidity requirement (UE5.3+ plugin)",
-      "control_rig": "procedural claw deployment/retraction"
-    },
-    "ai": "Behavior Trees + EQS (Environment Query System)",
-    "audio": "MetaSounds (reactive score system)",
-    "haptics": "Platform-native (DualSense adaptive triggers)",
-    "destruction": "Chaos Destruction (persistent, not resetting)",
-    "crowd": "Mass AI (city population density)"
-  },
-
-  "4_system_architecture": {
-    "game_mode_hierarchy": {
-      "UWolverineGameMode": {
-        "parent": "AGameMode",
-        "purpose": "Manages 72-hour narrative timeline, district state, mission flow"
-      },
-      "UWolverineGameState": {
-        "parent": "AGameState",
-        "purpose": "Replicates game state to all clients"
-      },
-      "UWolverinePlayerState": {
-        "parent": "APlayerState",
-        "purpose": "Player-specific persistent data (NO XP/skills — HR-08)"
-      }
-    },
-    "character_components": {
-      "UWolverineClawComponent": {
-        "parent": "UActorComponent",
-        "purpose": "Claw deployment, material detection, impact response",
-        "tick": "60fps during combat (TG_PrePhysics)",
-        "hr_mapping": ["HR-01", "HR-06"]
-      },
-      "UWolverineWoundSystemComponent": {
-        "parent": "UActorComponent",
-        "purpose": "Real-time mesh deformation, healing visualization",
-        "tick": "10Hz (TG_PostUpdateWork) — performance optimization",
-        "hr_mapping": ["HR-02"]
-      },
-      "UWolverineRageComponent": {
-        "parent": "UActorComponent",
-        "purpose": "Rage accumulation, Berserker Mode state machine",
-        "tick": "TG_UpdateWork",
-        "hr04_compliance": "NO public ActivateRage() — event-driven only",
-        "hr_mapping": ["HR-04"]
-      },
-      "UWolverineMovementComponent": {
-        "parent": "UCharacterMovementComponent",
-        "purpose": "Custom traversal (sprint, wall climb, claw swing, lunge)",
-        "tick": "TG_PrePhysics",
-        "hr_mapping": ["HR-01", "HR-07"]
-      },
-      "UWolverineTraumaSystemComponent": {
-        "parent": "UActorComponent",
-        "purpose": "Memory fragment unlocks, mechanical bonuses (no XP/skills)",
-        "tick": "No (event-driven only)",
-        "hr_mapping": ["HR-08"]
-      },
-      "UWolverineAudioComponent": {
-        "parent": "UAudioComponent",
-        "purpose": "MetaSounds reactive graph",
-        "hr_mapping": ["HR-06"]
-      },
-      "UHapticFeedbackSystem": {
-        "parent": "UActorComponent",
-        "purpose": "Asymmetric haptic feedback per claw, per material",
-        "hr_mapping": ["HR-06"]
-      }
-    },
-    "ai_architecture": {
-      "enemy_types": [
-        "AWeaponXSoldier (standard infantry)",
-        "AWeaponXHeavyUnit (powered armor)",
-        "AMutantHunter (healing dampening)",
-        "AFeralMutant (fast, dodge-heavy)",
-        "ASentinel (late-game boss)"
-      ],
-      "systems": [
-        "AEscalationManager (city-wide AI state)",
-        "Behavior Trees + EQS",
-        "Fear State Machine"
-      ]
-    },
-    "world_architecture": {
-      "districts": ["Basin", "Midtown", "Ridge"],
-      "APortAshfordWorldSettings": {
-        "parent": "AWorldSettings",
-        "purpose": "District streaming, weather, destruction persistence"
-      },
-      "UDestructionPersistenceData": {
-        "parent": "UDataAsset",
-        "purpose": "GUID-based destruction records (survives save/load)"
-      },
-      "AWeatherSystem": {
-        "parent": "AActor",
-        "purpose": "Dynamic weather transitions"
-      }
-    },
-    "hud_architecture": {
-      "UWolverineHUD": {
-        "parent": "UUserWidget",
-        "purpose": "Minimal HUD (wound density, rage vignette, compass only)",
-        "hr_mapping": ["HR-08 — NO XP/level/skill UI"]
-      }
-    }
-  },
-
-  "5_dependency_graph": {
-    "build_levels": 6,
-    "total_cpp_modules": 31,
-    "total_cpp_files": 62,
-    "cycle_detection": {
-      "nodes_checked": 47,
-      "edges_checked": 89,
-      "cycles_detected": 0,
-      "verdict": "Graph is a DAG (Directed Acyclic Graph)"
-    },
-    "critical_path": {
-      "description": "Claws in Game",
-      "path": [
-        "WolverineCoreTypes",
-        "IWolverineMaterialResponse",
-        "MaterialResponseSystem",
-        "ClawComponent",
-        "MovementComponent",
-        "WolverineCharacter"
-      ],
-      "result": "Playable in empty level",
-      "minimum_files": 18
-    },
-    "build_level_assignment": {
-      "level_0": "Core types, enums, interfaces (4 modules, 8 files)",
-      "level_1": "MaterialResponse, WoundSystem, Animation, SaveGame (4 modules, 8 files)",
-      "level_2": "Claw, Rage, Trauma, Audio, Haptic (5 modules, 10 files)",
-      "level_3": "Movement, Character, PlayerController, HUD (6 modules, 12 files)",
-      "level_4": "AI + World (9 modules, 36 files)",
-      "level_5": "GameMode, GameState, PlayerState (3 modules, 10 files)"
-    }
-  },
-
-  "6_file_manifest": {
-    "total_files": 214,
-    "layer1_files": 113,
-    "layer3_content_assets": 101,
-    "breakdown": {
-      "cpp_headers": 42,
-      "cpp_sources": 42,
-      "automation_tests": 8,
-      "blueprint_classes": 10,
-      "blueprint_systems": 6,
-      "config_files": 5,
-      "content_assets": 101
-    },
-    "by_build_level": {
-      "L0_Core_Types": 8,
-      "L1_Systems": 8,
-      "L2_Components": 10,
-      "L3_Character": 12,
-      "L4_AI_World": 36,
-      "L5_Game_Flow": 10
-    }
-  },
-
-  "7_folder_structure": {
-    "root": "wolf.beast",
-    "total_folders": 35,
-    "source_structure": {
-      "Source/Wolverine/Public": "42 headers",
-      "Source/Wolverine/Private": "42 sources",
-      "Source/Wolverine/Tests/Automation": "8 tests",
-      "Content/Blueprints": "16 blueprint placeholders",
-      "Content/Animations": "52 clips documented",
-      "Content/Audio": "18 files documented",
-      "Content/Materials": "6 materials documented",
-      "Content/Data": "31 data assets (Memories, Intel, Haptics)",
-      "Config": "5 .ini files"
-    }
-  },
-
-  "8_task_schedule": {
-    "total_tasks": 213,
-    "milestone_gates": [
-      {"gate": "MG-L0-COMPLETE", "tasks": "T001-T008", "description": "Core Types Compiled"},
-      {"gate": "MG-L1-COMPLETE", "tasks": "T009-T016", "description": "Systems Functional"},
-      {"gate": "MG-L2-COMPLETE", "tasks": "T017-T026", "description": "Components Ready"},
-      {"gate": "MG-CLAWS-IN-GAME", "tasks": "T001-T018", "description": "CRITICAL MILESTONE — 18 files, playable claw demo"},
-      {"gate": "MG-L3-COMPLETE", "tasks": "T027-T038", "description": "Character Complete"},
-      {"gate": "MG-L4-COMPLETE", "tasks": "T039-T074", "description": "AI + World Integrated"},
-      {"gate": "MG-L5-COMPLETE", "tasks": "T075-T084", "description": "Game Flow Complete"},
-      {"gate": "MG-BP-COMPLETE", "tasks": "T085-T099", "description": "Blueprints Integrated"},
-      {"gate": "MG-TESTS-PASS", "tasks": "T100-T107", "description": "Automation Tests Pass (8 HR tests)"},
-      {"gate": "MG-CONTENT-READY", "tasks": "T108-T219", "description": "Content Assets Complete"}
-    ]
-  },
-
-  "9_count_reconciliation": {
-    "protocol": "LayerEngine Count Reconciliation Protocol v1.0 (wfcountguide.json)",
-    "gate": "L1_LOCK (CRP-V01)",
-    "pass_condition": "L1_MANIFEST_COUNT === L1_STRUCTURE_COUNT",
-    "manifest_count": 113,
-    "structure_count": 113,
-    "delta": 0,
-    "status": "MATCH ✓",
-    "crp_v01_result": "PASS",
-    "verifier_checks": [
-      {"id": "CRP-V01", "gate": "L1_LOCK", "check": "L1_MANIFEST_COUNT === L1_STRUCTURE_COUNT", "blocking": true},
-      {"id": "CRP-V02", "gate": "L2_MANIFEST_GATE", "check": "L2_MANIFEST_COUNT >= L1_CONTRACT_COUNT", "blocking": true},
-      {"id": "CRP-V03", "gate": "L2_MANIFEST_GATE", "check": "DELTA >= 0", "blocking": true},
-      {"id": "CRP-V04", "gate": "L2_SCHEDULE_GATE", "check": "SCHEDULE_FILE_COUNT === L2_MANIFEST_COUNT", "blocking": true},
-      {"id": "CRP-V05", "gate": "L3_SESSION_GATE", "check": "FILES_COMPLETED <= FILES_SCHEDULED", "blocking": true},
-      {"id": "CRP-V06", "gate": "ALL", "check": "All required_fields present in gate header", "blocking": true}
-    ]
-  },
-
-  "10_workflow_frequencies": {
-    "layer1_phases": 9,
-    "layer1_total_minutes": 540,
-    "layer2_phases": 9,
-    "layer2_total_minutes": 630,
-    "layer3_phases": 10,
-    "layer3_total_minutes": 705,
-    "total_development_hours": 47,
-    "critic_gates": 20,
-    "repair_loop_max_cycles": 3,
-    "daily_cadence": "7 days recommended schedule"
-  },
-
-  "11_critic_verification": {
-    "prebuild_verdict": "APPROVED",
-    "final_verdict": "APPROVED",
-    "vision_fulfillment": "HIGH_FIDELITY",
-    "architecture_quality": "HIGH",
-    "file_manifest_quality": "HIGH",
-    "technical_resolutions": "VALID",
-    "automation_test_coverage": "8 tests map 1:1 to 8 HR requirements",
-    "three_pillars_implementation": {
-      "pillar_1_claws": "ClawComponent + MaterialResponse + HapticSystem + AudioComponent — Complete",
-      "pillar_2_damage": "WoundSystem + RageComponent (damage → rage → power) — Complete",
-      "pillar_3_city": "PortAshfordWorldSettings + DestructionPersistence + EscalationManager — Complete"
-    }
-  },
-
-  "12_milestones": {
-    "M1_CLAW_VERTICAL_SLICE": "Claws deploy, impact 6 materials, camera + haptic + audio all respond",
-    "M2_MOVEMENT_VERTICAL_SLICE": "Full traversal kit in test level",
-    "M3_DAMAGE_LOOP": "Wounds + healing + rage all functional",
-    "M4_ENEMY_LOOP": "Soldiers think, fear, escalate",
-    "M5_WORLD_INTEGRATION": "Port Ashford alive + destructible",
-    "M6_FULL_GAME_LOOP": "Act 1 playable start to finish",
-    "M7_CONTENT_COMPLETE": "All three acts playable",
-    "M8_PLATFORM_GOLD": "PC + PS5 + Xbox builds passing cert"
-  },
-
-  "13_layer1_status": {
-    "status": "COMPLETE - ALL GATES PASSED",
-    "layer2_ready": true,
-    "blocking_issues": [],
-    "repairs_completed": 2,
-    "key_decisions": [
-      "CRP-V01 count reconciliation PASSED (113 = 113)",
-      "All 8 HR requirements SATISFIED at structure level",
-      "Nanite/mesh deform conflict resolved (non-Nanite character mesh)",
-      "HR-04 enforced at compile-time (no BlueprintCallable on AddRage)",
-      "WoundSystem ticks at 10Hz (performance optimization)",
-      "8 automation tests map 1:1 to 8 HR requirements",
-      "Dependency graph is DAG (0 cycles, deterministic build)",
-      "Technical resolutions VALID and FEASIBLE"
-    ]
-  },
-
-  "decision_hash": {
-    "document": "layer1sys_arch.json",
-    "project": "wolf.beast",
-    "version": "1.0",
-    "created": "2026-03-09",
-    "source_documents_count": 12,
-    "layer1_status": "COMPLETE",
-    "l1_manifest_count": 113,
-    "l1_structure_count": 113,
-    "delta": 0,
-    "crp_v01_status": "PASS",
-    "hr_compliance": {
-      "HR-01": "SATISFIED",
-      "HR-02": "SATISFIED",
-      "HR-03": "SATISFIED",
-      "HR-04": "SATISFIED",
-      "HR-05": "SATISFIED",
-      "HR-06": "SATISFIED",
-      "HR-07": "SATISFIED",
-      "HR-08": "SATISFIED"
-    },
-    "dependency_graph": {
-      "nodes": 47,
-      "edges": 89,
-      "cycles": 0,
-      "verdict": "DAG"
-    },
-    "total_files": 214,
-    "total_tasks": 213,
-    "milestone_gates": 10,
-    "automation_tests": 8,
-    "critical_path_files": 18,
-    "verdict": "APPROVED",
-    "layer2_ready": true
-  }
+                                                 ],
+                             "repairs_completed":  2,
+                             "key_decisions":  [
+                                                   "CRP-V01 count reconciliation PASSED (113 = 113)",
+                                                   "All 8 HR requirements SATISFIED at structure level",
+                                                   "Nanite/mesh deform conflict resolved (non-Nanite character mesh)",
+                                                   "HR-04 enforced at compile-time (no BlueprintCallable on AddRage)",
+                                                   "WoundSystem ticks at 10Hz (performance optimization)",
+                                                   "8 automation tests map 1:1 to 8 HR requirements",
+                                                   "Dependency graph is DAG (0 cycles, deterministic build)",
+                                                   "Technical resolutions VALID and FEASIBLE"
+                                               ]
+                         },
+    "decision_hash":  {
+                          "document":  "layer1sys_arch.json",
+                          "project":  "wolf.beast",
+                          "version":  "1.0",
+                          "created":  "2026-03-09",
+                          "source_documents_count":  12,
+                          "layer1_status":  "COMPLETE",
+                          "l1_manifest_count":  113,
+                          "l1_structure_count":  113,
+                          "delta":  0,
+                          "crp_v01_status":  "PASS",
+                          "hr_compliance":  {
+                                                "HR-01":  "SATISFIED",
+                                                "HR-02":  "SATISFIED",
+                                                "HR-03":  "SATISFIED",
+                                                "HR-04":  "SATISFIED",
+                                                "HR-05":  "SATISFIED",
+                                                "HR-06":  "SATISFIED",
+                                                "HR-07":  "SATISFIED",
+                                                "HR-08":  "SATISFIED"
+                                            },
+                          "dependency_graph":  {
+                                                   "nodes":  47,
+                                                   "edges":  89,
+                                                   "cycles":  0,
+                                                   "verdict":  "DAG"
+                                               },
+                          "total_files":  214,
+                          "total_tasks":  213,
+                          "milestone_gates":  10,
+                          "automation_tests":  8,
+                          "critical_path_files":  18,
+                          "verdict":  "APPROVED",
+                          "layer2_ready":  true
+                      },
+    "context_token":  {
+                          "estimated_tokens":  3777,
+                          "character_count":  15107,
+                          "token_calculation_method":  "characters / 4",
+                          "word_count":  2965,
+                          "llm_ingestion_safety":  {
+                                                       "safe_for_4k_context":  true,
+                                                       "safe_for_8k_context":  true,
+                                                       "margin_4k_context":  "18% remaining",
+                                                       "safe_for_16k_context":  true,
+                                                       "safe_for_32k_context":  true
+                                                   }
+                      }
 }
