@@ -12,7 +12,8 @@ from celery import Celery
 from pathlib import Path
 
 from contracts.models.game_brief import Platform
-from contracts.models.platform_spec import PlatformTarget, PackageResult
+from contracts.models.platform_spec import PlatformTarget
+from contracts.models.build_result import PackageResult
 
 app = Celery("forge", broker="redis://localhost:6379/0")
 
