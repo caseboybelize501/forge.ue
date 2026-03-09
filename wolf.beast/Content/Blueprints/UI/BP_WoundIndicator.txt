@@ -1,0 +1,13 @@
+# BP_WoundIndicator.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T094 (BP-10)
+# Purpose: Wound UI BP
+# Parent: UWoundIndicatorWidget
+# Dependencies: T036 (WoundIndicatorWidget.cpp)
+# ============================================================================
+# Blueprint Class: BP_WoundIndicator
+# Parent Class: /Script/Wolverine.WoundIndicatorWidget
+#
+# Visual: Vignette pulse based on wound severity (NOT a health bar)
+# ============================================================================

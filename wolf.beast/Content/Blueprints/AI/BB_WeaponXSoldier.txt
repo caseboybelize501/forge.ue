@@ -1,0 +1,25 @@
+# BB_WeaponXSoldier - Blackboard Asset
+# Layer 1 Placeholder - Soldier AI Blackboard
+# 
+# Build Level: L4 (AI + World)
+# Task Reference: wftask_schedule.md T095
+# Purpose: Soldier blackboard data container
+#
+# FR/NFR/HR Mappings:
+#   - FR-09: Enemy AI (soldier coordination)
+#   - NFR-04: AI response <100ms
+#
+# Dependencies:
+#   - T086: BP_WeaponXSoldier (parent BP)
+#   - T074: EQSService (EQS queries)
+#
+# Blackboard Keys:
+#   - TargetActor (Actor reference)
+#   - LastSeenPos (Vector - last known player position)
+#   - FearLevel (Float 0-100)
+#   - SquadStatus (Enum - Active, Flanking, Retreating)
+#
+# TODO Layer 3:
+#   - Create actual Blackboard asset in UE5 editor
+#   - Configure key types and default values
+#   - Link to BT_WeaponXSoldier behavior tree

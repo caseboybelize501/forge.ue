@@ -1,0 +1,255 @@
+{
+  "document": "wfmod.dep.json",
+  "project": "wolf.beast",
+  "version": "1.0",
+  "created": "2026-03-08",
+  "title": "WOLVERINE: UNBOUNDED — Module Dependencies",
+  "summary": "Topological sort of wfdep.graph.md establishing exact UBT build order. 31 C++ modules (62 files) organized into 6 build levels. Each module specifies parent class, key UPROPERTY/UFUNCTION declarations, tick configuration, and FR/NFR/HR mappings. Critical path: CoreTypes → MaterialResponse → ClawComponent → MovementComponent → Character (playable at Level 3).",
+  "build_level_0_core_types": {
+    "description": "No Dependencies",
+    "modules": [
+      {
+        "id": "0.1",
+        "file_header": "Source/Wolverine/Public/WolverineCoreTypes.h",
+        "file_impl": "Source/Wolverine/Private/WolverineCoreTypes.cpp",
+        "type": "Enum/Struct definitions",
+        "dependencies": [],
+        "exports": ["EClawMaterialType", "ERageLevel", "ETraversalState", "EDistrictType", "EWeatherType", "ESoldierTactic", "ESentinelPhase", "ETraumaBonusType", "EHapticPattern", "EDestructionCause", "EDamageVisual", "ERootMotionMode", "EClawSide"],
+        "fr_mapping": "All (foundational enums)",
+        "hr_mapping": "HR-06 (6 material types)"
+      },
+      {
+        "id": "0.3",
+        "file_header": "Source/Wolverine/Public/IWolverineMaterialResponse.h",
+        "file_impl": "Source/Wolverine/Private/IWolverineMaterialResponse.cpp",
+        "type": "C++ Interface",
+        "dependencies": ["WolverineCoreTypes.h"],
+        "exports": ["GetMaterialType(FHitResult) → EClawMaterialType"],
+        "fr_mapping": "FR-07 (material-responsive claw impact)",
+        "hr_mapping": "HR-06 (6 material types)"
+      },
+      {
+        "id": "0.5",
+        "file_header": "Source/Wolverine/Public/IWolverineDamageInterface.h",
+        "file_impl": "Source/Wolverine/Private/IWolverineDamageInterface.cpp",
+        "type": "C++ Interface",
+        "dependencies": [],
+        "exports": ["ApplyDamage(float, FVector, AActor*) → void"],
+        "fr_mapping": "FR-06 (real-time wound system)",
+        "hr_mapping": "HR-02 (mesh deformation)"
+      },
+      {
+        "id": "0.7",
+        "file_header": "Source/Wolverine/Public/WolverineDataStructures.h",
+        "file_impl": "Source/Wolverine/Private/WolverineDataStructures.cpp",
+        "type": "Struct definitions",
+        "dependencies": ["WolverineCoreTypes.h"],
+        "exports": ["FWoundData", "FMemoryFragment", "FAudioReactiveParams", "FHapticFeedbackData", "FMotionMatchingData", "FClawAnimationData", "FDestructionRecord", "FDamageRecord", "FIntelItem"],
+        "fr_mapping": "FR-06, FR-11, FR-13, FR-15, FR-18, FR-20"
+      }
+    ]
+  },
+  "build_level_1_systems": {
+    "description": "Depend on L0 Only",
+    "modules": [
+      {
+        "id": "1.1",
+        "file_header": "Source/Wolverine/Public/Components/WolverineMaterialResponseSystem.h",
+        "file_impl": "Source/Wolverine/Private/Components/WolverineMaterialResponseSystem.cpp",
+        "parent": "UActorComponent",
+        "interfaces": ["IWolverineMaterialResponse"],
+        "dependencies": ["L0: WolverineCoreTypes, IWolverineMaterialResponse, WolverineDataStructures"],
+        "tick": false,
+        "fr_mapping": "FR-07",
+        "hr_mapping": "HR-06"
+      },
+      {
+        "id": "1.3",
+        "file_header": "Source/Wolverine/Public/Components/WolverineWoundSystemComponent.h",
+        "file_impl": "Source/Wolverine/Private/Components/WolverineWoundSystemComponent.cpp",
+        "parent": "UActorComponent",
+        "interfaces": ["IWolverineDamageInterface"],
+        "dependencies": ["L0: WolverineCoreTypes, IWolverineDamageInterface, WolverineDataStructures"],
+        "tick": {"enabled": true, "interval": 0.1, "group": "TG_PostUpdateWork", "note": "10Hz for performance"},
+        "fr_mapping": "FR-06",
+        "hr_mapping": "HR-02",
+        "nfr_mapping": ["NFR-01 (60fps)", "NFR-03 (healing visual <500ms)"]
+      },
+      {
+        "id": "1.5",
+        "file_header": "Source/Wolverine/Public/Animation/WolverineAnimationInstance.h",
+        "file_impl": "Source/Wolverine/Private/Animation/WolverineAnimationInstance.cpp",
+        "parent": "UAnimInstance",
+        "dependencies": ["L0: WolverineCoreTypes, WolverineDataStructures"],
+        "tick": "Native (AnimInstance)",
+        "fr_mapping": ["FR-02", "FR-03"],
+        "nfr_mapping": ["NFR-01 (60fps)", "NFR-07 (<2s transitions)"]
+      },
+      {
+        "id": "1.7",
+        "file_header": "Source/Wolverine/Public/WolverineSaveGame.h",
+        "file_impl": "Source/Wolverine/Private/WolverineSaveGame.cpp",
+        "parent": "USaveGame",
+        "dependencies": ["L0: WolverineCoreTypes, WolverineDataStructures"],
+        "fr_mapping": ["FR-13", "FR-11", "FR-15"],
+        "hr_mapping": "HR-05",
+        "nfr_mapping": "NFR-06"
+      }
+    ]
+  },
+  "build_level_2_components": {
+    "description": "Depend on L0 + L1",
+    "modules": [
+      {
+        "id": "2.1",
+        "file_header": "Source/Wolverine/Public/Components/WolverineClawComponent.h",
+        "file_impl": "Source/Wolverine/Private/Components/WolverineClawComponent.cpp",
+        "parent": "UActorComponent",
+        "dependencies": ["L0 + L1: WolverineMaterialResponseSystem"],
+        "tick": {"enabled": true, "interval": 0.016, "group": "TG_PrePhysics", "note": "60fps during combat"},
+        "fr_mapping": ["FR-03", "FR-04", "FR-07"],
+        "hr_mapping": ["HR-01", "HR-06"],
+        "nfr_mapping": ["NFR-02 (<200ms deploy)", "NFR-08 (audio never masked)"]
+      },
+      {
+        "id": "2.3",
+        "file_header": "Source/Wolverine/Public/Components/WolverineRageComponent.h",
+        "file_impl": "Source/Wolverine/Private/Components/WolverineRageComponent.cpp",
+        "parent": "UActorComponent",
+        "dependencies": ["L0: WolverineCoreTypes, WolverineDataStructures"],
+        "tick": {"enabled": true, "group": "TG_UpdateWork", "note": "rage drain, Berserker countdown"},
+        "fr_mapping": "FR-05",
+        "hr_mapping": "HR-04 (event-driven only, NO manual activation)",
+        "nfr_mapping": ["NFR-01 (60fps)", "NFR-04 (AI response <100ms)"],
+        "critical_hr04_compliance": {
+          "no_public_activate_rage": true,
+          "no_blueprint_callable_on_add_rage": true,
+          "rage_only_from_events": ["OnDamageDealt", "OnDamageReceived"]
+        }
+      },
+      {
+        "id": "2.5",
+        "file_header": "Source/Wolverine/Public/Components/WolverineTraumaSystemComponent.h",
+        "file_impl": "Source/Wolverine/Private/Components/WolverineTraumaSystemComponent.cpp",
+        "parent": "UActorComponent",
+        "dependencies": ["L0: WolverineCoreTypes, WolverineDataStructures"],
+        "tick": false,
+        "fr_mapping": "FR-11",
+        "hr_mapping": "HR-08 (no skill trees)"
+      },
+      {
+        "id": "2.7",
+        "file_header": "Source/Wolverine/Public/Components/WolverineAudioComponent.h",
+        "file_impl": "Source/Wolverine/Private/Components/WolverineAudioComponent.cpp",
+        "parent": "UAudioComponent",
+        "dependencies": ["L0 + L1"],
+        "fr_mapping": "FR-18",
+        "hr_mapping": "HR-06",
+        "nfr_mapping": "NFR-08"
+      },
+      {
+        "id": "2.9",
+        "file_header": "Source/Wolverine/Public/Components/HapticFeedbackSystem.h",
+        "file_impl": "Source/Wolverine/Private/Components/HapticFeedbackSystem.cpp",
+        "parent": "UActorComponent",
+        "dependencies": ["L0: WolverineCoreTypes, WolverineDataStructures"],
+        "fr_mapping": "FR-20",
+        "hr_mapping": "HR-06",
+        "nfr_mapping": "NFR-02"
+      }
+    ]
+  },
+  "build_level_3_character": {
+    "description": "Depend on L0 + L1 + L2",
+    "modules": [
+      {
+        "id": "3.1",
+        "file_header": "Source/Wolverine/Public/Components/WolverineMovementComponent.h",
+        "file_impl": "Source/Wolverine/Private/Components/WolverineMovementComponent.cpp",
+        "parent": "UCharacterMovementComponent",
+        "dependencies": ["L0 + L2: WolverineClawComponent"],
+        "tick": {"enabled": true, "group": "TG_PrePhysics"},
+        "fr_mapping": "FR-02",
+        "hr_mapping": ["HR-01", "HR-07"],
+        "nfr_mapping": ["NFR-01 (60fps)", "NFR-02 (claw lunge <200ms)"]
+      },
+      {
+        "id": "3.3",
+        "file_header": "Source/Wolverine/Public/WolverineCharacter.h",
+        "file_impl": "Source/Wolverine/Private/WolverineCharacter.cpp",
+        "parent": "ACharacter",
+        "dependencies": ["L0 + L1 + L2 (all components)"],
+        "components": ["ClawComponent", "WoundSystemComponent", "RageComponent", "MovementComponent", "TraumaSystemComponent", "AudioComponent", "HapticFeedbackSystem"],
+        "fr_mapping": "All (aggregates all systems)"
+      }
+    ]
+  },
+  "build_level_4_ai_world": {
+    "description": "Depend on L0-L3",
+    "modules": [
+      {"id": "4.1", "name": "WeaponXSoldier", "parent": "ACharacter", "dependencies": ["L0 + L3"], "fr_mapping": "FR-09"},
+      {"id": "4.2", "name": "WeaponXHeavyUnit", "parent": "AWeaponXSoldier", "dependencies": ["L0 + L3"], "fr_mapping": "FR-09"},
+      {"id": "4.3", "name": "MutantHunter", "parent": "AWeaponXSoldier", "dependencies": ["L0 + L3"], "fr_mapping": "FR-09"},
+      {"id": "4.4", "name": "FeralMutant", "parent": "AWeaponXSoldier", "dependencies": ["L0 + L3"], "fr_mapping": "FR-09"},
+      {"id": "4.5", "name": "Sentinel", "parent": "AWeaponXSoldier", "dependencies": ["L0 + L3 + L4"], "fr_mapping": "FR-09"},
+      {"id": "4.6", "name": "EscalationManager", "parent": "AActor", "dependencies": ["L0 + L3 + L4"], "fr_mapping": "FR-14"},
+      {"id": "4.7", "name": "PortAshfordWorldSettings", "parent": "AWorldSettings", "dependencies": ["L0 + L1"], "fr_mapping": ["FR-12", "FR-13"], "hr_mapping": ["HR-03", "HR-05"]},
+      {"id": "4.8", "name": "WeatherSystem", "parent": "AActor", "dependencies": ["L0 + L4"], "fr_mapping": "FR-12"},
+      {"id": "4.9", "name": "DestructionPersistenceData", "parent": "UDataAsset", "dependencies": ["L0"], "fr_mapping": "FR-13", "hr_mapping": "HR-05", "nfr_mapping": "NFR-06"}
+    ]
+  },
+  "build_level_5_game_flow": {
+    "description": "Depend on L0-L4",
+    "modules": [
+      {"id": "5.1", "name": "WolverineGameMode", "parent": "AGameMode", "dependencies": ["L0-L4"], "fr_mapping": "FR-17"},
+      {"id": "5.2", "name": "WolverineGameState", "parent": "AGameState", "dependencies": ["L0 + L3"], "fr_mapping": "Replication"},
+      {"id": "5.3", "name": "WolverinePlayerState", "parent": "APlayerState", "dependencies": ["L0"], "fr_mapping": ["FR-11", "FR-15"], "hr_mapping": "HR-08"}
+    ]
+  },
+  "build_order_summary": [
+    {"level": 0, "modules": "CoreTypes, Interfaces, Structs", "files": 8, "cumulative": 8, "milestone": "Types available"},
+    {"level": 1, "modules": "MaterialResponse, WoundSystem, Animation, SaveGame", "files": 8, "cumulative": 16, "milestone": "Systems ready"},
+    {"level": 2, "modules": "Claw, Rage, Trauma, Audio, Haptic", "files": 10, "cumulative": 26, "milestone": "Components ready"},
+    {"level": 3, "modules": "Movement, Character", "files": 4, "cumulative": 30, "milestone": "CLAWS IN GAME"},
+    {"level": 4, "modules": "AI (5), World (4)", "files": 18, "cumulative": 48, "milestone": "AI + World integrated"},
+    {"level": 5, "modules": "GameMode, GameState, PlayerState", "files": 6, "cumulative": 54, "milestone": "FULL GAME LOOP"}
+  ],
+  "total_files": {
+    "cpp_headers": 54,
+    "cpp_sources": 54,
+    "total": 108
+  },
+  "decision_hash": {
+    "document": "wfmod.dep.md",
+    "project": "wolf.beast",
+    "version": "1.0",
+    "created": "2026-03-08",
+    "derived_from": ["wfdep.graph.md", "wfarch.md"],
+    "build_levels": 6,
+    "cpp_modules": 31,
+    "cpp_files": 62,
+    "total_files": 108,
+    "key_decisions": [
+      "Level 0 frozen after L1P9 — WolverineCoreTypes is foundational",
+      "WoundSystemComponent ticks at 10Hz (0.1f) — NFR-01 performance optimization",
+      "RageComponent::AddRage() has NO BlueprintCallable — HR-04 enforced",
+      "ClawComponent ticks at 60fps during combat — NFR-02 <200ms response",
+      "Critical path: L0→L1→L2→L3 = CLAWS IN GAME at Level 3",
+      "All 6 EClawMaterialType values defined — HR-06 compliance verified"
+    ],
+    "constraints": [
+      "No changes to Level 0 after L1P9 without full rebuild",
+      "RageComponent MUST NOT expose ActivateRage — HR-04 compile-time enforcement",
+      "WoundSystemComponent tick interval fixed at 0.1f — do not increase",
+      "ClawComponent material trace cached if no movement — performance budget"
+    ],
+    "hr_compliance": {
+      "HR-01": "ClawComponent deploy time <200ms — NFR-02",
+      "HR-02": "WoundSystemComponent mesh deformation — non-Nanite skeletal mesh",
+      "HR-04": "RageComponent::AddRage() internal only — no BlueprintCallable",
+      "HR-05": "DestructionPersistenceData survives save/load — NFR-06",
+      "HR-06": "EClawMaterialType has exactly 6 values",
+      "HR-08": "No XP/level/skill in PlayerState or any UMG"
+    }
+  }
+}

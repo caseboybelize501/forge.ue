@@ -1,0 +1,13 @@
+# BP_WeaponXHeavy.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T087 (BP-03)
+# Purpose: Heavy unit BP
+# Parent: AWeaponXHeavyUnit
+# Dependencies: T042 (WeaponXHeavyUnit.cpp)
+# ============================================================================
+# Blueprint Class: BP_WeaponXHeavy
+# Parent Class: /Script/Wolverine.WeaponXHeavyUnit
+#
+# Special: Armor breach mechanic (claw pry required)
+# ============================================================================

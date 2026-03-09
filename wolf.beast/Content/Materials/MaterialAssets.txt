@@ -1,0 +1,19 @@
+# Material Assets (Placeholders)
+# ============================================================================
+# Build Level: Content Assets
+# Task Ref: T183-T188 (6 material assets)
+# Purpose: Claw impact materials (visual + physical)
+# HR Mapping: HR-06 (6 material types)
+# Dependencies: T010 (WolverineMaterialResponseSystem.cpp)
+# ============================================================================
+
+# Claw Impact Materials (6 files) - T183-T188
+Content/Materials/ClawImpact/
+  - M_ClawImpact_Flesh (soft, blood decal)
+  - M_ClawImpact_Bone (hard, crack decal)
+  - M_ClawImpact_LightMetal (spark, scratch decal)
+  - M_ClawImpact_HeavyMetal (spark, dent decal)
+  - M_ClawImpact_Concrete (dust, chip decal)
+  - M_ClawImpact_Glass (shatter, crack decal)
+
+# Total: 6 material assets (HR-06 compliance)

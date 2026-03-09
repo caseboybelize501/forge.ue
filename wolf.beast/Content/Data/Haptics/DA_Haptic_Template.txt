@@ -1,0 +1,52 @@
+# Haptic Feedback Data Assets (Placeholders)
+# ============================================================================
+# Build Level: Data Assets
+# Task Ref: T214-T219 (6 haptic patterns)
+# Purpose: Per-material haptic feedback
+# HR Mapping: HR-06 (6 material types)
+# Dependencies: T026 (HapticFeedbackSystem.cpp)
+# ============================================================================
+
+# Haptic 01: DA_Haptic_Flesh
+FHapticFeedbackData:
+  MaterialType: Flesh
+  Strength: 0.3
+  Duration: 0.1
+  Pattern: "Soft pulse"
+
+# Haptic 02: DA_Haptic_Bone
+FHapticFeedbackData:
+  MaterialType: Bone
+  Strength: 0.5
+  Duration: 0.15
+  Pattern: "Sharp crack"
+
+# Haptic 03: DA_Haptic_LightMetal
+FHapticFeedbackData:
+  MaterialType: LightMetal
+  Strength: 0.6
+  Duration: 0.1
+  Pattern: "Metallic ping"
+
+# Haptic 04: DA_Haptic_HeavyMetal
+FHapticFeedbackData:
+  MaterialType: HeavyMetal
+  Strength: 0.8
+  Duration: 0.2
+  Pattern: "Heavy impact"
+
+# Haptic 05: DA_Haptic_Concrete
+FHapticFeedbackData:
+  MaterialType: Concrete
+  Strength: 0.7
+  Duration: 0.15
+  Pattern: "Gritty scrape"
+
+# Haptic 06: DA_Haptic_Glass
+FHapticFeedbackData:
+  MaterialType: Glass
+  Strength: 0.4
+  Duration: 0.05
+  Pattern: "Sharp shatter"
+
+# Total: 6 haptic data assets (HR-06 compliance)

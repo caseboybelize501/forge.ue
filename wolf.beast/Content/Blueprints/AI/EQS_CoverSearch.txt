@@ -1,0 +1,22 @@
+# EQS_CoverSearch.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint-Only Systems
+# Task Ref: T097 (BP-EQS-02)
+# Purpose: Cover search query
+# Dependencies: T074 (EQSService.cpp)
+# ============================================================================
+# EQS Query: EQS_CoverSearch
+#
+# Test Generators:
+# - Context: Cover actors in radius (1500 units)
+#
+# Tests:
+# - Distance (to Player): Min 300, Max 1200
+# - Line of Sight (to Player): No direct LOS (behind cover)
+# - Cover Strength: Actor provides cover (height >= 100 units)
+# - Distance (to Current Position): Prefer closer cover
+#
+# Scoring:
+# - Cover Strength: Higher is better
+# - Distance to Player: Optimal at 800 units
+# ============================================================================

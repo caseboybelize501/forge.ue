@@ -1,0 +1,22 @@
+# EQS_RetreatPath.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint-Only Systems
+# Task Ref: T098 (BP-EQS-03)
+# Purpose: Retreat path query
+# Dependencies: T074 (EQSService.cpp)
+# ============================================================================
+# EQS Query: EQS_RetreatPath
+#
+# Test Generators:
+# - Grid (radius: 3000 units, spacing: 200 units)
+#
+# Tests:
+# - Distance (to Player): Min 1500, Max 3000 (far from player)
+# - Navigation: Reachable (path exists)
+# - Cover (nearby): At least one cover object within 300 units
+# - Squad Members: Away from other squad members (avoid clustering)
+#
+# Scoring:
+# - Distance to Player: Farther is better
+# - Cover proximity: Closer is better
+# ============================================================================

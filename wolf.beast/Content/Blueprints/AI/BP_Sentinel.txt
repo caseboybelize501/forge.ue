@@ -1,0 +1,13 @@
+# BP_Sentinel.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T090 (BP-06)
+# Purpose: Boss BP
+# Parent: ASentinel
+# Dependencies: T048 (Sentinel.cpp)
+# ============================================================================
+# Blueprint Class: BP_Sentinel
+# Parent Class: /Script/Wolverine.Sentinel
+#
+# Special: Multi-phase boss (3 phases), area destruction attacks
+# ============================================================================

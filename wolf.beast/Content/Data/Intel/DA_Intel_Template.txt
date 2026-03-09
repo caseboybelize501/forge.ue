@@ -1,0 +1,23 @@
+# Weapon X Intel Data Assets (Placeholders)
+# ============================================================================
+# Build Level: Data Assets
+# Task Ref: T199-T213 (15 intel items)
+# Purpose: Weapon X collectibles (audio logs, photos)
+# FR Mapping: FR-15
+# Dependencies: T022 (WolverineTraumaSystemComponent)
+# ============================================================================
+# Layer 3 Content: Actual intel content (titles, descriptions, audio paths)
+#                  to be defined in Layer 3. Architecture is complete.
+# ============================================================================
+
+# Intel 01: DA_Intel_WeaponX_Report_001
+FIntelItem:
+  IntelID: "WeaponX_Report_001"
+  Title: "TODO: Layer 3 content"
+  Description: "TODO: Layer 3 content"
+  AudioLog: "TODO: Layer 3 content"
+  IsCollected: false
+
+# Intel 02-15: Similar structure (Layer 3 content)
+# Total: 15 Weapon X Intel data assets
+# Note: NO map markers (FR-15)

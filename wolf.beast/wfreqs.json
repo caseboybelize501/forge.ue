@@ -1,0 +1,133 @@
+{
+  "document": "wfreqs.json",
+  "project": "wolf.beast",
+  "version": "1.0",
+  "created": "2026-03-08",
+  "title": "WOLVERINE: UNBOUNDED — Workflow Frequencies",
+  "summary": "Development rhythm and iteration frequencies for FORGE pipeline execution on the Wolverine project.",
+  "layer1_frequencies": {
+    "title": "Architecture Planning",
+    "phases": [
+      {"phase": 1, "name": "requirements.md", "agent": "architect_agent", "estimated_minutes": 45, "git_commit": true},
+      {"phase": 2, "name": "architecture.md", "agent": "architect_agent", "estimated_minutes": 90, "git_commit": true},
+      {"phase": 3, "name": "dependency_graph.md", "agent": "architect_agent", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 4, "name": "module_dependencies.md", "agent": "architect_agent", "estimated_minutes": 45, "git_commit": true},
+      {"phase": 5, "name": "file_manifest.md", "agent": "architect_agent", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 6, "name": "critic_prebuild.md", "agent": "critic_agent", "estimated_minutes": 75, "git_commit": true},
+      {"phase": 7, "name": "task_schedule.md", "agent": "architect_agent", "estimated_minutes": 45, "git_commit": true},
+      {"phase": 8, "name": "structure_confirmed.md", "agent": "architect_agent + CLI", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 9, "name": "critic_final.md", "agent": "critic_agent", "estimated_minutes": 60, "git_commit": true}
+    ],
+    "total_minutes": 540
+  },
+  "layer2_frequencies": {
+    "title": "Code Planning + Stress Test",
+    "phases": [
+      {"phase": 1, "name": "requirements2.md", "agent": "architect_agent", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 2, "name": "architecture2.md", "agent": "architect_agent", "estimated_minutes": 90, "git_commit": true},
+      {"phase": 3, "name": "dependency_graph2.md", "agent": "architect_agent", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 4, "name": "module_dependencies2.md", "agent": "architect_agent", "estimated_minutes": 45, "git_commit": true},
+      {"phase": 5, "name": "file_manifest2.md", "agent": "architect_agent", "estimated_minutes": 75, "git_commit": true},
+      {"phase": 6, "name": "critic_prebuild2.md", "agent": "critic_agent", "estimated_minutes": 90, "git_commit": true},
+      {"phase": 7, "name": "task_schedule2.md", "agent": "architect_agent", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 8, "name": "structure_confirmed2.md", "agent": "architect_agent + CLI", "estimated_minutes": 75, "git_commit": true},
+      {"phase": 9, "name": "critic_final2.md", "agent": "critic_agent", "estimated_minutes": 75, "git_commit": true}
+    ],
+    "total_minutes": 630,
+    "codingschedule_generation_minutes": 30
+  },
+  "layer3_frequencies": {
+    "title": "Implementation Phases",
+    "description": "Layer 3 executes in 10 phases based on the task_schedule from Layer 2.",
+    "phases": [
+      {"phase": 1, "focus": "Core types, interfaces, enums", "estimated_minutes": 45, "git_commit": true},
+      {"phase": 2, "focus": "MaterialResponseSystem, WoundSystem", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 3, "focus": "ClawComponent, RageComponent", "estimated_minutes": 90, "git_commit": true},
+      {"phase": 4, "focus": "WolverineCharacter + MovementComponent", "estimated_minutes": 90, "git_commit": true},
+      {"phase": 5, "focus": "AI systems (Behavior Trees, EQS)", "estimated_minutes": 75, "git_commit": true},
+      {"phase": 6, "focus": "World systems (district streaming, weather)", "estimated_minutes": 75, "git_commit": true},
+      {"phase": 7, "focus": "Audio (MetaSounds), Haptics", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 8, "focus": "HUD, TraumaSystem, Safe Houses", "estimated_minutes": 60, "git_commit": true},
+      {"phase": 9, "focus": "Integration, tests, polish", "estimated_minutes": 90, "git_commit": true},
+      {"phase": 10, "focus": "Final critic, packaging prep", "estimated_minutes": 60, "git_commit": true}
+    ],
+    "total_minutes": 705
+  },
+  "critic_gate_frequencies": {
+    "gates": [
+      {"gate": "critic_prebuild", "layer": "L1P6", "trigger": "After file_manifest", "max_wait_minutes": 75, "action_on_failure": "RETURN TO PHASE N"},
+      {"gate": "critic_final", "layer": "L1P9", "trigger": "After structure_confirmed", "max_wait_minutes": 75, "action_on_failure": "RETURN TO PHASE N"},
+      {"gate": "critic_prebuild2", "layer": "L2P6", "trigger": "After file_manifest2", "max_wait_minutes": 90, "action_on_failure": "RETURN TO PHASE N"},
+      {"gate": "critic_final2", "layer": "L2P9", "trigger": "After structure_confirmed2", "max_wait_minutes": 75, "action_on_failure": "RETURN TO PHASE N"},
+      {"gate": "critic_layer3", "layer": "each L3 phase", "trigger": "After each L3 phase", "max_wait_minutes": 45, "action_on_failure": "RETURN TO PHASE N"}
+    ],
+    "rule": "Critic returns RETURN TO PHASE [N] → execute immediately. Do not proceed."
+  },
+  "git_commit_frequencies": {
+    "patterns": [
+      {"event": "After each Layer 1 phase", "pattern": "L1P[N]: [phase_name] — [brief_description]"},
+      {"event": "After each Layer 2 phase", "pattern": "L2P[N]: [phase_name] — [brief_description]"},
+      {"event": "After each Layer 3 phase", "pattern": "L3P[N]: [phase_name] — [brief_description]"},
+      {"event": "After critic approval", "pattern": "CRITIC: Layer [N] Phase [M] — APPROVED"},
+      {"event": "After repair cycle", "pattern": "REPAIR: [file_name] — [error_fixed]"}
+    ],
+    "commit_frequency_minutes": "45-90 during active development"
+  },
+  "repair_loop_frequencies": {
+    "loops": [
+      {"layer": "Layer 1", "max_cycles": 3, "avg_time_per_cycle_minutes": 30, "trigger": "Critic rejection"},
+      {"layer": "Layer 2", "max_cycles": 3, "avg_time_per_cycle_minutes": 30, "trigger": "Critic rejection"},
+      {"layer": "Layer 3", "max_cycles": 3, "avg_time_per_cycle_minutes": 20, "trigger": "UHT/UBT failure"}
+    ],
+    "rule": "After 3 failed repair cycles → escalate to architect_agent for redesign."
+  },
+  "milestone_frequencies": {
+    "milestones": [
+      {"milestone": "CLAWS IN GAME", "target": "End L3P3", "cumulative_hours": 20},
+      {"milestone": "CHARACTER IN WORLD", "target": "End L3P4", "cumulative_hours": 25},
+      {"milestone": "FULL COMBAT LOOP", "target": "End L3P5", "cumulative_hours": 30},
+      {"milestone": "AI + WORLD COMPLETE", "target": "End L3P6", "cumulative_hours": 35},
+      {"milestone": "AUDIO + HUD COMPLETE", "target": "End L3P8", "cumulative_hours": 40},
+      {"milestone": "INTEGRATION COMPLETE", "target": "End L3P9", "cumulative_hours": 45},
+      {"milestone": "READY FOR PACKAGING", "target": "End L3P10", "cumulative_hours": 47}
+    ]
+  },
+  "daily_cadence": {
+    "recommended_schedule": [
+      {"day": 1, "focus": "Layer 1 (Phases 1-5)", "target": "requirements → file_manifest"},
+      {"day": 2, "focus": "Layer 1 (Phases 6-9)", "target": "critic_prebuild → critic_final"},
+      {"day": 3, "focus": "Layer 2 (Phases 1-5)", "target": "requirements2 → file_manifest2"},
+      {"day": 4, "focus": "Layer 2 (Phases 6-9)", "target": "critic_prebuild2 → critic_final2 + codingschedule.md"},
+      {"day": 5, "focus": "Layer 3 (Phases 1-4)", "target": "Core systems → WolverineCharacter"},
+      {"day": 6, "focus": "Layer 3 (Phases 5-7)", "target": "AI → Audio/Haptics"},
+      {"day": 7, "focus": "Layer 3 (Phases 8-10)", "target": "HUD → Packaging prep"}
+    ],
+    "total_development_hours": 47
+  },
+  "hard_requirements_verification": {
+    "verifications": [
+      {"hr": "HR-01", "requirement": "Claws < 10s", "points": ["L1P6", "L3P3", "L3P9"], "method": "Time measurement from game start"},
+      {"hr": "HR-02", "requirement": "Mesh deformation", "points": ["L1P6", "L3P2", "L3P9"], "method": "Nanite/Chaos compatibility check"},
+      {"hr": "HR-03", "requirement": "No loading screens", "points": ["L1P2", "L3P6"], "method": "Level streaming test"},
+      {"hr": "HR-04", "requirement": "Rage event-driven", "points": ["L1P6", "L3P3", "L3P9"], "method": "Grep Blueprint for manual triggers"},
+      {"hr": "HR-05", "requirement": "Persistent destruction", "points": ["L1P6", "L3P6"], "method": "Save/load cycle test"},
+      {"hr": "HR-06", "requirement": "6 material types", "points": ["L1P1", "L3P2"], "method": "MaterialResponseSystem audit"},
+      {"hr": "HR-07", "requirement": "Predator optional", "points": ["L1P2", "L3P5"], "method": "Stealth/combat path audit"},
+      {"hr": "HR-08", "requirement": "No skill trees", "points": ["L1P1", "L3P8", "L3P9"], "method": "UMG widget grep for XP/levels"}
+    ]
+  },
+  "decision_hash": {
+    "document": "wfreqs.md",
+    "project": "wolf.beast",
+    "version": "1.0",
+    "created": "2026-03-08",
+    "layer1_phases": 9,
+    "layer2_phases": 9,
+    "layer3_phases": 10,
+    "total_estimated_hours": 47,
+    "critic_gates": 20,
+    "hard_requirements": 8,
+    "functional_requirements": 20,
+    "non_functional_requirements": 8
+  }
+}

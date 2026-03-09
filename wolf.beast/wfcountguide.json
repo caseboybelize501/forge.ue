@@ -1,0 +1,356 @@
+
+M L <marco.a.lopez89@gmail.com>
+12: 58 AM (1 hour ago)
+to me
+
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://layerengine/count-reconciliation/v1.0",
+    "title": "LayerEngine Count Reconciliation Protocol",
+    "description": "Completeness as arithmetic, not assumption. One count flows through every layer. Delta can only be zero or positive. Never negative. A layer cannot close until its count matches or exceeds the previous layer's locked count.",
+    "version": "1.0.0",
+    "principles": {
+        "core_rule": "count(files_produced) must equal count(files_planned) at every layer close",
+        "delta_rule": "Each layer's file count must be >= the previous layer's locked count. Delta can grow. It cannot shrink.",
+        "gate_rule": "A layer cannot advance until its count gate passes. No exceptions.",
+        "trust_rule": "Critics validate correctness. Count reconciliation validates completeness. Both are required. Neither replaces the other."
+    },
+    "count_chain": {
+        "description": "The full count lineage from Layer 1 through Layer 3. One number originates at L1 Phase 9 and is inherited as a hard floor at every subsequent gate.",
+        "links": [
+            {
+                "id": "L1_LOCK",
+                "layer": 1,
+                "phase": 9,
+                "document": "critic_final.md",
+                "gate_name": "L1_MANIFEST_COUNT",
+                "description": "Count every file in file_manifest.md. Count every stub in structure_confirmed.md. These two numbers must match exactly before critic_final.md can be written.",
+                "inputs": {
+                    "manifest_source": "file_manifest.md",
+                    "structure_source": "structure_confirmed.md"
+                },
+                "fields_written": {
+                    "L1_MANIFEST_COUNT": "integer â€” total files in file_manifest.md",
+                    "L1_STRUCTURE_COUNT": "integer â€” total stub files in structure_confirmed.md",
+                    "STATUS": "MATCH âœ“ | MISMATCH âœ—"
+                },
+                "pass_condition": "L1_MANIFEST_COUNT === L1_STRUCTURE_COUNT",
+                "fail_action": "STOP. Return to Phase 5 (file_manifest.md) and reconcile before proceeding.",
+                "on_pass": "critic_final.md is APPROVED. L1_MANIFEST_COUNT is now a hard contract inherited by Layer 2."
+            },
+            {
+                "id": "L2_MANIFEST_GATE",
+                "layer": 2,
+                "phase": 5,
+                "document": "file_manifest2.md",
+                "gate_name": "L2_MANIFEST_COUNT",
+                "description": "Read L1_MANIFEST_COUNT from critic_final.md. Count every file in file_manifest2.md. L2 count must be >= L1 count.",
+                "inputs": {
+                    "contract_source": "critic_final.md â†’ L1_MANIFEST_COUNT",
+                    "manifest_source": "file_manifest2.md"
+                },
+                "fields_written": {
+                    "L1_CONTRACT_COUNT": "integer â€” inherited from critic_final.md",
+                    "L2_MANIFEST_COUNT": "integer â€” total files in file_manifest2.md",
+                    "DELTA": "integer â€” L2_MANIFEST_COUNT minus L1_CONTRACT_COUNT",
+                    "STATUS": "COMPLETE âœ“ | INCOMPLETE âœ— ([N] files missing)"
+                },
+                "pass_condition": "L2_MANIFEST_COUNT >= L1_CONTRACT_COUNT",
+                "fail_action": "STOP. Return to Phase 3 (dependency_graph2.md) and find what was dropped.",
+                "on_pass": "file_manifest2.md is locked. L2_MANIFEST_COUNT is the new floor for the coding schedule.",
+                "notes": "Positive delta is valid and expected â€” Layer 2 often discovers files Layer 1 did not anticipate. New files must be marked NEW in the manifest. Negative delta is never valid."
+            },
+            {
+                "id": "L2_SCHEDULE_GATE",
+                "layer": 2,
+                "phase": 10,
+                "document": "codingschedule.md",
+                "gate_name": "SCHEDULE_FILE_COUNT",
+                "description": "Read L2_MANIFEST_COUNT from file_manifest2.md. Count every file assigned a task ID in codingschedule.md. These two numbers must match exactly.",
+                "inputs": {
+                    "contract_source": "file_manifest2.md â†’ L2_MANIFEST_COUNT",
+                    "schedule_source": "codingschedule.md"
+                },
+                "fields_written": {
+                    "L2_MANIFEST_COUNT": "integer â€” inherited from file_manifest2.md",
+                    "SCHEDULE_FILE_COUNT": "integer â€” total files with an assigned task ID",
+                    "STATUS": "COMPLETE âœ“ | INCOMPLETE âœ— ([N] files unscheduled)"
+                },
+                "pass_condition": "SCHEDULE_FILE_COUNT === L2_MANIFEST_COUNT",
+                "fail_action": "STOP. Find every file in the manifest with no task ID. Assign them. Do not close the schedule until counts match.",
+                "on_pass": "codingschedule.md is locked. SCHEDULE_FILE_COUNT becomes the denominator for all Layer 3 running totals."
+            },
+            {
+                "id": "L3_SESSION_GATE",
+                "layer": 3,
+                "phase": "each_session_critic",
+                "document": "codecriticlayer3phaseN.md",
+                "gate_name": "RUNNING_TOTAL",
+                "description": "At the end of every Layer 3 session critic, update the running completion total. Files completed is cumulative across all sessions.",
+                "inputs": {
+                    "denominator_source": "codingschedule.md â†’ SCHEDULE_FILE_COUNT",
+                    "numerator_source": "cumulative completed files across all sessions"
+                },
+                "fields_written": {
+                    "FILES_SCHEDULED": "integer â€” from codingschedule.md header (constant)",
+                    "FILES_COMPLETED": "integer â€” cumulative across all sessions to date",
+                    "FILES_REMAINING": "integer â€” FILES_SCHEDULED minus FILES_COMPLETED",
+                    "SESSIONS_COMPLETED": "integer",
+                    "COMPLETION_PCT": "number â€” FILES_COMPLETED / FILES_SCHEDULED * 100",
+                    "STATUS": "ON_TRACK | BEHIND | COMPLETE"
+                },
+                "pass_condition": "FILES_COMPLETED <= FILES_SCHEDULED",
+                "complete_condition": "FILES_COMPLETED === FILES_SCHEDULED",
+                "fail_action": "If FILES_COMPLETED > FILES_SCHEDULED: count error â€” recount and reconcile with codingschedule.md."
+            }
+        ]
+    },
+    "gate_header_templates": {
+        "description": "Exact header blocks to be written into each gated document. These are machine-readable and parsed by the verifier.",
+        "critic_final_md": {
+            "format": "L1_MANIFEST_COUNT: {n}\nL1_STRUCTURE_COUNT: {n}\nSTATUS: MATCH âœ“\nAPPROVED.",
+            "required_fields": [
+                "L1_MANIFEST_COUNT",
+                "L1_STRUCTURE_COUNT",
+                "STATUS"
+            ],
+            "approved_token": "APPROVED.",
+            "note": "APPROVED. must appear as a standalone line. critic_final.md is not valid without it."
+        },
+        "file_manifest2_md": {
+            "format": "L1_CONTRACT_COUNT: {n}\nL2_MANIFEST_COUNT: {x}\nDELTA: {x-n}\nSTATUS: COMPLETE âœ“",
+            "required_fields": [
+                "L1_CONTRACT_COUNT",
+                "L2_MANIFEST_COUNT",
+                "DELTA",
+                "STATUS"
+            ],
+            "delta_annotation": "Any file with positive delta origin must be marked NEW inline in the manifest body."
+        },
+        "codingschedule_md": {
+            "format": "L2_MANIFEST_COUNT: {x}\nSCHEDULE_FILE_COUNT: {y}\nSTATUS: COMPLETE âœ“",
+            "required_fields": [
+                "L2_MANIFEST_COUNT",
+                "SCHEDULE_FILE_COUNT",
+                "STATUS"
+            ]
+        },
+        "codecriticlayer3_md": {
+            "format": "FILES_SCHEDULED: {x}\nFILES_COMPLETED: {y}\nFILES_REMAINING: {x-y}\nSESSIONS_COMPLETED: {n}\nCOMPLETION_PCT: {pct}%\nSTATUS: ON_TRACK | BEHIND | COMPLETE",
+            "required_fields": [
+                "FILES_SCHEDULED",
+                "FILES_COMPLETED",
+                "FILES_REMAINING",
+                "SESSIONS_COMPLETED",
+                "COMPLETION_PCT",
+                "STATUS"
+            ]
+        }
+    },
+    "verifier": {
+        "description": "Programmatic checks run at each gate. All must pass before the layer advances.",
+        "checks": [
+            {
+                "id": "CRP-V01",
+                "gate": "L1_LOCK",
+                "check": "L1_MANIFEST_COUNT === L1_STRUCTURE_COUNT",
+                "error": "File manifest and folder structure counts do not match. Return to Phase 5.",
+                "blocking": true
+            },
+            {
+                "id": "CRP-V02",
+                "gate": "L2_MANIFEST_GATE",
+                "check": "L2_MANIFEST_COUNT >= L1_CONTRACT_COUNT",
+                "error": "Layer 2 manifest has fewer files than Layer 1 locked count. Files were dropped. Return to Phase 3.",
+                "blocking": true
+            },
+            {
+                "id": "CRP-V03",
+                "gate": "L2_MANIFEST_GATE",
+                "check": "DELTA >= 0",
+                "error": "Negative delta is never valid. Files cannot be removed between layers.",
+                "blocking": true
+            },
+            {
+                "id": "CRP-V04",
+                "gate": "L2_SCHEDULE_GATE",
+                "check": "SCHEDULE_FILE_COUNT === L2_MANIFEST_COUNT",
+                "error": "Coding schedule does not cover all manifest files. Find unscheduled files and assign task IDs.",
+                "blocking": true
+            },
+            {
+                "id": "CRP-V05",
+                "gate": "L3_SESSION_GATE",
+                "check": "FILES_COMPLETED <= FILES_SCHEDULED",
+                "error": "Completed count exceeds scheduled count. Count error â€” recount and reconcile.",
+                "blocking": true
+            },
+            {
+                "id": "CRP-V06",
+                "gate": "ALL",
+                "check": "All required_fields present in gate header",
+                "error": "Gate header is missing required fields. Document is not valid for this gate.",
+                "blocking": true
+            }
+        ]
+    },
+    "integration": {
+        "description": "How count reconciliation integrates with the architectural JSON graph",
+        "arch_graph_field": "commits[].verifier_result.checks",
+        "new_check_added": "count_reconciliation_passed",
+        "count_chain_stored_at": "meta.count_chain",
+        "schema": {
+            "meta.count_chain": {
+                "L1_MANIFEST_COUNT": "integer | null",
+                "L2_MANIFEST_COUNT": "integer | null",
+                "L2_SCHEDULE_FILE_COUNT": "integer | null",
+                "L3_files_completed": "integer",
+                "L3_files_remaining": "integer",
+                "L3_completion_pct": "number",
+                "last_gate_passed": "string â€” one of: L1_LOCK | L2_MANIFEST_GATE | L2_SCHEDULE_GATE | L3_SESSION_GATE",
+                "locked_at_commit": "string â€” SHA-256 of commit where this count was locked"
+            }
+        },
+        "training_signal": {
+            "description": "Count reconciliation failures are high-value GRPO negative reward signals. A model that produces a graph where L2_MANIFEST_COUNT < L1_CONTRACT_COUNT receives a reward penalty proportional to the missing file count.",
+            "reward_penalty_formula": "penalty = (L1_CONTRACT_COUNT - L2_MANIFEST_COUNT) / L1_CONTRACT_COUNT",
+            "reward_bonus": "A model that correctly identifies and adds NEW files in L2 (positive delta) receives a bonus proportional to the delta's validity."
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+# WOLVERINE: UNBOUNDED — File Count Guide
+
+## LAYER 1 FILE MANIFEST COUNT
+
+```
+L1_MANIFEST_COUNT = 214
+```
+
+**Tally Date:** 2026-03-08
+**Source:** wf_file_manifest.md (revised)
+**Verified By:** critic_prebuild.md (Layer 1 Phase 6)
+**Previous Count:** 224 (incorrect),
+238 (original claim)
+**Correction:** BUILD LEVEL 2 header claimed "20 files" but listed only 10 (2.1-2.10). Corrected C++ count: 84 files (42 headers + 42 sources).
+
+---
+
+## FILE COUNT BREAKDOWN
+
+### By Build Level
+| Level | Files | Description |
+|-------|-------|-------------|
+| L0 | 8 | Core Types (enums, interfaces, structs) |
+| L1 | 8 | Systems (MaterialResponse, WoundSystem, Animation, SaveGame) |
+| L2 | 10 | Components (Claw, Rage, Trauma, Audio, Haptic) — CORRECTED from 20 |
+| L3 | 12 | Character (Movement, Character, PlayerController, HUD, Widgets) |
+| L4 | 36 | AI + World (5 AI types, World systems, AI support) |
+| L5 | 10 | Game Flow (GameMode, GameState, PlayerState, GameInstance, MissionManager) |
+| **C++ Subtotal** | **84** | (42 headers + 42 sources) |
+
+### By Asset Type
+| Type | Count |
+|------|-------|
+| Blueprint Classes | 10 |
+| Blueprint-Only Systems | 6 |
+| Config Files | 5 |
+| Automation Tests | 8 |
+| Animation Assets | 52 |
+| Audio Assets | 12 |
+| Material Assets | 6 |
+| Data Assets | 31 |
+| **Content Assets Subtotal** | **101** |
+
+### Grand Total
+| Category | Count |
+|----------|-------|
+| C++ Files | 84 |
+| Blueprint Files | 16 |
+| Config Files | 5 |
+| Test Files | 8 |
+| Content Assets | 101 |
+| **TOTAL** | **214** |
+
+---
+
+## CRITICAL PATH COUNT
+
+**Files to CLAWS IN GAME milestone:** 18
+
+| Level | Files | Cumulative |
+|-------|-------|------------|
+| L0 | 8 | 8 |
+| L1 | 4 (subset: 1.1-1.4) | 12 |
+| L2 | 2 (subset: 2.1-2.2) | 14 |
+| L3 | 4 (subset: 3.1-3.4) | 18 |
+
+---
+
+## HR VERIFICATION COUNT
+
+| HR | Test Files | Source Files |
+|----|------------|--------------|
+| HR-01 | TEST-01, TEST-04 | 2.1,
+2.2,
+3.1,
+3.2 |
+| HR-02 | TEST-02 | 1.3,
+1.4 |
+| HR-03 | TEST-05 | 4.11,
+4.12,
+4.19,
+4.20 |
+| HR-04 | TEST-03 | 2.3,
+2.4 |
+| HR-05 | TEST-05 | 1.7,
+1.8,
+4.11,
+4.12,
+4.15,
+4.16 |
+| HR-06 | TEST-01, TEST-06 | 0.1,
+1.1,
+1.2,
+2.1,
+2.2,
+2.9,
+2.10 |
+| HR-07 | TEST-04 | 3.1,
+3.2,
+4.1,
+4.2 |
+| HR-08 | TEST-07, TEST-08 | 2.5,
+2.6,
+3.7,
+3.8,
+3.9,
+5.5,
+5.6 |
+
+---
+
+## NOTES
+
+1. **Count Correction:** Original wf_file_manifest.md claimed 238 files. First tally showed 224. Final corrected count is 214 files. Discrepancy was due to BUILD LEVEL 2 header claiming "20 files" but listing only 10 files (2.1-2.10).
+
+2. **C++ File Count:** 84 files (42 headers + 42 sources), not 108 (54+54) as originally claimed.
+
+3. **Layer 2 Update:** L2_MANIFEST_COUNT will be recorded after Layer 2 file manifest is produced.
+
+4. **Critical Path:** 18 files minimum for playable claw combat in empty level.
+
+---
+
+*WOLVERINE: UNBOUNDED — A FORGE Game*
+*Private Repository — All Rights Reserved*

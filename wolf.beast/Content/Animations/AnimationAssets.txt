@@ -1,0 +1,77 @@
+# Animation Assets (Placeholders)
+# ============================================================================
+# Build Level: Content Assets
+# Task Ref: T113-T164 (52 animation clips)
+# Purpose: Motion Matching animation database
+# NFR Mapping: NFR-07 (Motion Matching)
+# Dependencies: T014 (WolverineAnimationInstance.cpp)
+# ============================================================================
+# Total: 52 animation clips for Motion Matching (wfarch.md Section 7.2)
+# ============================================================================
+
+# Locomotion (6 clips) - T113-T118
+Content/Animations/Locomotion/
+  - A_Locomotion_Walk_Fwd
+  - A_Locomotion_Walk_Back
+  - A_Locomotion_Run_Fwd
+  - A_Locomotion_Run_Back
+  - A_Locomotion_Sprint
+  - A_Locomotion_Idle
+
+# Wall Climbing (4 clips) - T119-T122
+Content/Animations/WallClimb/
+  - A_WallClimb_Start
+  - A_WallClimb_Loop
+  - A_WallClimb_Jump
+  - A_WallClimb_Fall
+
+# Claw Swing (4 clips) - T123-T126
+Content/Animations/ClawSwing/
+  - A_ClawSwing_Attach
+  - A_ClawSwing_Swing
+  - A_ClawSwing_Release
+  - A_ClawSwing_Land
+
+# Claw Lunge (4 clips) - T127-T130
+Content/Animations/ClawLunge/
+  - A_ClawLunge_Start
+  - A_ClawLunge_Impact
+  - A_ClawLunge_Miss
+  - A_ClawLunge_Recover
+
+# Combat (18 clips) - T131-T148
+Content/Animations/Combat/
+  - A_Attack_Light_01, 02, 03
+  - A_Attack_Heavy_01, 02
+  - A_Attack_Claw_01, 02, 03
+  - A_Dodge_Left, Right, Back, Fwd
+  - A_Knockback_Light, Heavy
+  - A_Stumble, Recover
+  - A_Threaten, Roar
+
+# Predator/Stealth (5 clips) - T149-T153
+Content/Animations/Stealth/
+  - A_Stealth_Walk
+  - A_Stealth_Crouch
+  - A_Stealth_Takedown
+  - A_Stealth_Hide
+  - A_Stealth_Wait
+
+# Damage/Healing (4 clips) - T154-T157
+Content/Animations/Damage/
+  - A_Damage_Impact
+  - A_Damage_Fall
+  - A_Healing_Start
+  - A_Healing_Loop
+
+# Blend Spaces (7 clips) - T158-T164
+Content/Animations/BlendSpaces/
+  - BS_Locomotion_Direction
+  - BS_Locomotion_Speed
+  - BS_Claw_Deploy
+  - BS_Claw_Retract
+  - BS_WallClimb_Transition
+  - BS_Combat_Direction
+  - BS_Stealth_Movement
+
+# Total: 52 animation clips

@@ -4,6 +4,13 @@ A FORGE Game Brief — prompt.md
 Read exactly once by architect_agent. Never read again after Layer 1.
 ================================================================
 
+## GOVERNANCE
+**Parent Document:** critic_final.md (Layer 1 Phase 9)
+**Status:** READ-ONLY — Source document. Modifications require architect review.
+**Layer:** L0 (Source)
+
+================================================================
+
 LICENSE
 ───────
 Private Repository — All Rights Reserved

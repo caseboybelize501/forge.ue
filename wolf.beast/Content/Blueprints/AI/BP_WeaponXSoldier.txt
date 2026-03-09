@@ -1,0 +1,14 @@
+# BP_WeaponXSoldier.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T086 (BP-02)
+# Purpose: Soldier AI BP
+# Parent: AWeaponXSoldier
+# Dependencies: T040 (WeaponXSoldier.cpp)
+# ============================================================================
+# Blueprint Class: BP_WeaponXSoldier
+# Parent Class: /Script/Wolverine.WeaponXSoldier
+#
+# Behavior Tree: /Game/Blueprints/AI/BT_WeaponXSoldier
+# Blackboard: /Game/Blueprints/AI/BB_WeaponXSoldier
+# ============================================================================

@@ -1,0 +1,13 @@
+# BP_FeralMutant.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T089 (BP-05)
+# Purpose: Feral AI BP
+# Parent: AFeralMutant
+# Dependencies: T046 (FeralMutant.cpp)
+# ============================================================================
+# Blueprint Class: BP_FeralMutant
+# Parent Class: /Script/Wolverine.FeralMutant
+#
+# Special: Evasive dodge, chain attacks
+# ============================================================================

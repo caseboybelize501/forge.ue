@@ -1,0 +1,27 @@
+# BP_WolverineCharacter.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T085 (BP-01)
+# Purpose: Player character BP
+# Parent: AWolverineCharacter
+# Dependencies: T030 (WolverineCharacter.cpp)
+# ============================================================================
+# Blueprint Class: BP_WolverineCharacter
+# Parent Class: /Script/Wolverine.WolverineCharacter
+#
+# Components:
+# - WolverineClawComponent
+# - WolverineRageComponent
+# - WolverineWoundSystemComponent
+# - WolverineTraumaSystemComponent
+# - WolverineAudioComponent
+# - WolverineMovementComponent
+#
+# Input Mappings:
+# - Q: Deploy Claws (HR-01)
+# - MMB: Claw Lunge
+# - LShift: Sprint
+# - LMB: Light Attack
+# - RMB: Heavy Attack
+# - Space: Dodge
+# ============================================================================

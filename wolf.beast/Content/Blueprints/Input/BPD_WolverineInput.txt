@@ -1,0 +1,22 @@
+# BPD_WolverineInput.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint-Only Systems
+# Task Ref: T099 (BP-IA-01)
+# Purpose: Input actions/mappings
+# Dependencies: T030 (WolverineCharacter.cpp)
+# HR Mapping: HR-01 (claws deploy in first 10 seconds)
+# ============================================================================
+# Input Mapping Context: IMC_Wolverine
+#
+# Input Actions:
+# - IA_ClawDeploy (Key: Q) - HR-01: Claws deploy in first 10 seconds
+# - IA_ClawLunge (Key: MiddleMouseButton)
+# - IA_Sprint (Key: LeftShift)
+# - IA_LightAttack (Key: LeftMouseButton)
+# - IA_HeavyAttack (Key: RightMouseButton)
+# - IA_Dodge (Key: Spacebar)
+#
+# Input Action Modifiers:
+# - IA_Sprint: Hold to continue sprinting
+# - IA_ClawLunge: Trigger on press
+# ============================================================================

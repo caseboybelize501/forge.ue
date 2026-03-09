@@ -1,0 +1,23 @@
+# Memory Fragment Data Assets (Placeholders)
+# ============================================================================
+# Build Level: Data Assets
+# Task Ref: T189-T198 (10 memories)
+# Purpose: Trauma system memory unlocks
+# HR Mapping: HR-08 (no skill trees - progression via memories)
+# Dependencies: T022 (WolverineTraumaSystemComponent)
+# ============================================================================
+# Layer 3 Content: Actual memory content (titles, descriptions, bonuses) 
+#                  to be defined in Layer 3. Architecture is complete.
+# ============================================================================
+
+# Memory 01: DA_Memory_WeaponX_Lab
+FMemoryFragment:
+  MemoryID: "WeaponX_Lab"
+  Title: "TODO: Layer 3 content"
+  Duration: 30.0
+  MechanicalBonus: "TODO: Layer 3 content"
+  BonusValue: 0.0
+  BlueprintData: "TODO: Layer 3 content"
+
+# Memory 02-10: Similar structure (Layer 3 content)
+# Total: 10 Memory Fragment data assets

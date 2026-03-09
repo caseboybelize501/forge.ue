@@ -1,0 +1,22 @@
+# EQS_FlankPosition.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint-Only Systems
+# Task Ref: T096 (BP-EQS-01)
+# Purpose: Flank position query
+# Dependencies: T074 (EQSService.cpp)
+# ============================================================================
+# EQS Query: EQS_FlankPosition
+#
+# Test Generators:
+# - Grid (radius: 2000 units, spacing: 100 units)
+#
+# Tests:
+# - Distance (to TargetActor): Min 500, Max 1500
+# - Angle (to TargetActor): 45-135 degrees (flank angle)
+# - Trace (to TargetActor): Line of sight required
+# - Cover (nearby): At least one cover object within 200 units
+#
+# Scoring:
+# - Distance: Optimal at 1000 units
+# - Angle: Optimal at 90 degrees (perpendicular)
+# ============================================================================

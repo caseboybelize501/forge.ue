@@ -1,0 +1,44 @@
+# Audio Assets (Placeholders)
+# ============================================================================
+# Build Level: Content Assets
+# Task Ref: T165-T182 (18 audio files)
+# Purpose: Reactive audio, SFX, music
+# FR Mapping: FR-18 (reactive audio)
+# HR Mapping: HR-06 (material-specific audio)
+# Dependencies: T024 (WolverineAudioComponent.cpp)
+# ============================================================================
+
+# MetaSound Sources (6 files) - T165-T170
+Content/Audio/MetaSounds/
+  - MS_Claw_Impact (per-material synthesis)
+  - MS_Healing (bone crack, tissue regrowth)
+  - MS_Berserker (music intensity layer)
+  - MS_Footstep (surface-reactive)
+  - MS_Ambient (city soundscape)
+  - MS_Combat (intensity-reactive)
+
+# Claw Impact Sounds (6 files) - T171-T176
+Content/Audio/SFX/Claw/
+  - SFX_Claw_Flesh
+  - SFX_Claw_Bone
+  - SFX_Claw_LightMetal
+  - SFX_Claw_HeavyMetal
+  - SFX_Claw_Concrete
+  - SFX_Claw_Glass
+
+# Healing Sounds (1 file) - T177
+Content/Audio/SFX/Healing/
+  - SFX_Healing_Factor
+
+# Berserker Music (1 file) - T178
+Content/Audio/Music/Berserker/
+  - MUS_Berserker_Active
+
+# Ambient Tracks (4 files) - T179-T182
+Content/Audio/Music/Ambient/
+  - MUS_Ambient_Calm
+  - MUS_Ambient_Tense
+  - MUS_Ambient_Combat
+  - MUS_Ambient_Exploration
+
+# Total: 18 audio assets

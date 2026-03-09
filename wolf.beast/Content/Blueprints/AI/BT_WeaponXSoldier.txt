@@ -1,0 +1,27 @@
+# BT_WeaponXSoldier.uasset + BB_WeaponXSoldier.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint-Only Systems
+# Task Ref: T095 (BP-BT-01, BP-BB-01)
+# Purpose: Soldier behavior (Flank, Suppress, Retreat)
+# Dependencies: T086 (BP_WeaponXSoldier)
+# ============================================================================
+# Blackboard: BB_WeaponXSoldier
+# Keys:
+# - TargetActor (Object)
+# - LastSeenPosition (Vector)
+# - FearLevel (Float, 0-100)
+# - HasCover (Bool)
+# - CanFlank (Bool)
+#
+# Behavior Tree: BT_WeaponXSoldier
+# Tasks:
+# - BTTask_Flank (EQS: FlankPosition)
+# - BTTask_Suppress (Aim at target, fire)
+# - BTTask_Retreat (EQS: RetreatPath)
+# - BTTask_CallBackup (Notify squad leader)
+#
+# Decorators:
+# - FearLevel < 50: Aggressive
+# - FearLevel >= 50: Defensive
+# - FearLevel >= 80: Retreat
+# ============================================================================

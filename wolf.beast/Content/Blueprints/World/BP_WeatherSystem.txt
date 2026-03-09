@@ -1,0 +1,13 @@
+# BP_WeatherSystem.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T092 (BP-08)
+# Purpose: Weather BP
+# Parent: AWeatherSystem
+# Dependencies: T052 (WeatherSystem.cpp)
+# ============================================================================
+# Blueprint Class: BP_WeatherSystem
+# Parent Class: /Script/Wolverine.WeatherSystem
+#
+# Niagara Systems: NS_Rain, NS_Storm, NS_Overcast
+# ============================================================================

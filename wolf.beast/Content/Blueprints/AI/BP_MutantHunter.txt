@@ -1,0 +1,13 @@
+# BP_MutantHunter.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T088 (BP-04)
+# Purpose: Hunter AI BP
+# Parent: AMutantHunter
+# Dependencies: T044 (MutantHunter.cpp)
+# ============================================================================
+# Blueprint Class: BP_MutantHunter
+# Parent Class: /Script/Wolverine.MutantHunter
+#
+# Special: Healing dampening field
+# ============================================================================

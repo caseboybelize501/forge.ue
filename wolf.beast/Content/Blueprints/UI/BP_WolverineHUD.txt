@@ -1,0 +1,18 @@
+# BP_WolverineHUD.uasset (Placeholder)
+# ============================================================================
+# Build Level: Blueprint Classes
+# Task Ref: T093 (BP-09)
+# Purpose: HUD BP
+# Parent: UWolverineHUD
+# Dependencies: T034 (WolverineHUD.cpp)
+# HR Mapping: HR-08 (no skill trees)
+# ============================================================================
+# Blueprint Class: BP_WolverineHUD
+# Parent Class: /Script/Wolverine.WolverineHUD
+#
+# Widgets:
+# - WoundIndicator (vignette only - NO health bar)
+# - Compass (bearing + objective chevron)
+#
+# HR-08 Compliance: NO XP, NO Level, NO SkillTree widgets
+# ============================================================================

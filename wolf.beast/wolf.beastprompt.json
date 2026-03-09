@@ -1,0 +1,685 @@
+{
+  "document": "wolf.beastprompt.json",
+  "project": "wolf.beast",
+  "version": "1.0",
+  "created": "2026-03-09",
+  "title": "WOLVERINE: UNBOUNDED — Game Brief (JSON)",
+  "description": "Identical JSON conversion of wolf.beastprompt.md. Read exactly once by architect_agent. Never read again after Layer 1.",
+  "license": {
+    "text": "Private Repository — All Rights Reserved",
+    "ownership": "Game output owned entirely by developer",
+    "unreal_engine_royalty": "5% gross revenue after first $1M USD per product per calendar year (Epic Games standard EULA)",
+    "forge_royalty": "No FORGE royalty on shipped game"
+  },
+  "project_metadata": {
+    "engine": "Unreal Engine 5.3+",
+    "target_platforms": ["PC (primary)", "PS5", "Xbox Series X"],
+    "genre": "Third-person open world action",
+    "references": {
+      "traversal": "Spider-Man PS4 (traversal fluidity + open world density)",
+      "combat": "X-Men Origins: Wolverine PS3 (combat viscerality)",
+      "world_design": "Batman: Arkham City (world design + predator gameplay)"
+    },
+    "tone": "Brutal. Personal. Noir western in a modern city. Wolverine is not a hero. He is a consequence."
+  },
+  "the_game": {
+    "logline": "Logan has been living off-grid in a decaying industrial city — part Montreal, part Detroit, part nowhere — when a Weapon X splinter cell begins kidnapping mutants from the streets. Nobody sends him. Nobody asks him. He goes anyway. Over 72 hours the city tears itself apart and so does he.",
+    "origin_story": false,
+    "design_pillar": "The claws come out in the first ten seconds. The game never makes you wait to be Wolverine."
+  },
+  "the_feel_three_pillars": {
+    "pillar_1_you_feel_the_claws": {
+      "description": "Not button presses. Physical events.",
+      "material_responses": {
+        "flesh": "camera micro-stutters, controller vibrates asymmetrically (left claw, right claw separately), audio has weight and wet resistance, enemies react with real physics",
+        "metal": "sparks, screech, different resistance",
+        "concrete": "chunks, dust, grinding"
+      },
+      "design_rule": "The material system is not cosmetic. It is the combat."
+    },
+    "pillar_2_damage_is_a_resource": {
+      "description": "Logan takes real damage. Wounds appear on the model in real time. Slashes across chest. Bullet holes. Burn marks. Healing factor closes them visibly over seconds.",
+      "mechanic": "Low health = more wounds visible = faster healing rate (body compensating) = higher rage multiplier.",
+      "design_rule": "Getting hurt makes you more dangerous. This is not just visual. Damage state affects every system."
+    },
+    "pillar_3_the_city_is_alive_and_destructible": {
+      "description": "Open world. Not a sandbox. A living place.",
+      "systems": [
+        "Civilians react to mutant violence",
+        "Police escalate",
+        "Weapon X operatives patrol",
+        "Mutant underground exists"
+      ],
+      "design_rule": "Every street fight has consequences that ripple outward. Nothing resets. Destroyed environments stay destroyed. The city remembers what Logan did."
+    }
+  },
+  "world": {
+    "city_port_ashford": {
+      "description": "Fictional post-industrial city. Population 800,000.",
+      "districts": {
+        "the_basin": {
+          "description": "Starting area — Former industrial waterfront. Rusted cranes, warehouses, container yards. Weapon X is operating here openly. Low-rise, dense, brutal architecture.",
+          "atmosphere": "Night-time rain for first act. Always wet."
+        },
+        "midtown_ashford": {
+          "description": "Downtown. Glass and steel over crumbling foundations. Civilians dense. Police presence heavy. Weapon X has infiltrated city government. Mutant underground hides in the subway system below."
+        },
+        "the_ridge": {
+          "description": "Elevated residential and campus district. Ashford Biomedical (Weapon X front company) HQ here. Clean surface. Rot underneath. Final act takes place here."
+        }
+      }
+    },
+    "world_scale": {
+      "traversal": "Traversable on foot or via claw-sprint and environment climbing.",
+      "fast_travel": false,
+      "design_intent": "Distance is deliberate — Logan walks through the consequences of what he did.",
+      "traverse_times": {
+        "on_foot": "15-20 minute traverse time across full city",
+        "full_movement_kit": "3-5 minutes using full movement kit"
+      }
+    },
+    "time_of_day_weather": {
+      "system": "Dynamic. 72-hour story plays in real game time (compressed).",
+      "progression": [
+        "Night 1: rain, Basin, establishing brutality",
+        "Day 1: Midtown, consequences, exposure",
+        "Night 2: escalation, Ridge approach"
+      ],
+      "gameplay_effects": {
+        "combat": "Weather affects combat (rain slicks surfaces, reduces visibility)",
+        "stealth": "noise masking",
+        "enemy_behavior": "patrols tighten"
+      }
+    }
+  },
+  "combat_system": {
+    "philosophy": {
+      "reference": "Spider-Man PS4 = fluidity and momentum",
+      "application": "Every attack chains into the next without stopping. No attack animations that lock you in place longer than necessary. Aggression is always rewarded. Standing still is always punished."
+    },
+    "basic_framework": {
+      "light_attack": "fast claw swipes, builds combo",
+      "heavy_attack": "slow powerful slash, breaks guard, staggers",
+      "dodge": "short burst in any direction (not a roll — Wolverine doesn't roll, he lurches)",
+      "grab": "context-sensitive, different near walls/ledges/enemies",
+      "rage": "fills from damage taken + damage dealt"
+    },
+    "combo_system": {
+      "type": "Freeform directional. Not a locked string system.",
+      "directional": "Direction + attack = different strike angle",
+      "aerial": "Aerial attacks available from any jump",
+      "ragdoll": "Enemy ragdoll is physically simulated — where they land affects what you can do next (pin against wall, slam to ground, throw into group)"
+    },
+    "claw_lunge": {
+      "input": "Hold aim + attack",
+      "effect": "claw lunge across gap to enemy",
+      "distance": "15-20 meters",
+      "chain": "Can chain: lunge → hit → lunge → hit",
+      "design_intent": "This is the Spider-Man traversal equivalent for combat. Crossing a room in three seconds through four enemies via consecutive lunges is the core power fantasy."
+    },
+    "rage_system": {
+      "fills_from": ["taking damage", "landing combos", "environmental kills"],
+      "depletes_when": "not fighting (30 second drain if idle)",
+      "levels": {
+        "low_rage": "normal combat",
+        "mid_rage": "attacks leave burning claw trails, faster healing",
+        "full_rage_berserker_mode": {
+          "camera": "pulls slightly wider",
+          "animations": "change (more feral, less precise)",
+          "damage_multiplier": "3x",
+          "healing_factor": "at maximum",
+          "enemy_response": "show fear response (some flee, some freeze)",
+          "duration": "20 seconds or until rage depletes",
+          "activation": "Cannot be manually activated — must be earned through damage"
+        }
+      }
+    },
+    "environmental_kills": {
+      "design_rule": "Every environment has kill opportunities.",
+      "examples": [
+        "Throw enemy into electrical panel: electrocution",
+        "Slam into pipe: impalement (M-rated, not gratuitous — consequence)",
+        "Throw through window: fall damage",
+        "Car door: brutal improvised weapon, then discard"
+      ],
+      "philosophy": "The environment is always a weapon."
+    },
+    "enemy_types": {
+      "weapon_x_soldiers": "trained, coordinated, flank by default",
+      "heavy_units": "powered armour, require claw pry to damage",
+      "mutant_hunters": "counter-mutant tech, can dampen healing factor",
+      "feral_mutants": "fast, unpredictable, dodge-heavy",
+      "sentinels": "late-game boss — large, multi-phase, environmental destruction"
+    },
+    "predator_mode": {
+      "reference": "Arkham City",
+      "description": "Some missions require no detection. Vent system traversal. Silent takedowns from above. Claw marks on surfaces as environmental storytelling. Enemies find bodies and escalate.",
+      "design_rule": "Logan is absolutely not stealthy. The point is that he tries. Failed stealth = full combat, which is always an option."
+    }
+  },
+  "movement_system": {
+    "traversal_philosophy": {
+      "description": "Logan does not fly. He does not web-swing. He moves like a predator — low, fast, always threatening. But he is extremely physically capable. The traversal must feel powerful without feeling superhuman-floaty."
+    },
+    "movement_kit": {
+      "sprint": "full speed run, claws retracted",
+      "claw_sprint": "claws out, can slash obstacles/enemies while running, slightly slower but combat-ready",
+      "wall_climb": "claw into any climbable surface (brick, concrete, metal — not glass), full vertical + horizontal",
+      "ledge_vault": "automatic when sprinting toward chest-height obstacle",
+      "claw_swing": "throw claw into overhead surface, swing on it, release to launch — covers 20-30m horizontal (Spider-Man reference — limited version, requires valid surface overhead, not infinite web)",
+      "drop": "from any height, land on enemy = ground slam",
+      "claw_brake": "drag claws on wall while falling = controlled descent"
+    },
+    "traversal_feel_target": {
+      "description": "Moving across the Basin at full speed using claw swing + wall climb + ledge vault should feel like watching a hunting animal move. Fast. Low. Every surface is something to push off from.",
+      "references": "Mirror's Edge momentum + Spider-Man PS4 fluidity applied to a ground/wall hybrid mover."
+    }
+  },
+  "progression_system": {
+    "design_rule": "NO SKILL TREES. NO MENUS. Logan does not unlock abilities. He already has them. What changes is Logan's control over himself.",
+    "trauma_system": {
+      "replaces": "XP/levels",
+      "description": "Completing missions + finding collectibles unlocks MEMORIES. Memories are not cutscenes. They are playable fragments — 30-60 second first-person flashbacks of past violence.",
+      "mechanic": "Each memory unlocked = Logan masters one aspect of control.",
+      "mechanical_results": [
+        "combo window extends slightly",
+        "rage meter fills faster",
+        "healing factor efficiency improves"
+      ],
+      "design_philosophy": "This is narrative-mechanical integration: Logan gets better at fighting as he accepts what he is."
+    },
+    "weapon_x_intel": {
+      "type": "collectible system",
+      "description": "Files found in the world. Audio logs. Photographs. Each one expands the story of what Weapon X did.",
+      "map_markers": false,
+      "acquisition": "Found by exploration + following leads."
+    },
+    "safe_houses": {
+      "count": 4,
+      "description": "4 locations across the city. Hidden. Logan sleeps. Wounds fully heal. Time advances.",
+      "features": [
+        "No upgrade menus here. Just rest and a journal.",
+        "The journal updates automatically with Logan's internal monologue about what just happened. First person, terse."
+      ]
+    }
+  },
+  "narrative_structure": {
+    "acts": {
+      "act_1_the_basin": {
+        "duration": "3-4 hours",
+        "events": [
+          "Logan arrives. Finds first mutant victim.",
+          "Weapon X soldiers are everywhere.",
+          "Establishes: what is happening, who is doing it.",
+          "Ends with: Logan captured, claws neutralised briefly."
+        ]
+      },
+      "act_2_midtown": {
+        "duration": "4-5 hours",
+        "events": [
+          "Escape. Logan exposed in populated area.",
+          "Meets mutant underground. Alliance of necessity — not friendship.",
+          "Weapon X goes public: frames Logan for violence.",
+          "Police, media, civilians all against him.",
+          "Ends with: mutant underground betrayal."
+        ]
+      },
+      "act_3_the_ridge": {
+        "duration": "3-4 hours",
+        "events": [
+          "Alone. City locked down. Ashford Biomedical tower.",
+          "Everything Weapon X built comes apart from the inside.",
+          "Final confrontation: not a boss — a reckoning.",
+          "Ends: ambiguous. Logan leaves. City is changed. So is he."
+        ]
+      }
+    },
+    "tone_notes": [
+      "No quips. Logan is not funny in this game.",
+      "No redemption arc. He does not become a better person.",
+      "Supporting characters die. Some because of him.",
+      "The violence has weight because the story gives it weight.",
+      "Player should feel effective and uncomfortable simultaneously."
+    ],
+    "key_characters": {
+      "logan": "Player character. 197 years old. Tired.",
+      "dr_reyes": "Weapon X lead scientist. True believer, not villain. She thinks she is saving mutantkind. She is wrong.",
+      "echo": "Mutant underground contact. Telepathic. Sees everything Logan has done. Helps him anyway.",
+      "director_harrow": "Weapon X commander. Has the adamantium files. Knows exactly what Logan is. Has a use for it.",
+      "victor": "Shows up at Act 2 end. Not an ally. Not quite enemy. Has his own reasons for being here."
+    }
+  },
+  "audio_design": {
+    "music": {
+      "style": "No orchestral score. No licensed tracks. Reactive ambient score — industrial, percussive, atonal.",
+      "states": {
+        "combat": "rhythm builds with combo count",
+        "stealth": "sparse, tension-based",
+        "exploration": "city ambience, distant sirens, rain",
+        "rage_mode": "music drops to pure percussion and distortion"
+      }
+    },
+    "sound_design_priorities": [
+      "1. Claw deployment: iconic, immediate, satisfying",
+      "2. Claw impacts per material (6 material types minimum)",
+      "3. Healing: wet cellular sound, subtle, continuous during recovery",
+      "4. Enemy reactions: fear escalation through voice",
+      "5. City ambience: layered, directional, always present"
+    ],
+    "voice": {
+      "logan": "minimal. Speaks when necessary. Interior monologue in journal.",
+      "enemies": "reactive to combat state, material, situation.",
+      "civilians": "panic, specific, not generic."
+    }
+  },
+  "visual_direction": {
+    "rendering": {
+      "lumen": "critical for wet surfaces at night",
+      "nanite": "high density urban geometry without LOD pop",
+      "ray_traced_shadows": "in performance mode optional"
+    },
+    "colour_palette": {
+      "basin": "near-monochrome. Blue-black. Orange industrial light.",
+      "midtown": "cold white fluorescent over dirty concrete.",
+      "ridge": "false warmth. Corporate beige over clinical white.",
+      "rage_mode": "desaturation + red vignette (subtle — not comic book)"
+    },
+    "wolverine_model": {
+      "costume": "No costume for first two acts. Civilian clothes that get progressively destroyed over the 72 hours.",
+      "wounds": "visible on model at all times.",
+      "healing": "visible: skin knitting, cloth does NOT repair (costume damage is permanent — visual storytelling).",
+      "claws": "wet when deployed from flesh. Dry when retracted."
+    },
+    "hud_philosophy": {
+      "health": "shown as wound density on model, not bar",
+      "rage": "shown as vignette intensity, not meter (until full rage)",
+      "objective": "compass bearing only, no waypoint beam",
+      "design_rule": "Player learns to read the world, not the HUD."
+    }
+  },
+  "hard_requirements": {
+    "HR-01": {
+      "text": "CLAWS DEPLOY IN FIRST 10 SECONDS OF GAMEPLAY.",
+      "note": "Tutorial does not exist. The opening IS the tutorial."
+    },
+    "HR-02": {
+      "text": "DAMAGE MODEL IS REAL-TIME ON CHARACTER MESH.",
+      "note": "Not a texture swap. Actual mesh deformation for major wounds. Healing is visible mesh restoration."
+    },
+    "HR-03": {
+      "text": "NO LOADING SCREENS WITHIN THE CITY.",
+      "note": "District transitions seamless. Only loading: game start, fast travel to safe house (if implemented), mission replay."
+    },
+    "HR-04": {
+      "text": "RAGE CANNOT BE MANUALLY ACTIVATED.",
+      "note": "It is earned through damage taken. Never a button press. Any design that makes rage a cooldown = wrong."
+    },
+    "HR-05": {
+      "text": "ENVIRONMENTAL DESTRUCTION IS PERSISTENT.",
+      "note": "Destroyed objects do not respawn. Ever. The city remembers. Design all areas accordingly."
+    },
+    "HR-06": {
+      "text": "CLAW MATERIAL SYSTEM HAS MINIMUM 6 MATERIAL TYPES.",
+      "note": "Flesh, bone, light metal, heavy metal, concrete, glass. Each with distinct audio, visual, and haptic response."
+    },
+    "HR-07": {
+      "text": "PREDATOR MODE IS ALWAYS OPTIONAL.",
+      "note": "Every stealth section has a loud solution. Never lock the player out of combat."
+    },
+    "HR-08": {
+      "text": "NO SKILL TREES. NO UPGRADE MENUS.",
+      "note": "Progression is entirely through the Trauma System. UI should never show XP numbers, level numbers, or skill points."
+    }
+  },
+  "functional_requirements": {
+    "FR-01": "Open world city (Port Ashford) — three distinct districts",
+    "FR-02": "Seamless traversal: claw sprint, wall climb, claw swing, drop",
+    "FR-03": "Freeform directional combo combat system",
+    "FR-04": "Claw lunge (gap-close attack, chainable)",
+    "FR-05": "Rage system: fills from damage, drains when idle, Berserker Mode",
+    "FR-06": "Real-time wound + healing system on character mesh",
+    "FR-07": "Material-responsive claw impact system (6 types)",
+    "FR-08": "Environmental kill system (context-sensitive per environment)",
+    "FR-09": "Enemy AI: soldier coordination, fear response, escalation",
+    "FR-10": "Predator mode: vent traversal, silent takedowns, body discovery",
+    "FR-11": "Trauma System progression (memories → mechanical improvement)",
+    "FR-12": "Dynamic weather system (rain, time of day, lighting impact)",
+    "FR-13": "Persistent environmental destruction",
+    "FR-14": "Mutant escalation system (city response to Logan's actions)",
+    "FR-15": "Weapon X Intel collectible system (no map markers)",
+    "FR-16": "4 safe houses with journal system",
+    "FR-17": "Three-act narrative with playable memory fragments",
+    "FR-18": "Reactive audio score (combat intensity → music intensity)",
+    "FR-19": "Minimal HUD (wound-based health, vignette rage, compass only)",
+    "FR-20": "Haptic feedback system (asymmetric per claw, per material)"
+  },
+  "non_functional_requirements": {
+    "NFR-01": "60fps performance mode on PS5 / Xbox Series X",
+    "NFR-02": "Claw deploy-to-first-impact: < 200ms from button press",
+    "NFR-03": "Healing visual: begins within 500ms of damage event",
+    "NFR-04": "Enemy AI response to player position update: < 100ms",
+    "NFR-05": "City population density: minimum 40 civilians visible in populated districts at any time",
+    "NFR-06": "Persistent destruction state survives save/load cycle",
+    "NFR-07": "Memory fragment load time: < 2 seconds (seamless feel)",
+    "NFR-08": "Audio mix: claw impact never masked by music or ambience"
+  },
+  "tech_stack": {
+    "engine": "Unreal Engine 5.3+",
+    "rendering": {
+      "lumen": "required — city density demands it",
+      "nanite": "required — city density demands it"
+    },
+    "physics": "Chaos Physics (ragdoll + environmental destruction)",
+    "animation": {
+      "motion_matching": "traversal fluidity requirement",
+      "control_rig": "procedural claw deployment/retraction"
+    },
+    "ai": "Behavior Trees + EQS (Environment Query System)",
+    "audio": "MetaSounds (reactive score system)",
+    "haptics": "Platform-native (DualSense adaptive triggers for claw resistance per material)",
+    "destruction": "Chaos Destruction (persistent, not resetting)",
+    "crowd": "Mass AI (city population density)"
+  },
+  "execution_rules": [
+    "Read every phase completely before starting.",
+    "Produce output MD before proceeding.",
+    "Do not skip or merge phases.",
+    "Git commit after every phase.",
+    "Critic returns RETURN TO PHASE [N]: execute immediately.",
+    "Every MD begins with SUMMARY block (150 tokens max).",
+    "Every MD ends with DECISION_HASH block (JSON).",
+    "Phase 6 and Phase 9: read DECISION_HASH first, full content only on contradiction."
+  ],
+  "layer_1_architecture_planning": {
+    "reads": "prompt.md only",
+    "produces": "/layer1/ — 9 MD files",
+    "phases": {
+      "phase_1_requirements": {
+        "output": "/layer1/requirements.md",
+        "read": "prompt.md",
+        "tasks": [
+          "Extract: all FRs, NFRs, HRs.",
+          "For each HR: what FORGE test proves it is satisfied?",
+          "HR-01: first claw deployment time measured from game start.",
+          "HR-02: wound system — define UE5 implementation approach for mesh deformation.",
+          "HR-04: rage activation — grep all Blueprint for manual trigger.",
+          "HR-08: grep all UMG widgets for XP/level/skill references.",
+          "Make every requirement binary testable."
+        ]
+      },
+      "phase_2_architecture": {
+        "output": "/layer1/architecture.md",
+        "read": "prompt.md + layer1/requirements.md",
+        "tasks": [
+          "Design: complete UE5 game architecture.",
+          "Include GameMode / GameState / PlayerState hierarchy for Wolverine",
+          "Character component breakdown: WolverineMovementComponent, ClawComponent, WoundSystemComponent, RageComponent, TraumaSystemComponent",
+          "AI architecture: Weapon X soldier BT, fear state machine, escalation manager",
+          "World architecture: district streaming, destruction persistence, weather system, time-of-day progression",
+          "Audio architecture: MetaSounds reactive graph",
+          "HUD architecture: minimal (wound-driven, vignette-driven)",
+          "Every component maps to ≥1 FR/NFR/HR."
+        ]
+      },
+      "phase_3_dependency_graph": {
+        "output": "/layer1/dependency_graph.md",
+        "read": "layer1/architecture.md",
+        "tasks": [
+          "Build: UE5 module dependency graph.",
+          "Nodes: every C++ module, every major Blueprint system, every plugin dependency.",
+          "Critical dependencies: ClawComponent depends on MaterialResponseSystem, WoundSystem depends on ClawComponent impact events, RageComponent depends on WoundSystem damage events, TraumaSystem depends on MissionSystem completion events",
+          "Cycle detection on module graph. Any cycle = return to Phase 2."
+        ]
+      },
+      "phase_4_module_dependencies": {
+        "output": "/layer1/module_dependencies.md",
+        "read": "layer1/dependency_graph.md",
+        "tasks": [
+          "Topo sort → UBT build levels.",
+          "Level 0: Core types, enums, interfaces (no game deps)",
+          "Level 1: MaterialResponseSystem, WoundSystem (no player deps)",
+          "Level 2: ClawComponent, RageComponent (depends L1)",
+          "Level 3: WolverineCharacter (depends L2)",
+          "Level 4: AI, World, Audio (depends L3)",
+          "Level 5: UI, HUD (depends L4)",
+          "Critical path: Core → Material → Claw → Character (this is the minimum to get claws in game)"
+        ]
+      },
+      "phase_5_file_manifest": {
+        "output": "/layer1/file_manifest.md",
+        "read": "layer1/module_dependencies.md",
+        "tasks": [
+          "List: EVERY file.",
+          "C++ files: .h + .cpp pairs, topo level, FR refs",
+          "Blueprint files: name, parent class, purpose, FR refs",
+          "Config files: DefaultGame.ini, DefaultInput.ini sections",
+          "Include: every UE5 Automation Test file",
+          "Include: MetaSounds assets (named, not implemented)",
+          "This list is complete and final."
+        ]
+      },
+      "phase_6_critic_prebuild": {
+        "output": "/layer1/critic_prebuild.md",
+        "read": "ALL Layer 1 MDs + prompt.md (DECISION_HASH first)",
+        "critical_checks": [
+          "HR-01: does architecture guarantee claw deploy <10s? What is the opening sequence? Is it designed yet?",
+          "HR-02: is mesh deformation technically feasible with Chaos Physics + Nanite? Nanite and mesh deform conflict — RESOLVE THIS before Layer 2.",
+          "HR-04: is RageComponent state machine truly event-driven with no manual activation path?",
+          "HR-05: how does persistent destruction survive level streaming? District reloads — does destruction state persist?",
+          "Motion Matching: does it handle wall climb + claw swing transitions? Or does it require custom animation nodes?"
+        ],
+        "output_format": "APPROVED or RETURN TO PHASE [N]."
+      },
+      "phase_7_task_schedule": {
+        "output": "/layer1/task_schedule.md",
+        "read": "layer1/file_manifest.md + layer1/critic_prebuild.md",
+        "tasks": [
+          "JSON task graph.",
+          "First milestone: CLAWS IN GAME — task_ids that get to playable claw combat in empty level. This is the first vertical slice. Target: end of parallel group covering Level 0-3 files.",
+          "Second milestone: CHARACTER IN WORLD — Movement kit working in Port Ashford geometry.",
+          "Third milestone: FULL COMBAT LOOP — Rage + wounds + material response all functional."
+        ]
+      },
+      "phase_8_structure_confirmed": {
+        "output": "/layer1/structure_confirmed.md",
+        "read": "layer1/file_manifest.md + layer1/task_schedule.md",
+        "tasks": [
+          "Action: Create ALL folders, C++ header stubs, Blueprint stubs.",
+          "C++ stubs: correct UCLASS/UPROPERTY/UFUNCTION macros, correct parent class, correct includes. Zero implementation — pass bodies only.",
+          "Blueprint stubs: correct parent class, correct event graph entry points. Zero node logic.",
+          "Produce: file count diff. Must match exactly."
+        ]
+      },
+      "phase_9_critic_final": {
+        "output": "/layer1/critic_final.md",
+        "read": "ALL Layer 1 MDs + actual folder structure",
+        "verify": [
+          "Folder matches file_manifest.md exactly.",
+          "All C++ stubs pass UHT dry-run (macro compliance).",
+          "HR-02 Nanite/mesh deform conflict: resolution documented.",
+          "RageComponent: no manual activation path in any stub.",
+          "No skill tree / XP / level references in any UMG stub.",
+          "Persistent destruction: streaming solution defined."
+        ],
+        "output_format": "APPROVED or RETURN TO PHASE [N]. APPROVED = Layer 1 permanently frozen."
+      }
+    }
+  },
+  "layer_2_code_planning_stress_test": {
+    "reads": "ENTIRE /layer1/ at every phase",
+    "produces": "/layer2/ — 9 MD files + codingschedule.md",
+    "phases": {
+      "phase_1_requirements2": {
+        "output": "/layer2/requirements2.md",
+        "read": "ENTIRE /layer1/",
+        "tasks": [
+          "Re-derive at code level.",
+          "Critical additions: Motion Matching dataset (what animations needed for wall climb → claw swing → aerial lunge chain?), Chaos Destruction + streaming (exact technical solution for persistent destruction across district boundaries), MetaSounds reactive graph (what parameter drives combat intensity? How does combo count map to audio?), DualSense haptics (does UE5.3 support per-trigger asymmetric haptic strength natively?)"
+        ]
+      },
+      "phase_2_architecture2": {
+        "output": "/layer2/architecture2.md",
+        "read": "ENTIRE /layer1/ + layer2/requirements2.md",
+        "validate": [
+          "All Layer 1 architectural decisions.",
+          "Critical: Nanite + wound deformation conflict — Nanite does not support skeletal mesh deformation. Solution: Logan character uses non-Nanite skeletal mesh. World geometry uses Nanite. Confirm this is Layer 1 error corrected here and document the fix.",
+          "Motion Matching traversal: define exact blend parameters.",
+          "ClawComponent material detection: line trace per claw tip per frame, or collision event? Which is performant at 60fps?"
+        ]
+      },
+      "phase_3_dependency_graph2": {
+        "output": "/layer2/dependency_graph2.md",
+        "read": "ENTIRE /layer1/ + layer2/architecture2.md",
+        "validate": [
+          "All C++ dependencies installable/available.",
+          "All UE5 plugin dependencies (built-in vs marketplace).",
+          "Produce: list of all plugins required with versions.",
+          "Check: Motion Matching plugin availability in UE5.3.",
+          "Check: MetaSounds is built-in (confirm version)."
+        ]
+      },
+      "phase_4_module_dependencies2": {
+        "output": "/layer2/module_dependencies2.md",
+        "read": "ENTIRE /layer1/ + layer2/dependency_graph2.md",
+        "validate": [
+          "UBT build order at C++ import level.",
+          "Critical: WoundSystemComponent tick rate — if healing runs every frame at 60fps on mesh deformation, what is the performance budget? Define tick group and tick interval."
+        ]
+      },
+      "phase_5_file_manifest2": {
+        "output": "/layer2/file_manifest2.md",
+        "read": "ENTIRE /layer1/ + layer2/module_dependencies2.md",
+        "tasks": [
+          "Full C++ contracts: Every UCLASS (name, parent, key UPROPERTY fields with types), Every UFUNCTION (name, params, return, BlueprintCallable?), Every component (BeginPlay, TickComponent, key events)",
+          "Blueprint contracts: Every Blueprint (parent class, exposed variables, event graph entry points: BeginPlay, custom events)",
+          "Critical contracts: UWolverineClawComponent::OnClawImpact(FHitResult Hit, EClawMaterialType Material) → void, UWolverineWoundSystem::ApplyWound(FVector Location, float Severity) → void, UWolverineRageComponent::OnDamageReceived(float Amount, AActor* Source) → void (no public ActivateRage function — enforces HR-04)"
+        ]
+      },
+      "phase_6_critic_prebuild2": {
+        "output": "/layer2/critic_prebuild2.md",
+        "read": "ENTIRE /layer1/ + ALL /layer2/ (DECISION_HASH first)",
+        "cross_layer_stress_test": [
+          "Nanite fix confirmed in architecture2.md?",
+          "HR-04: UWolverineRageComponent has NO public ActivateRage? Check file_manifest2.md. If it exists = FAIL.",
+          "HR-08: search all UMG contracts for XP/level/skill. Must be empty.",
+          "Motion Matching: animation clip count sufficient for fluid traversal? Define minimum.",
+          "Persistent destruction: solution from architecture2.md correctly reflected in module contracts?"
+        ],
+        "output_format": "APPROVED or RETURN TO PHASE [N]."
+      },
+      "phase_7_task_schedule2": {
+        "output": "/layer2/task_schedule2.md",
+        "read": "layer2/file_manifest2.md + layer2/critic_prebuild2.md",
+        "session_milestones": [
+          "MILESTONE 1 — CLAW VERTICAL SLICE: ClawComponent + MaterialResponseSystem + basic combat. Testable: claw deploy, impact, 6 material responses",
+          "MILESTONE 2 — MOVEMENT VERTICAL SLICE: WolverineMovementComponent + Motion Matching base. Testable: sprint, wall climb, claw swing in test level",
+          "MILESTONE 3 — DAMAGE LOOP: WoundSystem + RageComponent + healing visual. Testable: take damage → wound appears → heals → rage fills",
+          "MILESTONE 4 — ENEMY LOOP: Soldier BT + fear state + escalation manager. Testable: soldier flanks, registers rage, attempts retreat",
+          "MILESTONE 5 — WORLD INTEGRATION: Port Ashford geometry + destruction + weather + population",
+          "MILESTONE 6 — FULL GAME LOOP: All systems integrated, Act 1 playable"
+        ]
+      },
+      "phase_8_structure_confirmed2": {
+        "output": "/layer2/structure_confirmed2.md",
+        "read": "layer2/file_manifest2.md + layer2/task_schedule2.md",
+        "validate": [
+          "all C++ stubs match contracts in file_manifest2.md.",
+          "UHT compile: all UCLASS macros correct.",
+          "HR-04 final check: grep all stubs for ActivateRage public function. Must return zero results."
+        ]
+      },
+      "phase_9_critic_final2": {
+        "output": "/layer2/critic_final2.md",
+        "read": "ENTIRE /layer1/ + ALL /layer2/ + folder structure",
+        "final_sign_off": [
+          "Nanite/skeletal mesh conflict resolved.",
+          "HR-04 enforced in contracts (no public rage activation).",
+          "HR-08 enforced (no XP/level in any contract).",
+          "Motion Matching clip list defined and sufficient.",
+          "Persistent destruction solution architecturally sound.",
+          "All 6 material types defined in EClawMaterialType enum."
+        ],
+        "output_format": "APPROVED or RETURN TO PHASE [N]. APPROVED = Layer 1 + Layer 2 permanently frozen."
+      },
+      "phase_10_codingschedule": {
+        "output": "/layer2/codingschedule.md",
+        "read": "ALL /layer2/ only",
+        "description": "Milestone-driven schedule. Every session maps to one milestone or sub-milestone. Each session has: files, validation method, milestone target. First session: Core types + EClawMaterialType enum + IWolverineInterface. These unblock everything. Build them first."
+      }
+    }
+  },
+  "layer_3_code_execution": {
+    "reads": "Layer 2 MDs + code being written. NEVER Layer 1.",
+    "produces": "/layer3/codecriticlayer3phaseN.md per session",
+    "session_pattern": {
+      "build": "implement session N against file_manifest2.md contracts.",
+      "validate_per_session": {
+        "UHT": "all UCLASS macros valid",
+        "UBT": "module compiles clean",
+        "HR_check_relevant_to_session": {
+          "claw_sessions": "material enum has exactly 6 types",
+          "rage_sessions": "grep for ActivateRage public → must be empty",
+          "UI_sessions": "grep UMG for XP/level → must be empty",
+          "destruction_sessions": "verify no reset timer in destruction code"
+        }
+      },
+      "produce": "/layer3/codecriticlayer3phaseN.md",
+      "output_fields": [
+        "session_id",
+        "files_built",
+        "ubt_result",
+        "uht_result",
+        "hr_checks: {hr_id: PASS|FAIL}",
+        "contract_compliance: PASS|FAIL per file",
+        "milestone_progress: which milestone this advances",
+        "overall: APPROVED|RETURN TO [filename] and why"
+      ],
+      "git_commit": "after APPROVED only.",
+      "tag": "git tag milestone-N"
+    },
+    "drift_protocol": {
+      "UBT_UHT_error": "fix file → re-run session critic",
+      "contract_error": "return to layer2/file_manifest2.md — Layer 2 repair from Phase 5",
+      "design_error": "return to layer2/architecture2.md — Layer 2 repair from Phase 2",
+      "HR_violation_found": "HALT. Return to source phase. Do not patch forward.",
+      "rule": "Never Layer 1. Never patch forward past source of drift."
+    }
+  },
+  "milestones_at_a_glance": {
+    "M1_CLAW_VERTICAL_SLICE": "Claws deploy, impact 6 materials, camera + haptic + audio all respond",
+    "M2_MOVEMENT_VERTICAL_SLICE": "Full traversal kit in test level",
+    "M3_DAMAGE_LOOP": "Wounds + healing + rage all functional",
+    "M4_ENEMY_LOOP": "Soldiers think, fear, escalate",
+    "M5_WORLD_INTEGRATION": "Port Ashford alive + destructible",
+    "M6_FULL_GAME_LOOP": "Act 1 playable start to finish",
+    "M7_CONTENT_COMPLETE": "All three acts playable",
+    "M8_PLATFORM_GOLD": "PC + PS5 + Xbox builds passing cert"
+  },
+  "context_budget": {
+    "layer_1_per_phase": {
+      "phase_1": "prompt.md only — ~5k tokens",
+      "phase_2": "prompt + req — ~10k tokens",
+      "phase_3_to_5": "single prior MD — ~6-8k each",
+      "phase_6": "ALL L1 + prompt — ~35k ← cliff",
+      "phase_7_to_8": "2 MDs — ~12k",
+      "phase_9": "ALL L1 + folder — ~40k ← cliff"
+    },
+    "layer_2_per_phase": {
+      "phase_1_to_5": "ALL L1 + growing L2 — ~40-55k",
+      "phase_6": "ALL L1 + ALL L2 — ~65k ← peak",
+      "phase_9": "ALL L1 + ALL L2 + folder — ~70k ← peak"
+    },
+    "layer_3_per_session": "3 L2 MDs + prev critic + code — ~15-20k ← bounded",
+    "model_requirements": {
+      "layer_1": "64k minimum (game arch is denser than software arch)",
+      "layer_2": "128k minimum",
+      "layer_3": "32k sufficient"
+    }
+  },
+  "summary_compression_rule": {
+    "every_md_begins_with": "## SUMMARY (max 150 tokens)",
+    "every_md_ends_with": "## DECISION_HASH — JSON block with key_decisions, constraints, derived_from, derived_from_hash (sha256)",
+    "phase_6_and_9": "DECISION_HASH first. Full content on contradiction."
+  },
+  "closing": "Logan doesn't wait to be Wolverine. Neither does the game."
+}

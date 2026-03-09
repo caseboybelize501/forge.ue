@@ -1,0 +1,352 @@
+{
+  "document": "wf_file_manifest.json",
+  "project": "wolf.beast",
+  "version": "1.1",
+  "created": "2026-03-08",
+  "revised": "2026-03-08",
+  "title": "WOLVERINE: UNBOUNDED — File Manifest",
+  "summary": "Complete file manifest for Wolverine: Unbounded. Every C++ header/implementation pair, Blueprint class, config file, and automation test. Total: 214 files (84 C++ source, 16 Blueprint, 5 config files, 8 automation tests, 101 content assets). Organized by build level from wfmod.dep.md. Each file includes path, build level, and FR/NFR/HR references.",
+  "build_level_0_core_types": {
+    "description": "Core Types (8 files)",
+    "files": [
+      {"id": "0.1", "path": "Source/Wolverine/Public/WolverineCoreTypes.h", "type": "C++ Header", "build_level": "L0", "fr_nfr_hr": "All/All/HR-06", "description": "All core enums (EClawMaterialType, ERageLevel, ETraversalState, etc.)"},
+      {"id": "0.2", "path": "Source/Wolverine/Private/WolverineCoreTypes.cpp", "type": "C++ Source", "build_level": "L0", "fr_nfr_hr": "-", "description": "Empty impl (enums only)"},
+      {"id": "0.3", "path": "Source/Wolverine/Public/IWolverineMaterialResponse.h", "type": "C++ Header", "build_level": "L0", "fr_nfr_hr": "FR-07/HR-06", "description": "Interface for material detection"},
+      {"id": "0.4", "path": "Source/Wolverine/Private/IWolverineMaterialResponse.cpp", "type": "C++ Source", "build_level": "L0", "fr_nfr_hr": "FR-07", "description": "Default interface impl"},
+      {"id": "0.5", "path": "Source/Wolverine/Public/IWolverineDamageInterface.h", "type": "C++ Header", "build_level": "L0", "fr_nfr_hr": "FR-06/HR-02", "description": "Interface for damage application"},
+      {"id": "0.6", "path": "Source/Wolverine/Private/IWolverineDamageInterface.cpp", "type": "C++ Source", "build_level": "L0", "fr_nfr_hr": "FR-06", "description": "Default interface impl"},
+      {"id": "0.7", "path": "Source/Wolverine/Public/WolverineDataStructures.h", "type": "C++ Header", "build_level": "L0", "fr_nfr_hr": "FR-06/FR-11/FR-13/FR-15/FR-18/FR-20", "description": "All FStructs (FWoundData, FMemoryFragment, etc.)"},
+      {"id": "0.8", "path": "Source/Wolverine/Private/WolverineDataStructures.cpp", "type": "C++ Source", "build_level": "L0", "fr_nfr_hr": "-", "description": "Empty impl (structs only)"}
+    ]
+  },
+  "build_level_1_systems": {
+    "description": "Systems (8 files)",
+    "files": [
+      {"id": "1.1", "path": "Source/Wolverine/Public/Components/WolverineMaterialResponseSystem.h", "type": "C++ Header", "build_level": "L1", "fr_nfr_hr": "FR-07/HR-06", "description": "Material detection from hit results"},
+      {"id": "1.2", "path": "Source/Wolverine/Private/Components/WolverineMaterialResponseSystem.cpp", "type": "C++ Source", "build_level": "L1", "fr_nfr_hr": "FR-07", "description": "Surface type → EClawMaterialType mapping"},
+      {"id": "1.3", "path": "Source/Wolverine/Public/Components/WolverineWoundSystemComponent.h", "type": "C++ Header", "build_level": "L1", "fr_nfr_hr": "FR-06/NFR-01/NFR-03/HR-02", "description": "Mesh deformation, healing, wound state"},
+      {"id": "1.4", "path": "Source/Wolverine/Private/Components/WolverineWoundSystemComponent.cpp", "type": "C++ Source", "build_level": "L1", "fr_nfr_hr": "FR-06/HR-02", "description": "10Hz healing tick, morph target deformation"},
+      {"id": "1.5", "path": "Source/Wolverine/Public/Animation/WolverineAnimationInstance.h", "type": "C++ Header", "build_level": "L1", "fr_nfr_hr": "FR-02/FR-03/NFR-01/NFR-07", "description": "Motion Matching, claw animation blending"},
+      {"id": "1.6", "path": "Source/Wolverine/Private/Animation/WolverineAnimationInstance.cpp", "type": "C++ Source", "build_level": "L1", "fr_nfr_hr": "FR-02/FR-03", "description": "Motion Matching update, claw blend weights"},
+      {"id": "1.7", "path": "Source/Wolverine/Public/WolverineSaveGame.h", "type": "C++ Header", "build_level": "L1", "fr_nfr_hr": "FR-11/FR-13/FR-15/NFR-06/HR-05", "description": "Save game class with destruction persistence"},
+      {"id": "1.8", "path": "Source/Wolverine/Private/WolverineSaveGame.cpp", "type": "C++ Source", "build_level": "L1", "fr_nfr_hr": "FR-13/HR-05", "description": "Constructor impl"}
+    ]
+  },
+  "build_level_2_components": {
+    "description": "Components (10 files)",
+    "files": [
+      {"id": "2.1", "path": "Source/Wolverine/Public/Components/WolverineClawComponent.h", "type": "C++ Header", "build_level": "L2", "fr_nfr_hr": "FR-03/FR-04/FR-07/NFR-02/NFR-08/HR-01/HR-06", "description": "Claw deployment, material tracing, impact events"},
+      {"id": "2.2", "path": "Source/Wolverine/Private/Components/WolverineClawComponent.cpp", "type": "C++ Source", "build_level": "L2", "fr_nfr_hr": "FR-03/FR-04/FR-07/HR-01/HR-06", "description": "60fps material trace, <200ms deploy"},
+      {"id": "2.3", "path": "Source/Wolverine/Public/Components/WolverineRageComponent.h", "type": "C++ Header", "build_level": "L2", "fr_nfr_hr": "FR-05/NFR-01/NFR-04/HR-04", "description": "Rage accumulation, Berserker state machine"},
+      {"id": "2.4", "path": "Source/Wolverine/Private/Components/WolverineRageComponent.cpp", "type": "C++ Source", "build_level": "L2", "fr_nfr_hr": "FR-05/HR-04", "description": "Event-driven rage (NO manual activation)"},
+      {"id": "2.5", "path": "Source/Wolverine/Public/Components/WolverineTraumaSystemComponent.h", "type": "C++ Header", "build_level": "L2", "fr_nfr_hr": "FR-11/HR-08", "description": "Memory unlocks, mechanical bonuses"},
+      {"id": "2.6", "path": "Source/Wolverine/Private/Components/WolverineTraumaSystemComponent.cpp", "type": "C++ Source", "build_level": "L2", "fr_nfr_hr": "FR-11/HR-08", "description": "Bonus calculation from memories"},
+      {"id": "2.7", "path": "Source/Wolverine/Public/Components/WolverineAudioComponent.h", "type": "C++ Header", "build_level": "L2", "fr_nfr_hr": "FR-18/NFR-08/HR-06", "description": "MetaSounds reactive graph"},
+      {"id": "2.8", "path": "Source/Wolverine/Private/Components/WolverineAudioComponent.cpp", "type": "C++ Source", "build_level": "L2", "fr_nfr_hr": "FR-18/HR-06", "description": "Combat intensity → music intensity"},
+      {"id": "2.9", "path": "Source/Wolverine/Public/Components/HapticFeedbackSystem.h", "type": "C++ Header", "build_level": "L2", "fr_nfr_hr": "FR-20/NFR-02/HR-06", "description": "Asymmetric haptic feedback per claw/material"},
+      {"id": "2.10", "path": "Source/Wolverine/Private/Components/HapticFeedbackSystem.cpp", "type": "C++ Source", "build_level": "L2", "fr_nfr_hr": "FR-20/HR-06", "description": "Per-material haptic data"}
+    ]
+  },
+  "build_level_3_character": {
+    "description": "Character (12 files)",
+    "files": [
+      {"id": "3.1", "path": "Source/Wolverine/Public/Components/WolverineMovementComponent.h", "type": "C++ Header", "build_level": "L3", "fr_nfr_hr": "FR-02/NFR-01/NFR-02/HR-01/HR-07", "description": "Custom traversal (sprint, wall climb, claw swing, lunge)"},
+      {"id": "3.2", "path": "Source/Wolverine/Private/Components/WolverineMovementComponent.cpp", "type": "C++ Source", "build_level": "L3", "fr_nfr_hr": "FR-02/HR-01/HR-07", "description": "Movement state machine"},
+      {"id": "3.3", "path": "Source/Wolverine/Public/WolverineCharacter.h", "type": "C++ Header", "build_level": "L3", "fr_nfr_hr": "All", "description": "Player character — aggregates all components"},
+      {"id": "3.4", "path": "Source/Wolverine/Private/WolverineCharacter.cpp", "type": "C++ Source", "build_level": "L3", "fr_nfr_hr": "All", "description": "Component creation, input binding"},
+      {"id": "3.5", "path": "Source/Wolverine/Public/WolverinePlayerController.h", "type": "C++ Header", "build_level": "L3", "fr_nfr_hr": "FR-02/FR-03", "description": "Input binding, UI management"},
+      {"id": "3.6", "path": "Source/Wolverine/Private/WolverinePlayerController.cpp", "type": "C++ Source", "build_level": "L3", "fr_nfr_hr": "FR-02/FR-03", "description": "Enhanced Input mapping"},
+      {"id": "3.7", "path": "Source/Wolverine/Public/UI/WolverineHUD.h", "type": "C++ Header", "build_level": "L3", "fr_nfr_hr": "FR-19/HR-08", "description": "Minimal HUD (compass, vignette, wound indicator)"},
+      {"id": "3.8", "path": "Source/Wolverine/Private/UI/WolverineHUD.cpp", "type": "C++ Source", "build_level": "L3", "fr_nfr_hr": "FR-19/HR-08", "description": "Widget references, state updates"},
+      {"id": "3.9", "path": "Source/Wolverine/Public/UI/WoundIndicatorWidget.h", "type": "C++ Header", "build_level": "L3", "fr_nfr_hr": "FR-19/HR-08", "description": "Wound feedback (not a health bar)"},
+      {"id": "3.10", "path": "Source/Wolverine/Private/UI/WoundIndicatorWidget.cpp", "type": "C++ Source", "build_level": "L3", "fr_nfr_hr": "FR-19", "description": "Vignette pulse based on severity"},
+      {"id": "3.11", "path": "Source/Wolverine/Public/UI/CompassWidget.h", "type": "C++ Header", "build_level": "L3", "fr_nfr_hr": "FR-19", "description": "Compass bearing only"},
+      {"id": "3.12", "path": "Source/Wolverine/Private/UI/CompassWidget.cpp", "type": "C++ Source", "build_level": "L3", "fr_nfr_hr": "FR-19", "description": "Bearing update, objective chevron"}
+    ]
+  },
+  "build_level_4_ai_world": {
+    "description": "AI + World (36 files)",
+    "ai_characters": {
+      "description": "AI Characters (10 files)",
+      "files": [
+        {"id": "4.1", "path": "Source/Wolverine/Public/AI/WeaponXSoldier.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09/NFR-04/HR-07", "description": "Standard infantry AI"},
+        {"id": "4.2", "path": "Source/Wolverine/Private/AI/WeaponXSoldier.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09/HR-07", "description": "Behavior Tree execution, fear state"},
+        {"id": "4.3", "path": "Source/Wolverine/Public/AI/WeaponXHeavyUnit.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Powered armor — claw pry required"},
+        {"id": "4.4", "path": "Source/Wolverine/Private/AI/WeaponXHeavyUnit.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Armor breach mechanic"},
+        {"id": "4.5", "path": "Source/Wolverine/Public/AI/MutantHunter.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Healing dampening specialist"},
+        {"id": "4.6", "path": "Source/Wolverine/Private/AI/MutantHunter.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Dampening field activation"},
+        {"id": "4.7", "path": "Source/Wolverine/Public/AI/FeralMutant.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Fast, dodge-heavy enemy"},
+        {"id": "4.8", "path": "Source/Wolverine/Private/AI/FeralMutant.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Evasive dodge, chain attacks"},
+        {"id": "4.9", "path": "Source/Wolverine/Public/AI/Sentinel.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Late-game boss — multi-phase"},
+        {"id": "4.10", "path": "Source/Wolverine/Private/AI/Sentinel.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Phase transitions, area destruction"}
+      ]
+    },
+    "world_systems": {
+      "description": "World Systems (18 files)",
+      "files": [
+        {"id": "4.11", "path": "Source/Wolverine/Public/World/PortAshfordWorldSettings.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-12/FR-13/NFR-06/HR-03/HR-05", "description": "District streaming, weather, destruction persistence"},
+        {"id": "4.12", "path": "Source/Wolverine/Private/World/PortAshfordWorldSettings.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-12/FR-13/HR-03/HR-05", "description": "Level streaming, destruction save/load"},
+        {"id": "4.13", "path": "Source/Wolverine/Public/World/WeatherSystem.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-12", "description": "Dynamic weather transitions"},
+        {"id": "4.14", "path": "Source/Wolverine/Private/World/WeatherSystem.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-12", "description": "Weather state machine, Niagara particles"},
+        {"id": "4.15", "path": "Source/Wolverine/Public/World/DestructionPersistenceData.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-13/NFR-06/HR-05", "description": "Destruction records (survives save/load)"},
+        {"id": "4.16", "path": "Source/Wolverine/Private/World/DestructionPersistenceData.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-13/HR-05", "description": "Data asset impl"},
+        {"id": "4.17", "path": "Source/Wolverine/Public/World/EscalationManager.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-14/NFR-05", "description": "City-wide AI escalation"},
+        {"id": "4.18", "path": "Source/Wolverine/Private/World/EscalationManager.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-14/NFR-05", "description": "Notoriety decay, patrol spawning"},
+        {"id": "4.19", "path": "Source/Wolverine/Public/World/DistrictStreamingVolume.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-02/HR-03", "description": "Trigger volume for district transitions"},
+        {"id": "4.20", "path": "Source/Wolverine/Private/World/DistrictStreamingVolume.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-02/HR-03", "description": "Seamless district loading"},
+        {"id": "4.21", "path": "Source/Wolverine/Public/World/EnvironmentalDestructible.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-13/HR-05", "description": "Chaos destruction actor"},
+        {"id": "4.22", "path": "Source/Wolverine/Private/World/EnvironmentalDestructible.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-13/HR-05", "description": "GUID assignment, destruction state"},
+        {"id": "4.23", "path": "Source/Wolverine/Public/World/SafeHouse.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-16", "description": "Safe house location (4 total)"},
+        {"id": "4.24", "path": "Source/Wolverine/Private/World/SafeHouse.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-16", "description": "Journal trigger, full heal"},
+        {"id": "4.25", "path": "Source/Wolverine/Public/World/WeaponXIntelCollectible.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-15", "description": "Weapon X collectible (audio log/photo)"},
+        {"id": "4.26", "path": "Source/Wolverine/Private/World/WeaponXIntelCollectible.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-15", "description": "Collection trigger, no map markers"},
+        {"id": "4.27", "path": "Source/Wolverine/Public/World/MemoryFragmentTrigger.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-11/FR-17", "description": "Trauma system memory trigger"},
+        {"id": "4.28", "path": "Source/Wolverine/Private/World/MemoryFragmentTrigger.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-11/FR-17", "description": "Playable flashback trigger"}
+      ]
+    },
+    "ai_support": {
+      "description": "AI Support (8 files)",
+      "files": [
+        {"id": "4.29", "path": "Source/Wolverine/Public/AI/WeaponXSquadLeader.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Squad coordination"},
+        {"id": "4.30", "path": "Source/Wolverine/Private/AI/WeaponXSquadLeader.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Squad tactics, backup calls"},
+        {"id": "4.31", "path": "Source/Wolverine/Public/AI/AIControllerBase.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Base AI controller"},
+        {"id": "4.32", "path": "Source/Wolverine/Private/AI/AIControllerBase.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Common AI logic"},
+        {"id": "4.33", "path": "Source/Wolverine/Public/AI/FearStateMachine.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09/HR-07", "description": "Fear escalation system"},
+        {"id": "4.34", "path": "Source/Wolverine/Private/AI/FearStateMachine.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09/HR-07", "description": "Fear level calculation, response"},
+        {"id": "4.35", "path": "Source/Wolverine/Public/AI/EQSService.h", "type": "C++ Header", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "EQS query helper"},
+        {"id": "4.36", "path": "Source/Wolverine/Private/AI/EQSService.cpp", "type": "C++ Source", "build_level": "L4", "fr_nfr_hr": "FR-09", "description": "Flank/cover/retreat queries"}
+      ]
+    }
+  },
+  "build_level_5_game_flow": {
+    "description": "Game Flow (10 files)",
+    "files": [
+      {"id": "5.1", "path": "Source/Wolverine/Public/Game/WolverineGameMode.h", "type": "C++ Header", "build_level": "L5", "fr_nfr_hr": "FR-17", "description": "72-hour narrative, mission flow"},
+      {"id": "5.2", "path": "Source/Wolverine/Private/Game/WolverineGameMode.cpp", "type": "C++ Source", "build_level": "L5", "fr_nfr_hr": "FR-17", "description": "District transitions, escalation queries"},
+      {"id": "5.3", "path": "Source/Wolverine/Public/Game/WolverineGameState.h", "type": "C++ Header", "build_level": "L5", "fr_nfr_hr": "-", "description": "Replicated game state"},
+      {"id": "5.4", "path": "Source/Wolverine/Private/Game/WolverineGameState.cpp", "type": "C++ Source", "build_level": "L5", "fr_nfr_hr": "-", "description": "State replication"},
+      {"id": "5.5", "path": "Source/Wolverine/Public/Game/WolverinePlayerState.h", "type": "C++ Header", "build_level": "L5", "fr_nfr_hr": "FR-11/FR-15/HR-08", "description": "Persistent player data (NO XP/skills)"},
+      {"id": "5.6", "path": "Source/Wolverine/Private/Game/WolverinePlayerState.cpp", "type": "C++ Source", "build_level": "L5", "fr_nfr_hr": "FR-11/FR-15/HR-08", "description": "Memory/intel persistence"},
+      {"id": "5.7", "path": "Source/Wolverine/Public/Game/WolverineGameInstance.h", "type": "C++ Header", "build_level": "L5", "fr_nfr_hr": "-", "description": "Game instance (menu to game)"},
+      {"id": "5.8", "path": "Source/Wolverine/Private/Game/WolverineGameInstance.cpp", "type": "C++ Source", "build_level": "L5", "fr_nfr_hr": "-", "description": "Save/load management"},
+      {"id": "5.9", "path": "Source/Wolverine/Public/Game/MissionManager.h", "type": "C++ Header", "build_level": "L5", "fr_nfr_hr": "FR-17", "description": "Mission state machine"},
+      {"id": "5.10", "path": "Source/Wolverine/Private/Game/MissionManager.cpp", "type": "C++ Source", "build_level": "L5", "fr_nfr_hr": "FR-17", "description": "Act transitions, mission triggers"}
+    ]
+  },
+  "blueprint_classes": {
+    "description": "Blueprint Classes (10 files)",
+    "files": [
+      {"id": "BP-01", "path": "Content/Blueprints/Characters/BP_WolverineCharacter.uasset", "type": "Blueprint", "parent": "AWolverineCharacter", "purpose": "Player character BP"},
+      {"id": "BP-02", "path": "Content/Blueprints/AI/BP_WeaponXSoldier.uasset", "type": "Blueprint", "parent": "AWeaponXSoldier", "purpose": "Soldier AI BP"},
+      {"id": "BP-03", "path": "Content/Blueprints/AI/BP_WeaponXHeavy.uasset", "type": "Blueprint", "parent": "AWeaponXHeavyUnit", "purpose": "Heavy unit BP"},
+      {"id": "BP-04", "path": "Content/Blueprints/AI/BP_MutantHunter.uasset", "type": "Blueprint", "parent": "AMutantHunter", "purpose": "Hunter AI BP"},
+      {"id": "BP-05", "path": "Content/Blueprints/AI/BP_FeralMutant.uasset", "type": "Blueprint", "parent": "AFeralMutant", "purpose": "Feral AI BP"},
+      {"id": "BP-06", "path": "Content/Blueprints/AI/BP_Sentinel.uasset", "type": "Blueprint", "parent": "ASentinel", "purpose": "Boss BP"},
+      {"id": "BP-07", "path": "Content/Blueprints/World/BP_EscalationManager.uasset", "type": "Blueprint", "parent": "AEscalationManager", "purpose": "Escalation BP"},
+      {"id": "BP-08", "path": "Content/Blueprints/World/BP_WeatherSystem.uasset", "type": "Blueprint", "parent": "AWeatherSystem", "purpose": "Weather BP"},
+      {"id": "BP-09", "path": "Content/Blueprints/UI/BP_WolverineHUD.uasset", "type": "Blueprint", "parent": "UWolverineHUD", "purpose": "HUD BP"},
+      {"id": "BP-10", "path": "Content/Blueprints/UI/BP_WoundIndicator.uasset", "type": "Blueprint", "parent": "UWoundIndicatorWidget", "purpose": "Wound UI BP"}
+    ]
+  },
+  "blueprint_only_systems": {
+    "description": "Blueprint-Only Systems (6 files)",
+    "files": [
+      {"id": "BP-BT-01", "path": "Content/Blueprints/AI/BT_WeaponXSoldier.uasset", "type": "Behavior Tree", "purpose": "Soldier behavior (Flank, Suppress, Retreat)"},
+      {"id": "BP-BB-01", "path": "Content/Blueprints/AI/BB_WeaponXSoldier.uasset", "type": "Blackboard", "purpose": "Soldier blackboard (TargetActor, LastSeenPos, FearLevel)"},
+      {"id": "BP-EQS-01", "path": "Content/Blueprints/AI/EQS_FlankPosition.uasset", "type": "EQS Query", "purpose": "Flank position query"},
+      {"id": "BP-EQS-02", "path": "Content/Blueprints/AI/EQS_CoverSearch.uasset", "type": "EQS Query", "purpose": "Cover search query"},
+      {"id": "BP-EQS-03", "path": "Content/Blueprints/AI/EQS_RetreatPath.uasset", "type": "EQS Query", "purpose": "Retreat path query"},
+      {"id": "BP-IA-01", "path": "Content/Blueprints/Input/BPD_WolverineInput.uasset", "type": "Input Actions", "purpose": "IA_ClawDeploy, IA_ClawLunge, IA_Sprint, IA_LightAttack, IA_HeavyAttack, IA_Dodge"}
+    ]
+  },
+  "config_files": {
+    "description": "Config Files (5 files)",
+    "files": [
+      {"id": "CFG-01", "path": "Config/DefaultGame.ini", "type": "Config", "purpose": "Game settings, project metadata"},
+      {"id": "CFG-02", "path": "Config/DefaultInput.ini", "type": "Config", "purpose": "Input mappings (Enhanced Input)"},
+      {"id": "CFG-03", "path": "Config/DefaultEngine.ini", "type": "Config", "purpose": "Engine settings, plugins"},
+      {"id": "CFG-04", "path": "Config/DefaultEditor.ini", "type": "Config", "purpose": "Editor settings"},
+      {"id": "CFG-05", "path": "Config/DefaultScalability.ini", "type": "Config", "purpose": "Performance scalability (60fps target)"}
+    ],
+    "default_game_ini": {
+      "section": "/Script/EngineSettings.GeneralProjectSettings",
+      "settings": {
+        "ProjectID": "WOLVERINE-UNBOUNDED-2026",
+        "ProjectName": "Wolverine: Unbounded",
+        "CompanyName": "Forge Game Studio"
+      },
+      "wolverine_game_mode": {
+        "section": "/Script/Wolverine.WolverineGameMode",
+        "settings": {
+          "StartingDistrict": "Basin",
+          "StartingTimeHours": 0.0,
+          "StartingWeather": "Rain"
+        }
+      }
+    },
+    "default_input_ini": {
+      "section": "/Script/EnhancedInput.EnhancedInputProjectSettings",
+      "settings": {
+        "DefaultMappingContext": "/Game/Input/IMC_Wolverine.IMC_Wolverine"
+      },
+      "input_mappings": [
+        {"Action": "IA_ClawDeploy", "Key": "Q"},
+        {"Action": "IA_ClawLunge", "Key": "MiddleMouseButton"},
+        {"Action": "IA_Sprint", "Key": "LeftShift"},
+        {"Action": "IA_LightAttack", "Key": "LeftMouseButton"},
+        {"Action": "IA_HeavyAttack", "Key": "RightMouseButton"},
+        {"Action": "IA_Dodge", "Key": "Spacebar"}
+      ]
+    },
+    "default_engine_ini": {
+      "section": "/Script/Engine.RendererSettings",
+      "settings": {
+        "r.Nanite": 1,
+        "r.Lumen": 1,
+        "r.Shadow.Virtual": 1
+      },
+      "wolverine_character": {
+        "settings": {
+          "TargetFrameRate": 60,
+          "MotionMatchingEnabled": 1
+        }
+      }
+    }
+  },
+  "automation_tests": {
+    "description": "Automation Tests (8 files)",
+    "files": [
+      {"id": "TEST-01", "path": "Source/Wolverine/Tests/Automation/Test_WolverineClaw.cpp", "type": "Automation", "tests": "Claw deploy time, material detection, impact events", "hr_verified": ["HR-01", "HR-06"]},
+      {"id": "TEST-02", "path": "Source/Wolverine/Tests/Automation/Test_WolverineWoundSystem.cpp", "type": "Automation", "tests": "Wound application, healing tick rate, mesh deformation", "hr_verified": ["HR-02"]},
+      {"id": "TEST-03", "path": "Source/Wolverine/Tests/Automation/Test_WolverineRage.cpp", "type": "Automation", "tests": "Rage fill from damage, Berserker trigger, NO manual activation", "hr_verified": ["HR-04"]},
+      {"id": "TEST-04", "path": "Source/Wolverine/Tests/Automation/Test_WolverineMovement.cpp", "type": "Automation", "tests": "Traversal states, claw lunge distance, wall climb", "hr_verified": ["HR-01", "HR-07"]},
+      {"id": "TEST-05", "path": "Source/Wolverine/Tests/Automation/Test_DestructionPersistence.cpp", "type": "Automation", "tests": "Destruction save/load, GUID lookup, district transition", "hr_verified": ["HR-03", "HR-05"]},
+      {"id": "TEST-06", "path": "Source/Wolverine/Tests/Automation/Test_MaterialResponse.cpp", "type": "Automation", "tests": "6 material types, surface mapping, haptic response", "hr_verified": ["HR-06"]},
+      {"id": "TEST-07", "path": "Source/Wolverine/Tests/Automation/Test_TraumaSystem.cpp", "type": "Automation", "tests": "Memory unlocks, bonus calculation, NO XP/levels", "hr_verified": ["HR-08"]},
+      {"id": "TEST-08", "path": "Source/Wolverine/Tests/Automation/Test_HUDCompliance.cpp", "type": "Automation", "tests": "UMG widget grep for XP/level/skill references", "hr_verified": ["HR-08"]}
+    ],
+    "test_code_samples": {
+      "test_wolverine_rage_hr04": {
+        "description": "HR-04 Compliance Test — Verifies NO manual ActivateRage function",
+        "checks": [
+          "ActivateRage function does NOT exist",
+          "AddRage function exists but is NOT BlueprintCallable"
+        ]
+      },
+      "test_hud_compliance_hr08": {
+        "description": "HR-08 Compliance Test — Verifies NO XP/level/skill UI references",
+        "forbidden_terms": ["XP", "Experience", "Level", "SkillPoint", "SkillTree"]
+      }
+    }
+  },
+  "content_assets": {
+    "animation_assets": {
+      "description": "Animation Assets (52 files)",
+      "categories": [
+        {"name": "Locomotion", "count": 6, "path": "Content/Animations/Locomotion/"},
+        {"name": "Wall Climbing", "count": 4, "path": "Content/Animations/WallClimb/"},
+        {"name": "Claw Swing", "count": 4, "path": "Content/Animations/ClawSwing/"},
+        {"name": "Claw Lunge", "count": 4, "path": "Content/Animations/ClawLunge/"},
+        {"name": "Combat", "count": 18, "path": "Content/Animations/Combat/"},
+        {"name": "Predator/Stealth", "count": 5, "path": "Content/Animations/Stealth/"},
+        {"name": "Damage/Healing", "count": 4, "path": "Content/Animations/Damage/"},
+        {"name": "Blend Spaces", "count": 8, "path": "Content/Animations/BlendSpaces/"}
+      ],
+      "total_clips": 52
+    },
+    "audio_assets": {
+      "description": "Audio Assets (18 files)",
+      "categories": [
+        {"type": "MetaSound Sources", "count": 6, "path": "Content/Audio/MetaSounds/"},
+        {"type": "Claw Impact Sounds", "count": 6, "path": "Content/Audio/SFX/Claw/"},
+        {"type": "Healing Sounds", "count": 1, "path": "Content/Audio/SFX/Healing/"},
+        {"type": "Berserker Music", "count": 1, "path": "Content/Audio/Music/Berserker/"},
+        {"type": "Ambient Tracks", "count": 4, "path": "Content/Audio/Music/Ambient/"}
+      ],
+      "total": 18
+    },
+    "material_assets": {
+      "description": "Material Assets (6 files)",
+      "categories": [
+        {"type": "Claw Impact Materials", "count": 6, "path": "Content/Materials/ClawImpact/"}
+      ],
+      "total": 6
+    },
+    "data_assets": {
+      "description": "Data Assets (31 files)",
+      "categories": [
+        {"type": "Memory Fragment Data", "count": 10, "path": "Content/Data/Memories/"},
+        {"type": "Weapon X Intel Data", "count": 15, "path": "Content/Data/Intel/"},
+        {"type": "Haptic Feedback Data", "count": 6, "path": "Content/Data/Haptics/"}
+      ],
+      "total": 31
+    }
+  },
+  "file_count_summary": {
+    "cpp_headers": 42,
+    "cpp_sources": 42,
+    "blueprint_classes": 10,
+    "blueprint_systems": 6,
+    "config_files": 5,
+    "automation_tests": 8,
+    "animation_assets": 52,
+    "audio_assets": 18,
+    "material_assets": 6,
+    "data_assets": 31,
+    "total": 214,
+    "note": "Previous summary claimed 238 files (54 headers + 54 sources). Corrected count is 214 files (42 headers + 42 sources). Discrepancy was due to BUILD LEVEL 2 header claiming '20 files' but only listing 10 files (2.1-2.10). Actual C++ file count: L0(8) + L1(8) + L2(10) + L3(12) + L4(36) + L5(10) = 84 files (42 headers + 42 sources)."
+  },
+  "critical_path_files": {
+    "description": "CLAWS IN GAME milestone — 18 files minimum",
+    "milestone": "Playable claw combat in empty level after these 18 files compile",
+    "files": [
+      {"level": "L0", "range": "0.1-0.8", "count": 8, "cumulative": 8},
+      {"level": "L1", "range": "1.1-1.4", "count": 4, "cumulative": 12},
+      {"level": "L2", "range": "2.1-2.2", "count": 2, "cumulative": 14},
+      {"level": "L3", "range": "3.1-3.4", "count": 4, "cumulative": 18}
+    ],
+    "total_files": 18
+  },
+  "hr_verification_matrix": [
+    {"hr": "HR-01", "requirement": "Claws <10s", "files": ["2.1", "2.2", "3.1", "3.2"], "test_files": ["TEST-01", "TEST-04"]},
+    {"hr": "HR-02", "requirement": "Mesh deformation", "files": ["1.3", "1.4"], "test_files": ["TEST-02"]},
+    {"hr": "HR-03", "requirement": "No loading screens", "files": ["4.11", "4.12", "4.19", "4.20"], "test_files": ["TEST-05"]},
+    {"hr": "HR-04", "requirement": "Rage event-driven", "files": ["2.3", "2.4"], "test_files": ["TEST-03"]},
+    {"hr": "HR-05", "requirement": "Persistent destruction", "files": ["1.7", "1.8", "4.11", "4.12", "4.15", "4.16"], "test_files": ["TEST-05"]},
+    {"hr": "HR-06", "requirement": "6 material types", "files": ["0.1", "1.1", "1.2", "2.1", "2.2", "2.9", "2.10"], "test_files": ["TEST-01", "TEST-06"]},
+    {"hr": "HR-07", "requirement": "Predator optional", "files": ["3.1", "3.2", "4.1", "4.2"], "test_files": ["TEST-04"]},
+    {"hr": "HR-08", "requirement": "No skill trees", "files": ["2.5", "2.6", "3.7", "3.8", "3.9", "5.5", "5.6"], "test_files": ["TEST-07", "TEST-08"]}
+  ],
+  "decision_hash": {
+    "document": "wf_file_manifest.md",
+    "project": "wolf.beast",
+    "version": "1.1",
+    "created": "2026-03-08",
+    "revised": "2026-03-08",
+    "derived_from": ["wfmod.dep.md", "wfdep.graph.md", "wfarch.md"],
+    "total_files": 214,
+    "cpp_headers": 42,
+    "cpp_sources": 42,
+    "blueprint_classes": 10,
+    "blueprint_systems": 6,
+    "config_files": 5,
+    "automation_tests": 8,
+    "content_assets": 101,
+    "critical_path_files": 18,
+    "key_decisions": [
+      "18 files minimum for CLAWS IN GAME milestone (L0-L3 subset)",
+      "8 automation tests map to 8 HR requirements 1:1",
+      "52 animation clips for Motion Matching (wfarch.md Section 7.2)",
+      "HR-04 test explicitly checks NO public ActivateRage function",
+      "HR-08 test greps all UMG widgets for XP/level/skill terms",
+      "214 total files — corrected from 238 (BUILD LEVEL 2 header error fixed)",
+      "C++ file count: 84 (42 headers + 42 sources), not 108"
+    ],
+    "constraints": [
+      "All 42 C++ headers must compile with UHT dry-run before L2P8",
+      "All 8 automation tests must pass before L3P9",
+      "HR verification tests are blocking — cannot proceed on failure",
+      "Critical path files (18) have priority — build first"
+    ]
+  }
+}
