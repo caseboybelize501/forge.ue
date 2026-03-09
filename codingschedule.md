@@ -453,7 +453,7 @@ This document provides a **realistic, single-developer coding schedule** for imp
 **Phase 8 Part 1 Total:** 140 lines (all pre-existing stubs)
 **Note:** All dashboard component config files were already complete from initial scaffolding.
 
-**✅ APPROVED LAYER 3 PHASE 8 PART 1** — `codecriticlayer3phase8part1.md`
+**✅ APPROVED LAYER 3 PHASE 8 PART 1** — `codecriticlayer3phase8.md`
 
 **Phase 8 Part 1 Validation Gate:** ✅ PASSED — All 3 files syntax validated
 
