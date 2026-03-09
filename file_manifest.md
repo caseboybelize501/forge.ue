@@ -4,7 +4,21 @@
 
 This document lists **every file** that will exist in the FORGE project upon completion. Files are organized by topological level from `dependency_graph.md` and cross-referenced with `module_dependencies.md`.
 
-**Total File Count:** 127 files
+**Total File Count:** 137 files
+
+**L1_MANIFEST_COUNT = 137**
+
+### Count Reconciliation (countguide.md protocol)
+
+| Count Type | Value | Source |
+|------------|-------|--------|
+| L1_MANIFEST_COUNT | 137 | file_manifest.md (this file) |
+| L1_STRUCTURE_COUNT | 112 | structure_confirmed.md (Phase 8 stub creation) |
+| Pre-existing Files | 25 | Documentation (6) + Infrastructure (19) |
+
+**Note:** 112 stub files were created in Phase 8. 25 files pre-existed (documentation and infrastructure files from initial project setup). Total: 112 + 25 = 137 files.
+
+**STATUS: RECONCILED ✓**
 
 ---
 
