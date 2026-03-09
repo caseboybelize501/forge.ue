@@ -432,49 +432,58 @@ This document provides a **realistic, single-developer coding schedule** for imp
 
 ---
 
-### 3.9 Week 4 — Phase 7 Part 3 (Dashboard Components)
+### 3.9 Week 4 — Phase 8 Part 1 (Dashboard Components)
 
 | Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
 |-----|---------|-------|----------|------------|-------------|------------|--------|
 | Wed | 2 | `dashboard/src/api/index.js` | CG-L7-22 | 0.5 | — | Import check | ⏳ Pending |
 | Thu | 1 | `dashboard/src/styles/variables.css` | CG-L7-34 | 1 | — | CSS check | ⏳ Pending |
 | Thu | 2 | `dashboard/src/styles/main.css` | CG-L7-35 | 2 | — | CSS check | ⏳ Pending |
-| **Fri** | **Validation Gate** | **Phase 9 Complete** | **All CG-L7 Config** | **1** | **—** | **npm run build** | ⏳ Pending |
+| **Fri** | **Validation Gate** | **Phase 8 Part 1 Complete** | **All CG-L7 Config** | **1** | **—** | **npm run build** | ⏳ Pending |
 | Mon | 1 | `Header.jsx`, `Sidebar.jsx` | CG-L7-23, CG-L7-24 | 2 | — | Render check | ⏳ Pending |
 | Mon | 2 | `ProgressBar.jsx`, `FileNode.jsx` | CG-L7-25, CG-L7-26 | 2 | — | Render check | ⏳ Pending |
 | Tue | 1 | `ConsoleOutput.jsx`, `StatusBadge.jsx` | CG-L7-27, CG-L7-28 | 2 | — | Render check | ⏳ Pending |
 | Tue | 2 | `DownloadButton.jsx` | CG-L7-29 | 1 | — | Render check | ⏳ Pending |
 | Wed | 1 | `components/index.js` | CG-L7-30 | 0.5 | — | Import check | ⏳ Pending |
-| **Wed** | **Validation Gate** | **Phase 10 Complete** | **All Components** | **1** | **—** | **ESLint** | ⏳ Pending |
+| **Wed** | **Validation Gate** | **Phase 8 Part 2 Complete** | **All Components** | **1** | **—** | **ESLint** | ⏳ Pending |
 | Mon | 1 | `useProject.js` | CG-L7-31 | 1.5 | — | Hook check | ⏳ Pending |
 | Mon | 2 | `useBuild.js` | CG-L7-32 | 1.5 | — | Hook check | ⏳ Pending |
 | Tue | 1 | `hooks/index.js` | CG-L7-33 | 0.5 | — | Import check | ⏳ Pending |
-| **Tue** | **Validation Gate** | **Phase 11 Complete** | **All Hooks** | **1** | **—** | **Hook tests** | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 8 Part 3 Complete** | **All Hooks** | **1** | **—** | **Hook tests** | ⏳ Pending |
 | Wed | 1 | `ProjectBrief.jsx` | CG-L7-36 | 2.5 | — | Render check | ⏳ Pending |
 | Wed | 2 | `GenerationProgress.jsx` | CG-L7-37 | 2 | — | Render check | ⏳ Pending |
 | Thu | 1 | `FileTree.jsx` | CG-L7-38 | 2 | — | Render check | ⏳ Pending |
 | Thu | 2 | `BuildConsole.jsx` | CG-L7-39 | 2.5 | — | Render check | ⏳ Pending |
 | Fri | 1 | `PlatformPackages.jsx` | CG-L7-40 | 2 | — | Render check | ⏳ Pending |
 | Fri | 2 | `LearningStore.jsx` | CG-L7-41 | 2 | — | Render check | ⏳ Pending |
-| **Fri** | **Validation Gate** | **Phase 12 Complete** | **All Pages** | **2** | **—** | **Routing test** | ⏳ Pending |
+| **Fri** | **Validation Gate** | **Phase 8 Part 4 Complete** | **All Pages** | **2** | **—** | **Routing test** | ⏳ Pending |
 | Mon | 1 | `App.jsx` | CG-L7-42 | 2 | — | Render check | ⏳ Pending |
 | Mon | 2 | `main.jsx` | CG-L7-43 | 1 | — | Render check | ⏳ Pending |
 | Tue | 1 | `index.css` | CG-L7-44 | 0.5 | — | CSS check | ⏳ Pending |
-| **Tue** | **Validation Gate** | **Phase 13 Complete** | **All App** | **2** | **—** | **Full build** | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 8 Part 5 Complete** | **All App** | **2** | **—** | **Full build** | ⏳ Pending |
 
 **Week 4 Total:** 14 sessions, 28 files, ~42 hours
 
 ---
 
-### 3.7 Week 5 — Entry Point + Tests (Phases 14-15)
+### 3.10 Week 5 — Phase 9 Part 1 (Server Entry Point)
 
-**Goal:** Implement server entry point and all tests (14 files)
+**Goal:** Implement server entry point (2 files)
 
 | Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
 |-----|---------|-------|----------|------------|-------------|------------|--------|
 | Mon | 1 | `server/main.py` | CG-L8-01 | 2 | — | Server start | ⏳ Pending |
 | Mon | 2 | `server/__init__.py` | CG-L8-02 | 0 | — | Already complete | ⏳ Pending |
-| **Tue** | **Validation Gate** | **Phase 14 Complete** | **All CG-L8** | **2** | **—** | **Health endpoint** | ⏳ Pending |
+| **Tue** | **Validation Gate** | **Phase 9 Part 1 Complete** | **All CG-L8** | **2** | **—** | **Health endpoint** | ⏳ Pending |
+
+---
+
+### 3.11 Week 5 — Phase 10 Part 1 (Tests)
+
+**Goal:** Implement all tests (12 files)
+
+| Day | Session | Files | Task IDs | Est. Hours | Actual Del. | Validation | Status |
+|-----|---------|-------|----------|------------|-------------|------------|--------|
 | Mon | 1 | `conftest.py` | CG-L9-02 | 2 | — | Fixture check | ⏳ Pending |
 | Mon | 2 | `test_platform_guards.py` | CG-L9-03 | 2 | — | Test run | ⏳ Pending |
 | Tue | 1 | `test_architect_agent.py` | CG-L9-04 | 2.5 | — | Test run | ⏳ Pending |
@@ -485,7 +494,7 @@ This document provides a **realistic, single-developer coding schedule** for imp
 | Thu | 2 | `test_dependency_graph.py` | CG-L9-09 | 3 | — | Test run | ⏳ Pending |
 | Fri | 1 | `test_module_dependencies.py` | CG-L9-10 | 2.5 | — | Test run | ⏳ Pending |
 | Fri | 2 | `integration/__init__.py` | CG-L9-11 | 0 | — | Already complete | ⏳ Pending |
-| **Fri** | **Validation Gate** | **Phase 15 Complete** | **All CG-L9** | **3** | **—** | **Full test suite** | ⏳ Pending |
+| **Fri** | **Validation Gate** | **Phase 10 Part 1 Complete** | **All CG-L9** | **3** | **—** | **Full test suite** | ⏳ Pending |
 | Mon | 1 | `test_full_pipeline.py` | CG-L9-12 | 4 | — | Integration test | ⏳ Pending |
 | **Mon** | **FINAL VALIDATION** | **ALL PHASES** | **ALL 101** | **4** | **—** | **Full pipeline** | ⏳ Pending |
 
@@ -520,11 +529,14 @@ This document provides a **realistic, single-developer coding schedule** for imp
 | Phase 4 (Scaffold) | 2 | 1 | 4.5 | 2% |
 | Phase 5 (Code Gen) | 4 | 2 | 12 | 6% |
 | Phase 6 (Build) | 2 | 1 | 5 | 3% |
-| Phase 7 (Package) | 3 | 1 | 8 | 4% |
-| Phase 8 (Server) | 16 | 6 | 35 | 19% |
-| Phase 9-13 (Dashboard) | 28 | 14 | 42 | 22% |
-| Phase 14 (Entry) | 2 | 1 | 2 | 1% |
-| Phase 15 (Tests) | 12 | 5 | 38 | 20% |
+| Phase 7 Part 1 (Server API) | 8 | 4 | 14 | 7% |
+| Phase 7 Part 2 (Dashboard Config) | 5 | 3 | 6 | 3% |
+| Phase 8 Part 1 (Dashboard Comp) | 8 | 4 | 8 | 4% |
+| Phase 8 Part 2 (Hooks) | 3 | 2 | 3.5 | 2% |
+| Phase 8 Part 3 (Pages) | 6 | 5 | 12 | 6% |
+| Phase 8 Part 4 (App) | 3 | 2 | 3.5 | 2% |
+| Phase 9 Part 1 (Server Entry) | 2 | 1 | 2 | 1% |
+| Phase 10 Part 1 (Tests) | 12 | 5 | 38 | 20% |
 | Validation Gates | — | 15 | 30 | 16% |
 | **Total** | **101** | **53** | **188** | **100%** |
 
@@ -564,15 +576,14 @@ This document provides a **realistic, single-developer coding schedule** for imp
 | Gate 4 | Phase 4 (Scaffold) | 2h | Project structure validation |
 | Gate 5 | Phase 5 (Code Gen) | 2h | C++ header validation, UHT |
 | Gate 6 | Phase 6 (Build) | 2h | Error parsing, mock UBT |
-| Gate 7 | Phase 7 (Package) | 2h | Mock cook, store config |
-| Gate 8 | Phase 8 (Server) | 2h | API endpoint tests |
-| Gate 9 | Phase 9 (Config) | 1h | npm install, build |
-| Gate 10 | Phase 10 (Components) | 1h | ESLint, render check |
-| Gate 11 | Phase 11 (Hooks) | 1h | Hook functionality |
-| Gate 12 | Phase 12 (Pages) | 2h | Routing, render check |
-| Gate 13 | Phase 13 (App) | 2h | Full dashboard build |
-| Gate 14 | Phase 14 (Entry) | 2h | Server health endpoint |
-| Gate 15 | Phase 15 (Tests) | 3h | Full test suite |
+| Gate 7 | Phase 7 Part 1 (Server API) | 2h | API endpoint tests |
+| Gate 8 | Phase 7 Part 2 (Dashboard Config) | 1h | npm install, build |
+| Gate 9 | Phase 8 Part 1 (Components) | 1h | ESLint, render check |
+| Gate 10 | Phase 8 Part 2 (Hooks) | 1h | Hook functionality |
+| Gate 11 | Phase 8 Part 3 (Pages) | 2h | Routing, render check |
+| Gate 12 | Phase 8 Part 4 (App) | 2h | Full dashboard build |
+| Gate 13 | Phase 9 Part 1 (Entry) | 2h | Server health endpoint |
+| Gate 14 | Phase 10 Part 1 (Tests) | 3h | Full test suite |
 | Final | All Phases | 4h | Full pipeline integration |
 
 **Total Validation Time:** 30 hours (16% of total)
