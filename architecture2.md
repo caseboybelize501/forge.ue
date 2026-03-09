@@ -2,11 +2,28 @@
 
 ## 1. OVERVIEW
 
-This document specifies the **code generation architecture** for implementing all 112 stub files with working code. Based on `requirements2.md` and the complete folder structure.
+This document specifies the **code generation architecture** for implementing all 137 files from Layer 1's file_manifest.md. Based on `requirements2.md` and the complete folder structure.
+
+### Layer 3 Count Reconciliation (countguide.md protocol)
+
+| Count Type | Value | Source |
+|------------|-------|--------|
+| L1_MANIFEST_COUNT | 137 | file_manifest.md (Layer 1) |
+| L2_MANIFEST_COUNT | 137 | file_manifest2.md (Layer 2) |
+| L3_ACTUAL_COUNT | 143 | git ls-tree (Layer 3 actual) |
+| DELTA | +6 | L3 - L2 (additional critic/docs) |
+
+**Additional Files (6):**
+- QUICKSTART.md (user guide)
+- countguide.md (count protocol)
+- critic_final3.md (Layer 3 final critic)
+- codecriticlayer3phase*.md (10 phase critics, some replaced Layer 2 docs)
+
+**STATUS: COMPLETE ✓** (L3_ACTUAL_COUNT >= L2_MANIFEST_COUNT)
 
 **Prerequisites:**
-- All 9 planning phases complete (critic_final.md: APPROVED)
-- All 112 stub files in place
+- All 9 Layer 1 planning phases complete (critic_final.md: APPROVED)
+- All 137 stub files in place (structure_confirmed.md)
 - requirements2.md defines generation rules
 
 ---
